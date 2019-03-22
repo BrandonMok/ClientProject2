@@ -1,0 +1,213 @@
+/**
+* Brandon Mok
+* CSS - Project 2 styles
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'PT Sans', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Anchor tags - keep the same */
+a, a:visited{
+    color: black;
+    text-decoration: none;
+}
+
+
+.sectionHeading{
+    font-size: 3rem;
+    padding-bottom: 1em;
+    display: block;
+    width: 100%;
+}
+
+
+/* Header - Top Bar */
+.header{
+    display: inline;
+    position: fixed;
+    width: 100%;
+    background-color: #ffffff;
+    padding: .75em 0;
+    z-index: 10;
+    box-shadow: 0 4px 10px rgba(0,0,0,.16);
+}
+
+/* RIT in header */
+#RIT{
+    display: inline-block;
+    font-size: 3rem;
+    margin-left: 1em;
+}
+
+
+/* Nav */
+div ul#nav{
+    float: right;
+}
+div ul#nav li{
+    display: inline-block;
+    font-size: 1.15rem;
+    padding-right: 2em;
+    padding-top: 1em;
+}
+div ul#nav a:hover{
+    font-weight: bold;
+}
+
+
+/* Landing image DIV */
+#landingImage{
+    background-image: url("../images/homepage.jpg"); /* creator: willian-justen @ unsplash.com */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+#imageText{
+    position: absolute;
+    color: white;
+    font-size: 4rem;
+    margin-right: -50%;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
+
+
+
+/* About Section */
+#about{
+    margin: 4em;
+}
+#aboutDiv{
+    background-color: #F0F0F0;
+    text-align: center;
+    border-radius: 1em;
+    padding: 3em;
+}
+#aboutTitle{
+    font-size: 2rem;
+    font-weight: bold;
+}
+#aboutDesc{
+    font-size: 1.1rem;
+    padding: 2em 4em;
+}
+
+
+
+/* Quote - Considered about section */
+#quoteDiv{
+    margin: 5em 4em 3em 4em;
+    text-align: center;
+}
+#quote{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.3rem;
+    padding: 0 4em 1em 4em;
+}
+#quoteAuthor{
+    font-style: italic;
+    font-size: 1.4rem;
+}
+
+/* Actual quote symbol */
+.quotes{
+    margin: 0;
+    padding: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: grey;
+}
+
+
+
+#degrees{
+    background-color: #F0F0F0;
+    text-align: center;
+    border-radius: 1em;
+    padding: 1em 3em; 
+    margin: 3em;
+}
+.uDegBoxes{
+    display: inline-block;
+    width: 20em;
+    height: 15em;
+    margin: 5px;
+    border: 2px solid gray;
+    border-radius: .5em;
+    background-color: white;
+}
+.degreeName{
+    font-size: 1.1rem;
+    padding: 1em;
+    font-weight: bold;
+}
+.degreeDesc{
+    padding: 1em;
+}
+
+
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	border: 1px solid #e86202;
+	background: #F76902;
+	font-weight: normal;
+	color: #ffffff;
+}
+
+
+
+
+
+
+/** Media Queries */
+@media screen and (max-width: 900px){
+    /* Information Sciences & Technology text */
+    #imageText{
+        font-size: 3rem; 
+        margin-right: 2em;      
+    }
+}
+@media screen and (max-width: 500px){
+    /* Information Sciences & Technology text */
+    #imageText{
+        font-size: 2.4rem;        
+    }
+
+    /* about */
+    #about{
+        margin: 0;
+        margin-top: 3em;
+    }
+    #aboutTitle{
+        font-size: 1.2rem;
+        padding-bottom: 1em;
+    }
+    #aboutDesc{
+        font-size: 1rem;
+        padding: 0;
+    }
+
+
+    #quoteDiv{
+        margin: 2em 0;
+        padding: .5em;
+    }
+    #quote{
+        font-size: 1.1rem;
+    }
+    #quoteAuthor{
+        font-size: 1rem;
+    }
+}
