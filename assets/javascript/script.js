@@ -8,6 +8,9 @@ $(document).ready(function(){
     //     $('#landingImage').toggle("slow");
     // });
 
+    // Tabs plugin
+    $( "#tabs" ).tabs();
+
 
     // About information
     xhr('get', {path:"/about/"}, '#aboutContainer').done(function(results){
@@ -27,22 +30,20 @@ $(document).ready(function(){
     });
 
 
-    $( "#tabs" ).tabs();
 
-
-    // Degrees
-    xhr('get', {path:"/degrees/undergraduate/"}, '#degrees').done(function(results){
+    // Degrees - get entire object so don't have to make an extra call
+    xhr('get', {path:"/degrees/"}, '#degrees').done(function(results){
         $.each(results.undergraduate, function(){
 
             // need to parse the array for concentrations
             // var concentrations = this.concentrations;
 
             // stuff after - back
-            $('#tabs-1').append('<div id="'+this.degreeName+'" class="modal">' +
+            $('#tabs-1').append('<div id="'+ this.degreeName +'" class="modal">' +
                                     '<h2>' + this.title + '</h2>' +
                                     '<p style="font-size: 1.2rem;">Concentrations:</p>' +
                                     '<ul>'+
-                                    '<li>'+this.concentrations+'</li>' +
+                                    '<li>'+ this.concentrations +'</li>' +
                                     '</ul>'+
                                 '</div>');
 
@@ -56,11 +57,35 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</a>');
        });
+
+
+       // Graduate
+       $.each(results.graduate, function(){
+            // Only make ones that have a title
+            if(this.title){
+                $('#tabs-2').append('<div id="'+ this.degreeName +'" class="modal">' +
+                                    '<h2>' + this.title + '</h2>' +
+                                    '<p style="font-size: 1.2rem;">Concentrations:</p>' +
+                                    '<ul>'+
+                                    '<li>'+ this.concentrations +'</li>' +
+                                    '</ul>'+
+                                '</div>');
+
+                $('#tabs-2').append('<a href="#'+this.degreeName+'" rel="modal:open">' +
+                                    '<div class="uDegBoxes">'+
+                                        '<p class="degreeName">' + this.title + '</p>' +
+                                        '<p class="degreeDesc">' + this.description + '</p>' +
+                                        '<i class="far fa-plus-square"></i>' +
+                                    '</div>' +
+                                '</a>');
+            }
+        });
     });
 
 
 
 });
+
 
 
 

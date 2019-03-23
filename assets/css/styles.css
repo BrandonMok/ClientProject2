@@ -134,11 +134,19 @@ div ul#nav a:hover{
     padding: 1em 3em; 
     margin: 3em;
 }
+
+#tabs-1, #tabs-2{
+    display: flex;
+    flex-wrap: wrap;
+    /* flex: 1 1 25%; */
+}
+
+
 .uDegBoxes{
-    display: inline-block;
+    /* display: inline-block; */
+    flex: 1 1 25%;
     width: 20em;
-    height: 15em;
-    margin: 5px;
+    height: 16em;
     border: 2px solid gray;
     border-radius: .5em;
     background-color: white;
@@ -177,6 +185,12 @@ a.ui-button:active,
     #imageText{
         font-size: 3rem; 
         margin-right: 2em;      
+    }
+}
+@media screen and (max-width: 600px){
+    /* Degree boxes */
+    .uDegBoxes{
+        width: 15em;
     }
 }
 @media screen and (max-width: 500px){
