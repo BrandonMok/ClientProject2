@@ -148,14 +148,27 @@ div ul#nav a:hover{
     border-radius: .5em;
     background-color: white;
 }
+/* Name of the degree */
 .degreeName{
     font-size: 1.1rem;
     padding: 1em;
     font-weight: bold;
 }
+/* Degree descriptions */
 .degreeDesc{
     padding: 1em;
 }
+ul.conList{
+    /* Image author: Dave Gandy, https://www.flaticon.com/free-icon/terminal_25627#term=terminal&page=1&position=2 */
+    list-style-image: url('../images/terminal.png');
+    padding-left: 1.4em;
+}
+.conSubHeading{
+    font-size: 1.2rem;
+    padding-bottom: .5em;
+}
+
+
 
 /* Overwriting plugin's styling */
 .ui-state-active,
@@ -169,6 +182,10 @@ a.ui-button:active,
 	font-weight: normal;
 	color: #ffffff;
 }
+
+
+
+
 
 
 

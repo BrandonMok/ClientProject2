@@ -38,34 +38,34 @@ $(document).ready(function(){
         // undergraduate
         $.each(results.undergraduate, function(){
 
-            // var undergradCon = this.concentrations;
-            // console.log(undergradCon);
-    
-            // for(var s in undergradCon){
-            //     console.log(s);
-            // }
-
-            // need to parse the array for concentrations
-            // var concentrations = this.concentrations;
-
-            // stuff after - back
-            $('#tabs-1').append('<div id="'+ this.degreeName +'" class="modal">' +
-                                    '<h2>' + this.title + '</h2>' +
-                                    '<p style="font-size: 1.2rem;">Concentrations:</p>' +
-                                    '<ul>'+
-                                    '<li>'+ this.concentrations +'</li>' +
-                                    '</ul>'+
-                                '</div>');
+            var backModal = '<div id="'+ this.degreeName +'" class="modal">' +
+                            '<h2>' + this.title + '</h2>' +
+                            '<p class="conSubHeading">Concentrations:</p>' +
+                            '<ul class="conList">';
 
 
-            // The modal itself - front
-            $('#tabs-1').append('<a href="#'+this.degreeName+'" rel="modal:open">' +
+            $.each(this.concentrations, function(index , elem){
+                backModal += '<li>' + elem + '</li>'; 
+            });
+            backModal += '</ul></div>';
+
+
+            var frontModal = '<a href="#'+this.degreeName+'" rel="modal:open">' +
                                     '<div class="uDegBoxes">'+
                                         '<p class="degreeName">' + this.title + '</p>' +
                                         '<p class="degreeDesc">' + this.description + '</p>' +
                                         '<i class="far fa-plus-square"></i>' +
                                     '</div>' +
-                                '</a>');
+                                '</a>';
+
+
+
+
+            // stuff after - back
+            $('#tabs-1').append(backModal);
+
+            // The modal itself - front
+            $('#tabs-1').append(frontModal);
        });
 
 
@@ -74,21 +74,31 @@ $(document).ready(function(){
        $.each(results.graduate, function(){
             // Only make ones that have a title
             if(this.title){
-                $('#tabs-2').append('<div id="'+ this.degreeName +'" class="modal">' +
+                var backModal = '<div id="'+ this.degreeName +'" class="modal">' +
                                     '<h2>' + this.title + '</h2>' +
-                                    '<p style="font-size: 1.2rem;">Concentrations:</p>' +
-                                    '<ul>'+
-                                    '<li>'+ this.concentrations +'</li>' +
-                                    '</ul>'+
-                                '</div>');
+                                    '<p class="conSubHeading">Concentrations:</p>' +
+                                    '<ul class="conList">';
+                
+                
 
-                $('#tabs-2').append('<a href="#'+this.degreeName+'" rel="modal:open">' +
+                $.each(this.concentrations, function(index , elem){
+                    backModal += '<li>' + elem + '</li>'; 
+                });
+                backModal += '</ul></div>';
+
+
+
+                var frontModal = '<a href="#'+this.degreeName+'" rel="modal:open">' +
                                     '<div class="uDegBoxes">'+
                                         '<p class="degreeName">' + this.title + '</p>' +
                                         '<p class="degreeDesc">' + this.description + '</p>' +
                                         '<i class="far fa-plus-square"></i>' +
                                     '</div>' +
-                                '</a>');
+                                '</a>';
+
+
+                $('#tabs-2').append(backModal);
+                $('#tabs-2').append(frontModal);
             }
         });
     });
