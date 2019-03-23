@@ -31,9 +31,19 @@ $(document).ready(function(){
 
 
 
-    // Degrees - get entire object so don't have to make an extra call
+    // Degrees 
+    // Get entire object so don't have to make an extra call
     xhr('get', {path:"/degrees/"}, '#degrees').done(function(results){
+
+        // undergraduate
         $.each(results.undergraduate, function(){
+
+            // var undergradCon = this.concentrations;
+            // console.log(undergradCon);
+    
+            // for(var s in undergradCon){
+            //     console.log(s);
+            // }
 
             // need to parse the array for concentrations
             // var concentrations = this.concentrations;
@@ -59,6 +69,7 @@ $(document).ready(function(){
        });
 
 
+
        // Graduate
        $.each(results.graduate, function(){
             // Only make ones that have a title
@@ -82,6 +93,17 @@ $(document).ready(function(){
         });
     });
 
+
+
+    // Minors Section
+    xhr('get', {path:"/minors/"}, '#minors').done(function(results){
+
+        // Iterate through each minor
+        $.each(results.UgMinors , function(){
+            $('#minors').append('<div class="eachMinor">'+ this.title +'</div>');
+        });
+
+    });
 
 
 });

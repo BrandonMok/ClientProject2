@@ -80,7 +80,7 @@ div ul#nav a:hover{
 
 
 
-/* About Section */
+/** About Section */
 #about{
     margin: 4em;
 }
@@ -98,8 +98,6 @@ div ul#nav a:hover{
     font-size: 1.1rem;
     padding: 2em 4em;
 }
-
-
 
 /* Quote - Considered about section */
 #quoteDiv{
@@ -126,7 +124,7 @@ div ul#nav a:hover{
 }
 
 
-
+/** DEGREES Section **/
 #degrees{
     background-color: #F0F0F0;
     text-align: center;
@@ -135,15 +133,14 @@ div ul#nav a:hover{
     margin: 3em;
 }
 
+/* Tabs section 'undergraduate' & 'graduate' */
 #tabs-1, #tabs-2{
     display: flex;
     flex-wrap: wrap;
-    /* flex: 1 1 25%; */
 }
 
-
+/* Individual Degree boxes */
 .uDegBoxes{
-    /* display: inline-block; */
     flex: 1 1 25%;
     width: 20em;
     height: 16em;
@@ -160,8 +157,7 @@ div ul#nav a:hover{
     padding: 1em;
 }
 
-
-
+/* Overwriting plugin's styling */
 .ui-state-active,
 .ui-widget-content .ui-state-active,
 .ui-widget-header .ui-state-active,
@@ -176,11 +172,39 @@ a.ui-button:active,
 
 
 
+/** Minors Section **/
+#minors{
+    margin: 3em;
+    display: grid; 
+    grid-gap: 2em;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: 15em 15em 15em 15em;
+}
+.eachMinor{
+    padding: .5em;
+    border: 2px solid gray;
+    border-radius: .5em;
+    width: 12em;
+    height: 10em;
+
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+
 
 
 
 /** Media Queries */
 @media screen and (max-width: 900px){
+    /** Image scroll parallax effect stop */
+    #landingImage{
+        background-attachment: scroll;
+    }
     /* Information Sciences & Technology text */
     #imageText{
         font-size: 3rem; 
@@ -212,8 +236,6 @@ a.ui-button:active,
         font-size: 1rem;
         padding: 0;
     }
-
-
     #quoteDiv{
         margin: 2em 0;
         padding: .5em;
@@ -223,5 +245,11 @@ a.ui-button:active,
     }
     #quoteAuthor{
         font-size: 1rem;
+    }
+
+
+    /* Degrees */
+    #degrees{
+        margin: 0;
     }
 }
