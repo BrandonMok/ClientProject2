@@ -114,13 +114,14 @@ $(document).ready(function(){
                                 '<h2>' + this.title + '</h2>' +
                                 '<p>' + this.description + "</p>" +
                                 '<ul>';
-                            // '</div>';
             
 
+            // Cycle through the courses array
             $.each(this.courses, function(index , elem){
                 backModal += '<li>' + elem + '</li>'; 
             });
             backModal += '</ul></div>';
+
 
             var frontModal = '<a href="#'+ this.name +'" rel="modal:open">' +
                                 '<div class="eachMinor">'+

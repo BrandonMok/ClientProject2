@@ -20,7 +20,7 @@ a, a:visited{
 .sectionHeading{
     font-size: 3rem;
     padding-bottom: 1em;
-    display: block;
+    display: inline-block;
     width: 100%;
 }
 
@@ -192,14 +192,21 @@ a.ui-button:active,
 /** Minors Section **/
 #minors{
     margin: 3em;
-    display: grid; 
-    grid-gap: 2em;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    grid-template-columns: 15em 15em 15em 15em;
+    flex-direction: row;
+    /* display: grid; 
+    grid-gap: 2em; */
+    /* grid-template-columns: 15em 15em 15em 15em; */
+}
+#minors .sectionHeading{
+    flex: 1 1 100%;
+    text-align: center;
 }
 .eachMinor{
-    padding: .5em;
+    margin: 1em;
     border: 2px solid gray;
     border-radius: .5em;
     width: 12em;
