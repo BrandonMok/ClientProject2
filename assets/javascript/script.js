@@ -12,7 +12,9 @@ $(document).ready(function(){
     $( "#tabs" ).tabs();
 
 
-    // About information
+    /**
+     * About
+     */
     xhr('get', {path:"/about/"}, '#aboutContainer').done(function(results){
         var aboutSection = '<div id="aboutDiv">' +
                             '<p id="aboutTitle">' + results.title + '</p>' +
@@ -30,9 +32,10 @@ $(document).ready(function(){
     });
 
 
-
-    // Degrees 
-    // Get entire object so don't have to make an extra call
+    /**
+     * Degrees
+     * Get entire object so don't have to make an extra call
+     */
     xhr('get', {path:"/degrees/"}, '#degrees').done(function(results){
 
         // undergraduate
@@ -58,16 +61,10 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</a>';
 
-
-
-
-            // stuff after - back
-            $('#tabs-1').append(backModal);
-
-            // The modal itself - front
-            $('#tabs-1').append(frontModal);
+            // Append to dom
+            $('#tabs-1').append(backModal); // stuff after - back
+            $('#tabs-1').append(frontModal);// The modal itself - front
        });
-
 
 
        // Graduate
@@ -100,8 +97,10 @@ $(document).ready(function(){
                 $('#tabs-2').append(backModal);
                 $('#tabs-2').append(frontModal);
             }
-        });
+       });
     });
+
+
 
 
 
@@ -110,13 +109,37 @@ $(document).ready(function(){
 
         // Iterate through each minor
         $.each(results.UgMinors , function(){
-            $('#minors').append('<div class="eachMinor">'+ this.title +'</div>');
+
+            var backModal = '<div id="'+ this.name +'" class="modal">' +
+                                '<h2>' + this.title + '</h2>' +
+                                '<p>' + this.description + "</p>" +
+                                '<ul>';
+                            // '</div>';
+            
+
+            $.each(this.courses, function(index , elem){
+                backModal += '<li>' + elem + '</li>'; 
+            });
+            backModal += '</ul></div>';
+
+            var frontModal = '<a href="#'+ this.name +'" rel="modal:open">' +
+                                '<div class="eachMinor">'+
+                                    '<p class="degreeName">' + this.title + '</p>' +
+                                '</div>' +
+                            '</a>';
+
+
+                 
+            $('#minors').append(frontModal); 
+            $('#minors').append(backModal);          
         });
+
+
 
     });
 
-
 });
+
 
 
 
