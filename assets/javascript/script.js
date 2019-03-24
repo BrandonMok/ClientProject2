@@ -143,39 +143,32 @@ $(document).ready(function(){
             $('#minors').append(frontModal); 
             $('#minors').append(backModal);          
         });
-
-        /**
-         * Don't know if required to do it in jquery or can do css
-         */
-        $(".eachMinor").on('mouseover', function(){
-            $(this).css("border", "5px solid #F76902");
-            $(this).css("background-color","#fc954a");
-            $(this).css("z-index", "3");
-            $(this).css("box-shadow", "0 4px 10px rgba(0,0,0,.16)");
-        }).on('mouseout',function(){
-            $(this).css("border", "");
-            $(this).css("background-color","");
-            $(this).css("z-index", "");
-            $(this).css("box-shadow", "");
-        });
     });
 
 
 
     // Employment Section
     xhr('get', {path:"/employment/"}, "#employment").done(function(results){
-        // Title
-        var heading = '<p class="sectionHeading">' + results.introduction.title + '</p>';
 
-        // Employment Section
-        var employTitle = '<h3>' + results.introduction.content[0].title + '</h3>';
+        // Building of the employment section
+        var employmentSect = '<div id="empContent">' +
+                                '<p class="sectionHeading">' + results.introduction.title + '</p>' +
+                                '<h3>' + results.introduction.content[0].title + '</h3>' +
+                                '<p>' + results.introduction.content[0].description + '</p>' +
+                            '</div>';
 
-        // employment content
-        var employContent = '<p>' + results.introduction.content[0].description + '</p>';
 
-        heading += employTitle + employContent;
-
-        $('#employment').append(heading);
+        // Iterate through the statistics
+        $.each(results.degreeStatistics.statistics, function(){
+            employmentSect += '<div id="empBoxes">' +
+                                '<h2>' + this.value + '</h2>' +
+                                '<p>' + this.description + '</p>'+
+                            '</div>';
+                            
+        });
+                            
+        // append to dom
+        $('#employment').append(employmentSect);
     });
 
 
