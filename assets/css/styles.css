@@ -25,6 +25,15 @@ a, a:visited{
 }
 
 
+/* Every other section */
+.altSection{
+    background-color: #F0F0F0;
+    text-align: center;
+    border-radius: 1em;
+    padding: 3em;
+    margin: 3em;
+}
+
 
 /* Header - Top Bar */
 .header{
@@ -85,12 +94,12 @@ div ul#nav a:hover{
 #about{
     margin: 4em;
 }
-#aboutDiv{
+/* #aboutDiv{
     background-color: #F0F0F0;
     text-align: center;
     border-radius: 1em;
     padding: 3em;
-}
+} */
 #aboutTitle{
     font-size: 2rem;
     font-weight: bold;
@@ -126,13 +135,9 @@ div ul#nav a:hover{
 
 
 /** DEGREES Section **/
-#degrees{
-    background-color: #F0F0F0;
-    text-align: center;
-    border-radius: 1em;
-    padding: 1em 3em; 
+/* #degrees{
     margin: 3em;
-}
+} */
 
 /* Tabs section 'undergraduate' & 'graduate' */
 #tabs-1, #tabs-2{
@@ -199,11 +204,21 @@ ul.conList{
     text-align: center;
     font-weight: bold;
 }
+/* List of classes for the minor */
 ul.minorClasses{
     padding-left: 2em;
+    padding-bottom: 1em;
 }
 ul.minorClasses li{
     list-style-type: square;
+}
+/* Minor description */
+.minorDesc{
+    padding: 1em 0;
+}
+.minorNote{
+    font-size: .8rem;
+    font-style: italic;
 }
 
 
@@ -239,6 +254,17 @@ a.ui-button:active,
 
 
 
+/* Employment section */
+#employment p.sectionHeading{
+    font-size: 2.3rem;
+}
+
+
+
+
+
+
+
 
 
 
@@ -261,12 +287,12 @@ a.ui-button:active,
     .uDegBoxes{
         width: 15em;
     }
-}
-@media screen and (max-width: 500px){
-    /* Information Sciences & Technology text */
-    #imageText{
-        font-size: 2.4rem;        
+
+    /* Every other section */
+    .altSection{
+        margin: 0;
     }
+
 
     /* about */
     #about{
@@ -291,10 +317,13 @@ a.ui-button:active,
     #quoteAuthor{
         font-size: 1rem;
     }
-
-
-    /* Degrees */
-    #degrees{
-        margin: 0;
+}
+@media screen and (max-width: 500px){
+    /* Information Sciences & Technology text */
+    #imageText{
+        font-size: 2.4rem;        
     }
+
+
+
 }

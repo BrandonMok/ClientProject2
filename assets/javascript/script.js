@@ -17,7 +17,7 @@ $(document).ready(function(){
      * About
      */
     xhr('get', {path:"/about/"}, '#aboutContainer').done(function(results){
-        var aboutSection = '<div id="aboutDiv">' +
+        var aboutSection = '<div id="aboutDiv" class="altSection">' +
                             '<p id="aboutTitle">' + results.title + '</p>' +
                             '<p id="aboutDesc">' + results.description + '</p>' +
                         '</div>';
@@ -121,9 +121,17 @@ $(document).ready(function(){
             $.each(this.courses, function(index , elem){
                 backModal += '<li>' + elem + '</li>'; 
             });
-            backModal += '</ul></div>';
 
-
+            
+            // Only attach note at the bottom if it exists
+            if(this.note){
+                backModal += '</ul><p class="minorNote">*'+ this.note +'</p></div>';
+            }
+            else{
+                backModal += '</ul></div>';
+            }
+            
+            // Front modal - the part visible
             var frontModal = '<a href="#'+ this.name +'" rel="modal:open">' +
                                 '<div class="eachMinor">'+
                                     '<p class="degreeName">' + this.title + '</p>' +
@@ -136,9 +144,42 @@ $(document).ready(function(){
             $('#minors').append(backModal);          
         });
 
-
-
+        /**
+         * Don't know if required to do it in jquery or can do css
+         */
+        $(".eachMinor").on('mouseover', function(){
+            $(this).css("border", "5px solid #F76902");
+            $(this).css("background-color","#fc954a");
+            $(this).css("z-index", "3");
+            $(this).css("box-shadow", "0 4px 10px rgba(0,0,0,.16)");
+        }).on('mouseout',function(){
+            $(this).css("border", "");
+            $(this).css("background-color","");
+            $(this).css("z-index", "");
+            $(this).css("box-shadow", "");
+        });
     });
+
+
+
+    // Employment Section
+    xhr('get', {path:"/employment/"}, "#employment").done(function(results){
+        // Title
+        var heading = '<p class="sectionHeading">' + results.introduction.title + '</p>';
+
+        // Employment Section
+        var employTitle = '<h3>' + results.introduction.content[0].title + '</h3>';
+
+        // employment content
+        var employContent = '<p>' + results.introduction.content[0].description + '</p>';
+
+        heading += employTitle + employContent;
+
+        $('#employment').append(heading);
+    });
+
+
+    
 
 });
 
