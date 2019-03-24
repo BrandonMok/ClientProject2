@@ -16,13 +16,14 @@ a, a:visited{
     text-decoration: none;
 }
 
-
+/* Section Headings */
 .sectionHeading{
     font-size: 3rem;
     padding-bottom: 1em;
     display: inline-block;
     width: 100%;
 }
+
 
 
 /* Header - Top Bar */
@@ -32,7 +33,7 @@ a, a:visited{
     width: 100%;
     background-color: #ffffff;
     padding: .75em 0;
-    z-index: 10;
+    z-index: 5;
     box-shadow: 0 4px 10px rgba(0,0,0,.16);
 }
 
@@ -170,21 +171,6 @@ ul.conList{
 
 
 
-/* Overwriting plugin's styling */
-.ui-state-active,
-.ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active,
-a.ui-button:active,
-.ui-button:active,
-.ui-button.ui-state-active:hover {
-	border: 1px solid #e86202;
-	background: #F76902;
-	font-weight: normal;
-	color: #ffffff;
-}
-
-
-
 
 
 
@@ -197,9 +183,6 @@ a.ui-button:active,
     justify-content: center;
     align-content: center;
     flex-direction: row;
-    /* display: grid; 
-    grid-gap: 2em; */
-    /* grid-template-columns: 15em 15em 15em 15em; */
 }
 #minors .sectionHeading{
     flex: 1 1 100%;
@@ -216,6 +199,44 @@ a.ui-button:active,
     text-align: center;
     font-weight: bold;
 }
+ul.minorClasses{
+    padding-left: 2em;
+}
+ul.minorClasses li{
+    list-style-type: square;
+}
+
+
+
+
+
+
+/** 
+* Overwriting of plugin styling
+*/  
+
+/* Overwriting Tab plugin styling */
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	border: 1px solid #e86202;
+	background: #F76902;
+	font-weight: normal;
+	color: #ffffff;
+}
+
+
+/* Overwrite modal styles */
+.blocker{
+    z-index: 10;
+}
+.modal{
+    max-width: 750px;
+}
+
 
 
 

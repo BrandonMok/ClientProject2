@@ -12,6 +12,7 @@ $(document).ready(function(){
     $( "#tabs" ).tabs();
 
 
+
     /**
      * About
      */
@@ -103,7 +104,6 @@ $(document).ready(function(){
 
 
 
-
     // Minors Section
     xhr('get', {path:"/minors/"}, '#minors').done(function(results){
 
@@ -112,8 +112,9 @@ $(document).ready(function(){
 
             var backModal = '<div id="'+ this.name +'" class="modal">' +
                                 '<h2>' + this.title + '</h2>' +
-                                '<p>' + this.description + "</p>" +
-                                '<ul>';
+                                '<p class="minorDesc">' + this.description + "</p>" +
+                                '<h3> Courses: </h3>' + 
+                                '<ul class="minorClasses">';
             
 
             // Cycle through the courses array
