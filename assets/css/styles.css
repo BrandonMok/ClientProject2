@@ -10,6 +10,7 @@
     scroll-behavior: smooth;
 }
 
+
 /* Anchor tags - keep the same */
 a, a:visited{
     color: black;
@@ -20,8 +21,6 @@ a, a:visited{
 .sectionHeading{
     font-size: 3rem;
     padding-bottom: 1em;
-    display: inline-block;
-    width: 100%;
 }
 
 
@@ -94,12 +93,6 @@ div ul#nav a:hover{
 #about{
     margin: 4em;
 }
-/* #aboutDiv{
-    background-color: #F0F0F0;
-    text-align: center;
-    border-radius: 1em;
-    padding: 3em;
-} */
 #aboutTitle{
     font-size: 2rem;
     font-weight: bold;
@@ -185,10 +178,17 @@ ul.conList{
     justify-content: center;
     align-content: center;
     flex-direction: row;
+
+    /* display: grid;
+    grid-template-columns: repeat(4, 1fr); */
 }
-#minors .sectionHeading{
-    flex: 1 1 100%;
+#minors .sectionHeading{ 
+    flex: 1 1 100%; 
     text-align: center;
+} 
+#minorsBoxCont{
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr);
 }
 .eachMinor{
     margin: 1em;
@@ -227,34 +227,6 @@ ul.minorClasses li{
 }
 
 
-/** 
-* Overwriting of plugin styling
-*/  
-
-/* Overwriting Tab plugin styling */
-.ui-state-active,
-.ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active,
-a.ui-button:active,
-.ui-button:active,
-.ui-button.ui-state-active:hover {
-	border: 1px solid #e86202;
-	background: #F76902;
-	font-weight: normal;
-	color: #ffffff;
-}
-
-
-/* Overwrite modal styles */
-.blocker{
-    z-index: 10;
-}
-.modal{
-    max-width: 750px;
-}
-
-
-
 
 /* Employment section */
 #employment{
@@ -281,9 +253,45 @@ a.ui-button:active,
 }
 
 
+/** Student work locations "Where our students work" */
+#studentWorkLocations{
+    margin: 3em;
+}
+#studentWorkLocations p.sectionHeading{
+    text-align: center;
+}
 
 
 
+
+
+
+
+/** 
+* Overwriting of plugin styling
+*/  
+
+/* Overwriting Tab plugin styling */
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+	border: 1px solid #e86202;
+	background: #F76902;
+	font-weight: normal;
+	color: #ffffff;
+}
+
+
+/* Overwrite modal styles */
+.blocker{
+    z-index: 10;
+}
+.modal{
+    max-width: 750px;
+}
 
 
 

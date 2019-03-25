@@ -11,8 +11,21 @@ $(document).ready(function(){
     // Tabs plugin
     $( "#tabs" ).tabs();
 
-    // $( "#accordion" ).accordion({
-    //     collapsible: true
+    $( "#accordion" ).accordion({
+        active: false,
+        collapsible: true
+    });
+
+
+    // var aboutFlag = $('#about').offset().top;
+    // $(window).scroll(function(){
+    //     var scroll = $(window).scrollTop();
+
+    //     console.log("ABOUT: " + aboutFlag);
+    //     console.log("SCROLL: " + scroll);
+    //     if(scroll  == aboutFlag){
+    //         console.log("E");
+    //     }
     // });
 
 
@@ -143,9 +156,9 @@ $(document).ready(function(){
                             '</a>';
 
 
-                 
-            $('#minors').append(frontModal); 
-            $('#minors').append(backModal);          
+            // append to dom - #minorsBoxCont is the container for the boxes that's inside #minors div
+            $('#minorsBoxCont').append(frontModal); 
+            $('#minorsBoxCont').append(backModal);          
         });
     });
 
@@ -184,7 +197,13 @@ $(document).ready(function(){
     });
 
 
-    
+    // xhr('get', {path:"/map.php/"}, "#map").done(function(results){
+    //     console.log(results);
+
+    //     $('#map').append(results);
+    // });
+
+
 
 });
 
