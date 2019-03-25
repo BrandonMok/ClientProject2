@@ -11,6 +11,10 @@ $(document).ready(function(){
     // Tabs plugin
     $( "#tabs" ).tabs();
 
+    // $( "#accordion" ).accordion({
+    //     collapsible: true
+    // });
+
 
 
     /**
@@ -166,9 +170,17 @@ $(document).ready(function(){
                             '</div>';
                             
         });
+
+
+        // Coop Section
+        var coopSect = '<div id="coopContent">' +
+                            '<h3 style="padding-top: 1em;">' + results.introduction.content[1].title + '</h3>' +
+                            '<p>' + results.introduction.content[1].description + '</p>' +
+                        '</div>';
                             
         // append to dom
         $('#employment').append(employmentSect);
+        $('#employment').append(coopSect);
     });
 
 
@@ -214,3 +226,7 @@ function xhr(getPost,d,idForSpinner){
                     console.log(err);
             });
 }
+
+
+
+

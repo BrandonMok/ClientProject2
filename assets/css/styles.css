@@ -135,9 +135,6 @@ div ul#nav a:hover{
 
 
 /** DEGREES Section **/
-/* #degrees{
-    margin: 3em;
-} */
 
 /* Tabs section 'undergraduate' & 'graduate' */
 #tabs-1, #tabs-2{
@@ -230,10 +227,6 @@ ul.minorClasses li{
 }
 
 
-
-
-
-
 /** 
 * Overwriting of plugin styling
 */  
@@ -262,6 +255,7 @@ a.ui-button:active,
 
 
 
+
 /* Employment section */
 #employment{
     display: flex;
@@ -269,7 +263,7 @@ a.ui-button:active,
     flex-direction: row;
 }
 /* Actual content */
-#empContent{
+#empContent, #coopContent{
     flex: 1 1 100%;
     padding-bottom: 2em;
 }
