@@ -11,6 +11,7 @@ $(document).ready(function(){
     // Tabs plugin
     $( "#tabs" ).tabs();
 
+    // Accordian plugin
     $( "#accordion" ).accordion({
         active: false,
         collapsible: true
@@ -197,11 +198,27 @@ $(document).ready(function(){
     });
 
 
-    // xhr('get', {path:"/map.php/"}, "#map").done(function(results){
-    //     console.log(results);
 
-    //     $('#map').append(results);
-    // });
+    // Co-op/Employment section
+    xhr('get', {path:"/employment/"}, "#studentWorkLocations").done(function(results){
+        // append titles to accordion plugin's tab
+        $('#cTableTitle').append(results.coopTable.title);
+        $('#eTableTitle').append(results.employmentTable.title);
+
+
+        var coopTable = '<ul id="coopList">'
+
+        // Cycle through CO-OP table information
+        $.each(results.coopTable.coopInformation, function(){
+            coopTable += '<hr/><li><span>' + this.employer + '</span>' +
+                        '<span id="coopDegree">' + this.degree + '</span>' + 
+                        '<span>' + this.city + '</span>' + 
+                        '<span>'+ this.term + '</span>' + 
+                    '</li>';
+        });
+
+        $('#coopTableContent').append(coopTable);
+    });
 
 
 

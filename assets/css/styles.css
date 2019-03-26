@@ -260,6 +260,12 @@ ul.minorClasses li{
 #studentWorkLocations p.sectionHeading{
     text-align: center;
 }
+ul#coopList li{
+    padding: .5em 0;
+}
+#coopDegree{
+    padding: 0 1em;
+}
 
 
 
@@ -293,6 +299,11 @@ a.ui-button:active,
     max-width: 750px;
 }
 
+
+/* Accordian content size */
+.ui-accordion .ui-accordion-content{
+    padding: 3em 2.2em;
+}
 
 
 
