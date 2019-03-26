@@ -136,7 +136,7 @@ div ul#nav a:hover{
 }
 
 /* Individual Degree boxes */
-.uDegBoxes{
+.uDegBoxes, .gDegBoxes{
     flex: 1 1 25%;
     width: 20em;
     height: 16em;
@@ -169,7 +169,6 @@ ul.conList{
 
 
 
-
 /** Minors Section **/
 #minors{
     margin: 3em;
@@ -178,9 +177,6 @@ ul.conList{
     justify-content: center;
     align-content: center;
     flex-direction: row;
-
-    /* display: grid;
-    grid-template-columns: repeat(4, 1fr); */
 }
 #minors .sectionHeading{ 
     flex: 1 1 100%; 

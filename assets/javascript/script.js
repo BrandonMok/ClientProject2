@@ -4,30 +4,18 @@
  */
 
 $(document).ready(function(){
-    // $('#RIT').click(function(){
-    //     $('#landingImage').toggle("slow");
-    // });
 
-    // Tabs plugin
+    // Tabs 
     $( "#tabs" ).tabs();
 
-    // Accordian plugin
+    // Accordian 
     $( "#accordion" ).accordion({
         active: false,
         collapsible: true
     });
 
 
-    // var aboutFlag = $('#about').offset().top;
-    // $(window).scroll(function(){
-    //     var scroll = $(window).scrollTop();
 
-    //     console.log("ABOUT: " + aboutFlag);
-    //     console.log("SCROLL: " + scroll);
-    //     if(scroll  == aboutFlag){
-    //         console.log("E");
-    //     }
-    // });
 
 
 
@@ -57,32 +45,19 @@ $(document).ready(function(){
      */
     xhr('get', {path:"/degrees/"}, '#degrees').done(function(results){
 
-        // undergraduate
+        // Undergraduate
         $.each(results.undergraduate, function(){
-
-            var backModal = '<div id="'+ this.degreeName +'" class="modal">' +
-                            '<h2>' + this.title + '</h2>' +
-                            '<p class="conSubHeading">Concentrations:</p>' +
-                            '<ul class="conList">';
-
-
-            $.each(this.concentrations, function(index , elem){
-                backModal += '<li>' + elem + '</li>'; 
-            });
-            backModal += '</ul></div>';
-
-
+            // Front Modal - Back will only be loaded if clicked on
             var frontModal = '<a href="#'+this.degreeName+'" rel="modal:open">' +
-                                    '<div class="uDegBoxes">'+
+                                    '<div class="uDegBoxes" data-degree="'+this.degreeName+'">'+
                                         '<p class="degreeName">' + this.title + '</p>' +
                                         '<p class="degreeDesc">' + this.description + '</p>' +
                                         '<i class="far fa-plus-square"></i>' +
                                     '</div>' +
                                 '</a>';
 
-            // Append to dom
-            $('#tabs-1').append(backModal); // stuff after - back
-            $('#tabs-1').append(frontModal);// The modal itself - front
+            //Append to dom
+            $('#tabs-1').append(frontModal); // The modal itself - front
        });
 
 
@@ -90,22 +65,10 @@ $(document).ready(function(){
        $.each(results.graduate, function(){
             // Only make ones that have a title
             if(this.title){
-                var backModal = '<div id="'+ this.degreeName +'" class="modal">' +
-                                    '<h2>' + this.title + '</h2>' +
-                                    '<p class="conSubHeading">Concentrations:</p>' +
-                                    '<ul class="conList">';
-                
-                
 
-                $.each(this.concentrations, function(index , elem){
-                    backModal += '<li>' + elem + '</li>'; 
-                });
-                backModal += '</ul></div>';
-
-
-
+                // Only showing front modal until clickec on
                 var frontModal = '<a href="#'+this.degreeName+'" rel="modal:open">' +
-                                    '<div class="uDegBoxes">'+
+                                    '<div class="gDegBoxes" data-degree="'+this.degreeName+'">'+
                                         '<p class="degreeName">' + this.title + '</p>' +
                                         '<p class="degreeDesc">' + this.description + '</p>' +
                                         '<i class="far fa-plus-square"></i>' +
@@ -113,12 +76,23 @@ $(document).ready(function(){
                                 '</a>';
 
 
-                $('#tabs-2').append(backModal);
-                $('#tabs-2').append(frontModal);
-            }
+                $('#tabs-2').append(frontModal); // append front
+            }  
        });
-    });
+       
 
+        // Now get the information for this object
+        $('.uDegBoxes').on('click', function(){
+            // Pass in the query 'results.undergraduate' and the data attribute value
+            buildDegreeBackModal(results.undergraduate, $(this).attr('data-degree'));
+        });
+
+        // Now get the information for this object
+        $('.gDegBoxes').on('click', function(){
+            // Pass in the query 'results.undergraduate' and the data attribute value
+            buildDegreeBackModal(results.graduate, $(this).attr('data-degree'));
+        });
+    });
 
 
 
@@ -185,7 +159,6 @@ $(document).ready(function(){
                             
         });
 
-
         // Coop Section
         var coopSect = '<div id="coopContent">' +
                             '<h3 style="padding-top: 1em;">' + results.introduction.content[1].title + '</h3>' +
@@ -196,7 +169,6 @@ $(document).ready(function(){
         $('#employment').append(employmentSect);
         $('#employment').append(coopSect);
     });
-
 
 
     // Co-op/Employment section
@@ -223,6 +195,32 @@ $(document).ready(function(){
 
 
 });
+
+
+
+/**
+ * buildDegreeBackModal
+ * @param resultField - E.g. "results.undergraduate"
+ * @param dataField - Value of the data- attribute
+ */
+function buildDegreeBackModal(resultField, dataField){
+    // get the requested object
+    var temp = getAttributesByName(resultField, "degreeName", dataField);
+
+    // console.log(temp);
+    var backModal = '<div id="'+ temp.degreeName +'" class="modal">' +
+        '<h2>' + temp.title + '</h2>' +
+        '<p class="conSubHeading">Concentrations:</p>' +
+        '<ul class="conList">';
+
+        $.each(temp.concentrations, function(index , elem){
+            backModal += '<li>' + elem + '</li>'; 
+        });
+    backModal += '</ul></div>';
+
+
+    $('body').append(backModal); // stuff after - back
+}
 
 
 
@@ -261,6 +259,28 @@ function xhr(getPost,d,idForSpinner){
             }).fail(function(err){
                     console.log(err);
             });
+}
+
+
+
+
+// getAttributesByName 
+// arr - an array of objects [{},{},{}]
+// name - name of the name=value pair's object I want to send back
+// val - value of the name=value pair I want
+
+// [{x=1, y=1, z=1},{x=2, y=2, z=2}] -
+// getAttributesByName(arr, 'x', 1)
+function getAttributesByName(arr, name, val){
+    var result = null;
+
+    $.each(arr, function(){
+        if(this[name] === val){
+            result = this;
+        }
+    });
+
+    return result;
 }
 
 
