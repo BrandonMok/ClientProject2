@@ -89,6 +89,8 @@ div ul#nav a:hover{
 
 
 
+
+
 /** About Section */
 #about{
     margin: 4em;
@@ -127,6 +129,9 @@ div ul#nav a:hover{
 }
 
 
+
+
+
 /** DEGREES Section **/
 
 /* Tabs section 'undergraduate' & 'graduate' */
@@ -134,7 +139,6 @@ div ul#nav a:hover{
     display: flex;
     flex-wrap: wrap;
 }
-
 /* Individual Degree boxes */
 .uDegBoxes, .gDegBoxes{
     flex: 1 1 25%;
@@ -257,10 +261,9 @@ ul.minorClasses li{
 #studentWorkLocations p.sectionHeading{
     text-align: center;
 }
-ul#coopList li{
+/* ul#coopList li{
     padding: .5em 0;
-}
-
+} */
 
 
 
@@ -268,19 +271,26 @@ ul#coopList li{
 
 
 /** People section */
-#people{
+#tabs-3, #tabs-4{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+
 }
-.peopleContainer{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+#people p.sectionHeading{
+    text-align: center;
+    flex: 1 1 100%;
+}
+#peopleTabs{
+    width: 100%;
 }
 .peopleBoxes{
-    text-align: center;
+    flex: 1 1 25%;
+    margin: 1em;
     width: 14em;
     height: 7em;
     border: 2px solid #F76902;
+    text-align: center;
 }
 
 

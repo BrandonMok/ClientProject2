@@ -7,6 +7,7 @@ $(document).ready(function(){
 
     // Tabs 
     $( "#tabs" ).tabs();
+    $("#peopleTabs").tabs();
 
     // Accordian 
     $( "#accordion" ).accordion({
@@ -208,20 +209,16 @@ $(document).ready(function(){
     xhr('get', {path:"/people/"}, "#people").done(function(results){
         $('div#people p.sectionHeading').append(results.title);
 
-        var people = '<div id="peopleContainer">'
         $.each(results.faculty, function(){
-
-            people += '<a href="#'+this.username+'" rel="modal:open">'+
+            var people = '<a href="#'+this.username+'" rel="modal:open">'+
                             '<div class="peopleBoxes" data-uname="'+this.username+'">' +
                                 '<h2>'+this.name+'</h2>' +
                                 '<h4>' + this.title + '</h4>' +
                             '</div>'
                         '</a>';
+            $('#tabs-3').append(people);
 
-            // $('#tabs-3').append(people);
         });
-        people += '</div>';
-        $('#tabs-3').append(people);
 
     });
 
