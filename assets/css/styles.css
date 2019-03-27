@@ -299,17 +299,12 @@ ul.minorClasses li{
 }
 
 .peopleBackModal{
-    display: flex;
-    flex-direction: row;
+    text-align: center;
 }
-.peopleNameImage{
-    padding: 1em;
-    flex: 1 1 50%;
-}
-.peopleContactInfo{
-    flex: 1 1 50%;
+.peopleNameImage, .peopleContactInfo{
     padding: 1em;
 }
+
 
 
 

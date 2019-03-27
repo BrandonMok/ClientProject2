@@ -4,6 +4,15 @@
  */
 
 $(document).ready(function(){
+    // Browser Detection Plugin - https://github.com/danieledesantis/jquery-browser-detection
+    var curBrowser = $.browserDetection(true);
+    switch(curBrowser){
+        case "IE7":
+        case "IE8": 
+            alert("Outdated browser detected! Please update browser before viewing page!");
+            window.location = "http://outdatedbrowser.com/en";
+            break;
+    }
 
     // Tabs 
     $( "#tabs" ).tabs();
@@ -14,9 +23,6 @@ $(document).ready(function(){
         active: false,
         collapsible: true
     });
-
-
-
 
 
     /**
@@ -339,15 +345,20 @@ function buildPeopleBackModal(resultField, dataField){
 
     // Add rest of information
     backModal +=  '<div class="peopleNameImage">' +
-                            '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
-                            '<h2>' + data.title +'</h2>' +
-                        '</div>' +
-                        '<div class="peopleContactInfo">';
+                        '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
+                        '<h2>' + data.title +'</h2>';
+
+    // CHECK: interest areas
+    if(data.interestArea != null && data.interestArea != ""){
+        backModal += '<p><strong>Interest Areas:</strong>  '  + data.interestArea + '</p></div>';
+    }
+    backModal += '<div class="peopleContactInfo">';
+
 
     // CHECK: phone number
     if(data.phone != null && data.phone != ""){
         var originalPhone = data.phone; // orignal phone number from api
-        
+
         if(originalPhone.indexOf("(") >= 0 || originalPhone.indexOf(")") >= 0){
             backModal += '<h4><i class="fas fa-mobile-alt"></i>' + originalPhone + '</h4>';
         }
@@ -359,9 +370,13 @@ function buildPeopleBackModal(resultField, dataField){
                 "(" + originalPhone.substring(0,3) + ") " + originalPhone.substring(3,6) + " - " + originalPhone.substring(6,10) + '</h4>';
         }
     }
+
+    // CHECK: email 
     if(data.email != null && data.email != ""){
         backModal += '<h4><i class="far fa-envelope"></i>' + data.email + '</h4>';
     }
+
+    // CHECK: office
     if(data.office != null && data.office != ""){
         backModal += '<h4><i class="far fa-building"></i>' + data.office + '</h4>';
     }
