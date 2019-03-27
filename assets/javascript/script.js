@@ -325,10 +325,39 @@ function buildMinorsBackModal(resultField, dataField){
  * @param dataField - Value of the data- attribute    
  */
 function buildPeopleBackModal(resultField, dataField){
-    var data = getAttributesByName(resultField, "name", dataField);
+    var data = getAttributesByName(resultField, "username", dataField);
 
-    // var backModal = '<div id="'+ data.name +'">' +
-    //                     '<'          // now style infomation in modal
+    var backModal = '<div id="'+ data.username +'" class="modal peopleBackModal">' +
+                        '<h1>'+ data.name + '</h1>' +
+                        '<div class="peopleNameImage">' +
+                            '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
+                            '<h2>' + data.title +'</h2>' +
+                        '</div>' +
+                        '<div class="peopleContactInfo">';
+
+    // check for null values
+    if(data.phone != null && data.phone != ""){
+        var originalPhone = data.phone;
+
+        if(originalPhone.indexOf("-") >= 0){
+            backModal += '<h4><i class="fas fa-mobile-alt"></i> ('+ originalPhone.substring(0,3) + ')' + originalPhone.substring(3, 12) + '</h4>';
+        }
+        else if(originalPhone.indexOf("(") >= 0 || originalPhone.indexOf(")") >= 0){
+            backModal += '<h4><i class="fas fa-mobile-alt"></i>' + originalPhone + '</h4>';
+        }
+        else if(originalPhone.indexOf("-") < 0){
+            backModal += '<h4><i class="fas fa-mobile-alt"></i>' +
+                "(" + originalPhone.substring(0,3) + ") " + originalPhone.substring(3,6) + " - " + originalPhone.substring(6,10) + '</h4>';
+        }
+    }
+    if(data.email != null){
+        backModal += '<h4><i class="far fa-envelope"></i>' + data.email + '</h4>';
+    }
+    if(data.office != null){
+        backModal += '<h4><i class="far fa-building"></i>' + data.office + '</h4>';
+    }
+    backModal += '</div></div>';    // close divs
+    $('body').append(backModal);
 }
 
 
