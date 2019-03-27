@@ -18,6 +18,7 @@ $(document).ready(function(){
 
 
 
+
     /**
      * About
      */
@@ -207,24 +208,47 @@ $(document).ready(function(){
 
     // People section
     xhr('get', {path:"/people/"}, "#people").done(function(results){
+        // Our people title
         $('div#people p.sectionHeading').append(results.title);
 
+        // Cycle through staff
+        $.each(results.staff, function(){
+            var staff = '<a href="#'+this.username+'" rel="modal:open">' +
+                    '<div class="staffBoxes" data-uname="'+this.username+'">' +
+                        '<h2>' + this.name + '</h2>' +
+                        '<h4>' + this.title + '</h4>' +
+                    '</div>';
+            $('#tabs-4').append(staff);
+        });
+
+
+        // Cycle through Faculty
         $.each(results.faculty, function(){
-            var people = '<a href="#'+this.username+'" rel="modal:open">'+
-                            '<div class="peopleBoxes" data-uname="'+this.username+'">' +
+            var faculty = '<a href="#'+this.username+'" rel="modal:open">'+
+                            '<div class="facultyBoxes" data-uname="'+this.username+'">' +
                                 '<h2>'+this.name+'</h2>' +
                                 '<h4>' + this.title + '</h4>' +
                             '</div>'
                         '</a>';
-            $('#tabs-3').append(people);
-
+            $('#tabs-3').append(faculty); // append each faculty box to dom
         });
 
+
+
+
+        // Now get the information for this object
+        $('.staffBoxes').on('click', function(){
+            // Pass in the query 'results.undergraduate' and the data attribute value
+            buildPeopleBackModal(results.staff, $(this).attr('data-uname'));
+        });
+
+        // Now get the information for this object
+        $('.facultyBoxes').on('click', function(){
+            // Pass in the query 'results.undergraduate' and the data attribute value
+            buildPeopleBackModal(results.faculty, $(this).attr('data-uname'));
+        });
     });
 
-
-
-    
 
 
 
@@ -234,6 +258,7 @@ $(document).ready(function(){
 
 /**
  * buildDegreeBackModal
+ * Builds the back modal for the degrees section
  * @param resultField - E.g. "results.undergraduate"
  * @param dataField - Value of the data- attribute
  */
@@ -257,6 +282,13 @@ function buildDegreeBackModal(resultField, dataField){
 }
 
 
+
+/**
+ * buildMinorsBackModal
+ * Builds the back modal for minors
+ * @param resultField - E.g. "results.UgMinors"
+ * @param dataField - Value of the data- attribute
+ */
 function buildMinorsBackModal(resultField, dataField){
     var data = getAttributesByName(resultField, "name", dataField);
 
@@ -281,5 +313,23 @@ function buildMinorsBackModal(resultField, dataField){
         backModal += '</ul></d>';
     }
 
-    $('body').append(backModal);
+    $('body').append(backModal); // append back modal to the dom
 }
+
+
+
+/**
+ * buildPeopleBackModal
+ * Builds the backModal for the people (faculty, staff)
+ * @param resultField - E.g 'results.faculty'
+ * @param dataField - Value of the data- attribute    
+ */
+function buildPeopleBackModal(resultField, dataField){
+    var data = getAttributesByName(resultField, "name", dataField);
+
+    // var backModal = '<div id="'+ data.name +'">' +
+    //                     '<'          // now style infomation in modal
+}
+
+
+

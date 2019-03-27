@@ -275,7 +275,6 @@ ul.minorClasses li{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
 }
 #people p.sectionHeading{
     text-align: center;
@@ -284,7 +283,7 @@ ul.minorClasses li{
 #peopleTabs{
     width: 100%;
 }
-.peopleBoxes{
+.facultyBoxes, .staffBoxes{
     flex: 1 1 25%;
     margin: 1em;
     width: 14em;
