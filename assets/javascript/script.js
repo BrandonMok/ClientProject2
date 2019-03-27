@@ -8,7 +8,6 @@ $(document).ready(function(){
     var curBrowser = $.browserDetection(true);
     switch(curBrowser){
         case "IE7":
-        case "IE8": 
             alert("Outdated browser detected! Please update browser before viewing page!");
             window.location = "http://outdatedbrowser.com/en";
             break;
@@ -23,6 +22,8 @@ $(document).ready(function(){
         active: false,
         collapsible: true
     });
+
+
 
 
     /**
@@ -102,7 +103,9 @@ $(document).ready(function(){
 
 
 
-    // Minors Section
+    /**
+     * Minors section
+     */
     xhr('get', {path:"/minors/"}, '#minors').done(function(results){
         // Iterate through each minor
         $.each(results.UgMinors , function(){
@@ -129,7 +132,9 @@ $(document).ready(function(){
 
 
 
-    // Employment Section
+    /**
+     * Employment Section
+     */
     xhr('get', {path:"/employment/"}, "#employment").done(function(results){
         // Building of the employment section
         var employmentSect = '<div id="empContent">' +
@@ -144,7 +149,6 @@ $(document).ready(function(){
                                 '<h2>' + this.value + '</h2>' +
                                 '<p>' + this.description + '</p>'+
                             '</div>';
-                            
         });
 
         // Coop Section
@@ -212,7 +216,10 @@ $(document).ready(function(){
 
 
 
-    // People section
+    /**
+     * People Section
+     * Contains faculty & staff
+     */
     xhr('get', {path:"/people/"}, "#people").done(function(results){
         // Our people title
         $('div#people p.sectionHeading').append(results.title);
@@ -259,6 +266,10 @@ $(document).ready(function(){
 
 
 });
+
+
+
+
 
 
 

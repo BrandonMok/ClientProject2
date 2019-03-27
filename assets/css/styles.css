@@ -174,18 +174,14 @@ ul.conList{
 
 
 /** Minors Section **/
+/* Main minors container */
 #minors{
     margin: 3em;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
-    flex-direction: row;
 }
 #minors .sectionHeading{ 
-    flex: 1 1 100%; 
     text-align: center;
 } 
+/* Container for all minor boxes */
 #minorsBoxCont{
     display: grid; 
     grid-template-columns: repeat(4, 1fr);
@@ -208,6 +204,7 @@ ul.conList{
     z-index: 3;
     box-shadow: 0 4px 10px rgba(0,0,0,.16);
 }
+
 /* List of classes for the minor */
 ul.minorClasses{
     padding-left: 2em;
@@ -216,6 +213,7 @@ ul.minorClasses{
 ul.minorClasses li{
     list-style-type: square;
 }
+
 /* Minor description */
 .minorDesc{
     padding: 1em 0;
@@ -234,6 +232,11 @@ ul.minorClasses li{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    text-align: center;
+}
+/* Word "employment" */
+#employment p.sectionHeading{
+    font-size: 2.3rem;
 }
 /* Actual content */
 #empContent, #coopContent{
@@ -244,14 +247,10 @@ ul.minorClasses li{
 #empBoxes{
     flex: 1 1 25%;
     border: 3px solid #F76902;
-    background-color: white;
+    margin:.5em;
     min-height: 8em;
-    text-align: center;
 }
-/* Word "employment" */
-#employment p.sectionHeading{
-    font-size: 2.3rem;
-}
+
 
 
 /** Student work locations "Where our students work" */
@@ -328,7 +327,6 @@ a.ui-button:active,
 	color: #ffffff;
 }
 
-
 /* Overwrite modal styles */
 .blocker{
     z-index: 10;
@@ -336,7 +334,6 @@ a.ui-button:active,
 .modal{
     max-width: 750px;
 }
-
 
 /* Accordian content size */
 .ui-accordion .ui-accordion-content{
@@ -349,6 +346,11 @@ a.ui-button:active,
 
 
 /** Media Queries */
+@media screen and (max-width: 1000px){
+    #minorsBoxCont{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 @media screen and (max-width: 900px){
     /** Image scroll parallax effect stop */
     #landingImage{
@@ -359,6 +361,19 @@ a.ui-button:active,
         font-size: 3rem; 
         margin-right: 2em;      
     }
+
+
+    #minorsBoxCont{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+    .eachMinor{
+        flex: 1 1 50%;
+    }
+}
+@media screen and (max-width: 850px){
 }
 @media screen and (max-width: 600px){
     /* Degree boxes */
@@ -400,6 +415,11 @@ a.ui-button:active,
     /* Information Sciences & Technology text */
     #imageText{
         font-size: 2.4rem;        
+    }
+
+
+    #empBoxes{
+        font-size: .7rem;
     }
 
 
