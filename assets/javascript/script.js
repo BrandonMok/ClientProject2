@@ -328,32 +328,41 @@ function buildPeopleBackModal(resultField, dataField){
     var data = getAttributesByName(resultField, "username", dataField);
 
     var backModal = '<div id="'+ data.username +'" class="modal peopleBackModal">' +
-                        '<h1>'+ data.name + '</h1>' +
-                        '<div class="peopleNameImage">' +
+                        '<h1>'+ data.name;
+    
+    // CHECK: for tagline
+    if(data.tagline != null && data.tagline != ""){
+        backModal += " - " + data.tagline + '</h1>';
+    }else{
+        backModal += '</h1>';
+    }
+
+    // Add rest of information
+    backModal +=  '<div class="peopleNameImage">' +
                             '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
                             '<h2>' + data.title +'</h2>' +
                         '</div>' +
                         '<div class="peopleContactInfo">';
 
-    // check for null values
+    // CHECK: phone number
     if(data.phone != null && data.phone != ""){
-        var originalPhone = data.phone;
-
-        if(originalPhone.indexOf("-") >= 0){
-            backModal += '<h4><i class="fas fa-mobile-alt"></i> ('+ originalPhone.substring(0,3) + ')' + originalPhone.substring(3, 12) + '</h4>';
-        }
-        else if(originalPhone.indexOf("(") >= 0 || originalPhone.indexOf(")") >= 0){
+        var originalPhone = data.phone; // orignal phone number from api
+        
+        if(originalPhone.indexOf("(") >= 0 || originalPhone.indexOf(")") >= 0){
             backModal += '<h4><i class="fas fa-mobile-alt"></i>' + originalPhone + '</h4>';
         }
-        else if(originalPhone.indexOf("-") < 0){
+        else if(originalPhone.indexOf("-") >= 0){
+            backModal += '<h4><i class="fas fa-mobile-alt"></i> ('+ originalPhone.substring(0,3) + ')' + originalPhone.substring(3, 12) + '</h4>';
+        }
+        else if(originalPhone.indexOf("-") < 0){ // check if phone number doesn't have the dash
             backModal += '<h4><i class="fas fa-mobile-alt"></i>' +
                 "(" + originalPhone.substring(0,3) + ") " + originalPhone.substring(3,6) + " - " + originalPhone.substring(6,10) + '</h4>';
         }
     }
-    if(data.email != null){
+    if(data.email != null && data.email != ""){
         backModal += '<h4><i class="far fa-envelope"></i>' + data.email + '</h4>';
     }
-    if(data.office != null){
+    if(data.office != null && data.office != ""){
         backModal += '<h4><i class="far fa-building"></i>' + data.office + '</h4>';
     }
     backModal += '</div></div>';    // close divs
