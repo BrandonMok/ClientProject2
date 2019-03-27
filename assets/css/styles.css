@@ -224,6 +224,7 @@ ul.minorClasses li{
 
 
 
+
 /* Employment section */
 #employment{
     display: flex;
@@ -259,8 +260,27 @@ ul.minorClasses li{
 ul#coopList li{
     padding: .5em 0;
 }
-#coopDegree{
-    padding: 0 1em;
+
+
+
+
+
+
+
+/** People section */
+#people{
+    display: flex;
+    flex-wrap: wrap;
+}
+.peopleContainer{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+.peopleBoxes{
+    text-align: center;
+    width: 14em;
+    height: 7em;
+    border: 2px solid #F76902;
 }
 
 
@@ -298,7 +318,7 @@ a.ui-button:active,
 
 /* Accordian content size */
 .ui-accordion .ui-accordion-content{
-    padding: 3em 2.2em;
+    padding: 1em 2.2em 5em 2.2em;
 }
 
 

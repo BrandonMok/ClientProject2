@@ -17,8 +17,6 @@ $(document).ready(function(){
 
 
 
-
-
     /**
      * About
      */
@@ -98,34 +96,12 @@ $(document).ready(function(){
 
     // Minors Section
     xhr('get', {path:"/minors/"}, '#minors').done(function(results){
-
         // Iterate through each minor
         $.each(results.UgMinors , function(){
-
-            var backModal = '<div id="'+ this.name +'" class="modal">' +
-                                '<h2>' + this.title + '</h2>' +
-                                '<p class="minorDesc">' + this.description + "</p>" +
-                                '<h3> Courses: </h3>' + 
-                                '<ul class="minorClasses">';
-            
-
-            // Cycle through the courses array
-            $.each(this.courses, function(index , elem){
-                backModal += '<li>' + elem + '</li>'; 
-            });
-
-            
-            // Only attach note at the bottom if it exists
-            if(this.note){
-                backModal += '</ul><p class="minorNote">*'+ this.note +'</p></div>';
-            }
-            else{
-                backModal += '</ul></div>';
-            }
             
             // Front modal - the part visible
             var frontModal = '<a href="#'+ this.name +'" rel="modal:open">' +
-                                '<div class="eachMinor">'+
+                                '<div class="eachMinor" data-minor-name="'+this.name+'">'+
                                     '<p class="degreeName">' + this.title + '</p>' +
                                 '</div>' +
                             '</a>';
@@ -133,7 +109,13 @@ $(document).ready(function(){
 
             // append to dom - #minorsBoxCont is the container for the boxes that's inside #minors div
             $('#minorsBoxCont').append(frontModal); 
-            $('#minorsBoxCont').append(backModal);          
+        });
+
+
+        // Now get the information for this object
+        $('.eachMinor').on('click', function(){
+            // Pass in the query 'results.undergraduate' and the data attribute value
+            buildMinorsBackModal(results.UgMinors, $(this).attr('data-minor-name'));
         });
     });
 
@@ -141,14 +123,12 @@ $(document).ready(function(){
 
     // Employment Section
     xhr('get', {path:"/employment/"}, "#employment").done(function(results){
-
         // Building of the employment section
         var employmentSect = '<div id="empContent">' +
                                 '<p class="sectionHeading">' + results.introduction.title + '</p>' +
                                 '<h3>' + results.introduction.content[0].title + '</h3>' +
                                 '<p>' + results.introduction.content[0].description + '</p>' +
                             '</div>';
-
 
         // Iterate through the statistics
         $.each(results.degreeStatistics.statistics, function(){
@@ -177,20 +157,77 @@ $(document).ready(function(){
         $('#cTableTitle').append(results.coopTable.title);
         $('#eTableTitle').append(results.employmentTable.title);
 
-
-        var coopTable = '<ul id="coopList">'
+        // var coopTableList = '<ul id="coopList">';
+        var cTable = '<table id="coopTable">'+
+                        '<tr>'+
+                            '<th>Degree</th>'+
+                            '<th>Employer</th>' +
+                            '<th>Title</th>'+
+                            '<th>City</th>' +
+                            '<th>Start Date</th>'+
+                        '</tr>'; 
 
         // Cycle through CO-OP table information
         $.each(results.coopTable.coopInformation, function(){
-            coopTable += '<hr/><li><span>' + this.employer + '</span>' +
-                        '<span id="coopDegree">' + this.degree + '</span>' + 
-                        '<span>' + this.city + '</span>' + 
-                        '<span>'+ this.term + '</span>' + 
-                    '</li>';
-        });
+            cTable += '<tr>' +
+                        '<td>' + this.degree +'</td>'+
+                        '<td>' + this.employer + '</td>' +
+                        '<td>' + this.city +'</td>' +
+                        '<td>' + this.term + '</td>' +
+                       '</tr>';
 
-        $('#coopTableContent').append(coopTable);
+            // coopTableList += '<hr/><li>' + this.employer + 
+            //             // + this.degree + '</span>' + 
+            //             // ' + this.city + '</span>' + 
+            //             // '+ this.term + '</span>' + 
+            //             '</li>';
+        });
+        // coopTableList += '</ul>';
+        cTable += '</table>';
+
+
+        $('#coopTableContent').append(cTable);
+        // $('#coopTableContent').append(coopTableList);
+
+
+        // Cycle through employment table list
+        var employTableList = '<ul id="employList">';
+        $.each(results.employmentTable.professionalEmploymentInformation, function(){
+            employTableList += '<li>' + this.employer +'</li>';
+        });
+        employTableList += '</ul>';
+
+        $("#employmentTableContent").append(employTableList);
     });
+
+
+
+
+
+    // People section
+    xhr('get', {path:"/people/"}, "#people").done(function(results){
+        $('div#people p.sectionHeading').append(results.title);
+
+        var people = '<div id="peopleContainer">'
+        $.each(results.faculty, function(){
+
+            people += '<a href="#'+this.username+'" rel="modal:open">'+
+                            '<div class="peopleBoxes" data-uname="'+this.username+'">' +
+                                '<h2>'+this.name+'</h2>' +
+                                '<h4>' + this.title + '</h4>' +
+                            '</div>'
+                        '</a>';
+
+            // $('#tabs-3').append(people);
+        });
+        people += '</div>';
+        $('#tabs-3').append(people);
+
+    });
+
+
+
+    
 
 
 
@@ -218,71 +255,34 @@ function buildDegreeBackModal(resultField, dataField){
         });
     backModal += '</ul></div>';
 
-
+    
     $('body').append(backModal); // stuff after - back
 }
 
 
+function buildMinorsBackModal(resultField, dataField){
+    var data = getAttributesByName(resultField, "name", dataField);
+
+    var backModal = '<div id="'+ data.name +'" class="modal">' +
+            '<h2>' + data.title + '</h2>' +
+            '<p class="minorDesc">' + data.description + "</p>" +
+            '<h3> Courses: </h3>' + 
+            '<ul class="minorClasses">';
 
 
-
-
-// AJAX utility
-// args:
-// 		getPost 			(is this for a get or a post)
-// 		d - data			(path:'/about/')
-// 		[idForSpinner]	(#parent (if I want a spinner to show up while it is loading))
-// return: 
-//		ajax object
-// 	use:
-//		xhr('get', {path:'/degrees/'}, #parent).done(function(json){})
-function xhr(getPost,d,idForSpinner){
-    // Since each data will be different, pass in the entire call obj
-    return $.ajax({
-                type: getPost,
-                cache: false,
-                async: true,
-                dataType: 'json',
-                data: d,
-                url: 'proxy.php',
-
-                beforeSend:function(){
-                    // create the spinner IF there is a 3rd arg (optional)
-                    $(idForSpinner).append('<img src="assets/images/loading.gif" class="dontuse" />');
-                }
-            }).always(function(){
-                // kill the spinner
-                $(idForSpinner).find('.dontuse').fadeOut(500, function(){
-                    // kill it
-                    $(this).remove();
-                })
-            }).fail(function(err){
-                    console.log(err);
-            });
-}
-
-
-
-
-// getAttributesByName 
-// arr - an array of objects [{},{},{}]
-// name - name of the name=value pair's object I want to send back
-// val - value of the name=value pair I want
-
-// [{x=1, y=1, z=1},{x=2, y=2, z=2}] -
-// getAttributesByName(arr, 'x', 1)
-function getAttributesByName(arr, name, val){
-    var result = null;
-
-    $.each(arr, function(){
-        if(this[name] === val){
-            result = this;
-        }
+    // Cycle through the courses array
+    $.each(data.courses, function(index , elem){
+        backModal += '<li>' + elem + '</li>'; 
     });
 
-    return result;
+
+    // Only attach note at the bottom if it exists
+    if(data.note){
+     backModal += '</ul><p class="minorNote">*'+ data.note +'</p></div>';
+    }
+    else{
+        backModal += '</ul></d>';
+    }
+
+    $('body').append(backModal);
 }
-
-
-
-
