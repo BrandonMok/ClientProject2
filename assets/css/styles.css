@@ -70,7 +70,7 @@ div ul#nav a:hover{
 
 
 /* Landing image DIV */
-#landingImage{
+#landing-image{
     background-image: url("../images/homepage.jpg"); /* creator: willian-justen @ unsplash.com */
     background-attachment: fixed;
     background-position: center;
@@ -78,7 +78,7 @@ div ul#nav a:hover{
     background-size: cover;
     height: 100vh;
 }
-#imageText{
+#image-text{
     position: absolute;
     color: white;
     font-size: 4rem;
@@ -96,17 +96,17 @@ div ul#nav a:hover{
 #about{
     margin: 4em;
 }
-#aboutTitle{
+#about-Title{
     font-size: 2rem;
     font-weight: bold;
 }
-#aboutDesc{
+#about-Desc{
     font-size: 1.1rem;
     padding: 2em 4em;
 }
 
 /* Quote - Considered about section */
-#quoteDiv{
+#quote-Div{
     margin: 5em 4em 3em 4em;
     text-align: center;
 }
@@ -115,7 +115,7 @@ div ul#nav a:hover{
     font-size: 1.3rem;
     padding: 0 4em 1em 4em;
 }
-#quoteAuthor{
+#quote-Author{
     font-style: italic;
     font-size: 1.4rem;
 }
@@ -150,21 +150,21 @@ div ul#nav a:hover{
     background-color: white;
 }
 /* Name of the degree */
-.degreeName{
+.degree-name{
     font-size: 1.1rem;
     padding: 1em;
     font-weight: bold;
 }
 /* Degree descriptions */
-.degreeDesc{
+.degree-Desc{
     padding: 1em;
 }
-ul.conList{
+ul.concentration-list{
     /* Image author: Dave Gandy, https://www.flaticon.com/free-icon/terminal_25627#term=terminal&page=1&position=2 */
     list-style-image: url('../images/terminal.png');
     padding-left: 1.4em;
 }
-.conSubHeading{
+.concentration-subheading{
     font-size: 1.2rem;
     padding-bottom: .5em;
 }
@@ -179,15 +179,12 @@ ul.conList{
 #minors{
     margin: 3em;
 }
-/* #minors .section-heading{ 
-    text-align: center;
-}  */
 /* Container for all minor boxes */
-#minorsBoxCont{
+#minors-box-container{
     display: grid; 
     grid-template-columns: repeat(4, 1fr);
 }
-.eachMinor{
+.each-minor{
     margin: 1em;
     border: 2px solid gray;
     border-radius: .5em;
@@ -199,7 +196,7 @@ ul.conList{
     font-weight: bold;
 }
 /* Minor div hover effect */
-.eachMinor:hover{
+.each-minor:hover{
     border: 5px solid #F76902;
     background-color: #fc954a;
     z-index: 3;
@@ -207,20 +204,20 @@ ul.conList{
 }
 
 /* List of classes for the minor */
-ul.minorClasses{
+ul.minor-courses{
     padding-left: 2em;
     padding-bottom: 1em;
 }
-ul.minorClasses li{
+ul.minor-courses li{
     list-style-type: square;
 }
 
 /* Minor description */
-.minorDesc{
+.minor-description{
     padding: 1em 0;
 }
 /* Note at the bottom of the minor */
-.minorNote{
+.minor-note{
     font-size: .8rem;
     font-style: italic;
 }
@@ -240,12 +237,12 @@ ul.minorClasses li{
     font-size: 2.3rem;
 }
 /* Actual content */
-#empContent, #coopContent{
+#employment-content, #coop-content{
     flex: 1 1 100%;
     padding-bottom: 2em;
 }
 /* Boxes for employment stats */
-#empBoxes{
+#statistics-boxes{
     flex: 1 1 25%;
     border: 3px solid #F76902;
     margin:.5em;
@@ -255,7 +252,7 @@ ul.minorClasses li{
 
 
 /** Student work locations "Where our students work" */
-#studentWorkLocations{
+#student-work-locations{
     margin: 3em;
 }
 /* ul#coopList li{
@@ -277,7 +274,7 @@ ul.minorClasses li{
 #peopleTabs{
     width: 100%;
 }
-.facultyBoxes, .staffBoxes{
+.faculty-boxes, .staff-boxes{
     flex: 1 1 25%;
     margin: 1em;
     width: 14em;
@@ -285,16 +282,16 @@ ul.minorClasses li{
     border: 2px solid #F76902;
     text-align: center;
 }
-.facultyBoxes:hover, .staffBoxes:hover{
+.faculty-boxes:hover, .staff-boxes:hover{
     font-size: 1.1rem;
     z-index: 3;
     border: 4px solid #F76902;
     box-shadow: 0 4px 10px rgba(0,0,0,.16);
 }
-.peopleBackModal{
+.people-back-modal{
     text-align: center;
 }
-.peopleNameImage, .peopleContactInfo{
+.people-brief-info, .peopleContactInfo{
     padding: 1em;
 }
 
@@ -310,7 +307,7 @@ ul.minorClasses li{
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 1em;
 }
-.interestAreaBox, .interestFacultyBox{
+.interest-area-box, .interestFacultyBox{
     margin: 0 1em;
     width: 8em;
     height: 5em;
@@ -363,29 +360,29 @@ a.ui-button:active,
 
 /** Media Queries */
 @media screen and (max-width: 1000px){
-    #minorsBoxCont{
+    #minors-box-container{
         grid-template-columns: repeat(3, 1fr);
     }
 }
 @media screen and (max-width: 900px){
     /** Image scroll parallax effect stop */
-    #landingImage{
+    #landing-image{
         background-attachment: scroll;
     }
     /* Information Sciences & Technology text */
-    #imageText{
+    #image-text{
         font-size: 3rem; 
         margin-right: 2em;      
     }
 
 
-    #minorsBoxCont{
+    #minors-box-container{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
     }
-    .eachMinor{
+    .each-minor{
         flex: 1 1 50%;
     }
 }
@@ -408,33 +405,33 @@ a.ui-button:active,
         margin: 0;
         margin-top: 3em;
     }
-    #aboutTitle{
+    #about-Title{
         font-size: 1.2rem;
         padding-bottom: 1em;
     }
-    #aboutDesc{
+    #about-Desc{
         font-size: 1rem;
         padding: 0;
     }
-    #quoteDiv{
+    #quote-Div{
         margin: 2em 0;
         padding: .5em;
     }
     #quote{
         font-size: 1.1rem;
     }
-    #quoteAuthor{
+    #quote-Author{
         font-size: 1rem;
     }
 }
 @media screen and (max-width: 500px){
     /* Information Sciences & Technology text */
-    #imageText{
+    #image-text{
         font-size: 2.4rem;        
     }
 
     /* Employee boxes statistics */
-    #empBoxes{
+    #statistics-boxes{
         font-size: .7rem;
     }
 

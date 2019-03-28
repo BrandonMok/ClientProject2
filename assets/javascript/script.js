@@ -51,7 +51,7 @@ $(document).ready(function(){
 
     // Tabs 
     $( "#tabs" ).tabs();
-    $("#peopleTabs").tabs();
+    $("#people-tabs").tabs();
 
     // Accordian 
     $( "#accordion" ).accordion({
@@ -72,20 +72,20 @@ $(document).ready(function(){
     /**
      * About
      */
-    xhr('get', {path:"/about/"}, '#aboutContainer').done(function(results){
-        var aboutSection = '<div id="aboutDiv" class="altSection">' +
-                            '<p id="aboutTitle">' + results.title + '</p>' +
-                            '<p id="aboutDesc">' + results.description + '</p>' +
+    xhr('get', {path:"/about/"}, '#about').done(function(results){
+        var aboutSection = '<div id="about-Div" class="altSection">' +
+                            '<p id="about-Title">' + results.title + '</p>' +
+                            '<p id="about-Desc">' + results.description + '</p>' +
                         '</div>';
 
-        var quoteDiv = '<div id="quoteDiv">'+
+        var quoteSection = '<div id="quote-Div">'+
                         '<p id="quote"><span class="quotes">"</span>' + results.quote  + '<span class="quotes">"</span></p>' +
-                        '<p id="quoteAuthor"> - ' + results.quoteAuthor + '</p>' +
+                        '<p id="quote-Author"> - ' + results.quoteAuthor + '</p>' +
                     '</div>';
 
         // append to DOM
         $("#about").append(aboutSection);
-        $("#about").append(quoteDiv);
+        $("#about").append(quoteSection);
     });
 
 
@@ -100,8 +100,8 @@ $(document).ready(function(){
             // Front Modal - Back will only be loaded if clicked on
             var frontModal = '<a href="#'+this.degreeName+'" rel="modal:open">' +
                                     '<div class="uDegBoxes" data-degree="'+this.degreeName+'">'+
-                                        '<p class="degreeName">' + this.title + '</p>' +
-                                        '<p class="degreeDesc">' + this.description + '</p>' +
+                                        '<p class="degree-name">' + this.title + '</p>' +
+                                        '<p class="degree-Desc">' + this.description + '</p>' +
                                         '<i class="far fa-plus-square"></i>' +
                                     '</div>' +
                                 '</a>';
@@ -117,10 +117,10 @@ $(document).ready(function(){
             if(this.title){
 
                 // Only showing front modal until clickec on
-                var frontModal = '<a href="#'+this.degreeName+'" rel="modal:open">' +
-                                    '<div class="gDegBoxes" data-degree="'+this.degreeName+'">'+
-                                        '<p class="degreeName">' + this.title + '</p>' +
-                                        '<p class="degreeDesc">' + this.description + '</p>' +
+                var frontModal = '<a href="#'+ this.degreeName +'" rel="modal:open">' +
+                                    '<div class="gDegBoxes" data-degree="'+ this.degreeName +'">'+
+                                        '<p class="degree-name">' + this.title + '</p>' +
+                                        '<p class="degree-Desc">' + this.description + '</p>' +
                                         '<i class="far fa-plus-square"></i>' +
                                     '</div>' +
                                 '</a>';
@@ -155,19 +155,19 @@ $(document).ready(function(){
             
             // Front modal - the part visible
             var frontModal = '<a href="#'+ this.name +'" rel="modal:open">' +
-                                '<div class="eachMinor" data-minor-name="'+this.name+'">'+
-                                    '<p class="degreeName">' + this.title + '</p>' +
+                                '<div class="each-minor" data-minor-name="'+this.name+'">'+
+                                    '<p class="degree-name">' + this.title + '</p>' +
                                 '</div>' +
                             '</a>';
 
 
-            // append to dom - #minorsBoxCont is the container for the boxes that's inside #minors div
-            $('#minorsBoxCont').append(frontModal); 
+            // append to dom - #minors-box-container is the container for the boxes that's inside #minors div
+            $('#minors-box-container').append(frontModal); 
         });
 
 
         // Now get the information for this object
-        $('.eachMinor').on('click', function(){
+        $('.each-minor').on('click', function(){
             // Pass in the query 'results.undergraduate' and the data attribute value
             buildMinorsBackModal(results.UgMinors, $(this).attr('data-minor-name'));
         });
@@ -176,30 +176,33 @@ $(document).ready(function(){
 
 
     /**
-     * Employment Section
+     * Employment Section - Brief Co-op & employment w/statistics
      */
     xhr('get', {path:"/employment/"}, "#employment").done(function(results){
         // Building of the employment section
-        var employmentSect = '<div id="empContent">' +
-                                '<p class="sectionHeading">' + results.introduction.title + '</p>' +
+        var employmentSect = '<div id="employment-content">' +
+                                '<p class="section-heading">' + results.introduction.title + '</p>' +
                                 '<h3>' + results.introduction.content[0].title + '</h3>' +
                                 '<p>' + results.introduction.content[0].description + '</p>' +
                             '</div>';
 
         // Iterate through the statistics
         $.each(results.degreeStatistics.statistics, function(){
-            employmentSect += '<div id="empBoxes">' +
+            employmentSect += '<div id="statistics-boxes">' +
                                 '<h2>' + this.value + '</h2>' +
                                 '<p>' + this.description + '</p>'+
                             '</div>';
         });
+        
+
 
         // Coop Section
-        var coopSect = '<div id="coopContent">' +
+        var coopSect = '<div id="coop-content">' +
                             '<h3 style="padding-top: 1em;">' + results.introduction.content[1].title + '</h3>' +
                             '<p>' + results.introduction.content[1].description + '</p>' +
                         '</div>';
-                            
+                      
+                        
         // append to dom
         $('#employment').append(employmentSect);
         $('#employment').append(coopSect);
@@ -207,16 +210,17 @@ $(document).ready(function(){
 
 
 
+
     /**
-     * Co-op/Employment section
+     * Co-op/Employment section - Table/lists
      */
-    xhr('get', {path:"/employment/"}, "#studentWorkLocations").done(function(results){
+    xhr('get', {path:"/employment/"}, "#student-work-locations").done(function(results){
         // append titles to accordion plugin's tab
-        $('#cTableTitle').append(results.coopTable.title);
-        $('#eTableTitle').append(results.employmentTable.title);
+        $('#coop-table-title').append(results.coopTable.title);
+        $('#employment-table-title').append(results.employmentTable.title);
 
         // var coopTableList = '<ul id="coopList">';
-        var cTable = '<table id="coopTable">'+
+        var cTable = '<table id="coop-table">'+
                         '<tr>'+
                             '<th>Degree</th>'+
                             '<th>Employer</th>' +
@@ -244,18 +248,17 @@ $(document).ready(function(){
         cTable += '</table>';
 
 
-        $('#coopTableContent').append(cTable);
-        // $('#coopTableContent').append(coopTableList);
+        $('#coop-table-content').append(cTable);
 
 
         // Cycle through employment table list
-        var employTableList = '<ul id="employList">';
+        var employTable = '<ul id="employment-table">';
         $.each(results.employmentTable.professionalEmploymentInformation, function(){
-            employTableList += '<li>' + this.employer +'</li>';
+            employTable += '<li>' + this.employer +'</li>';
         });
-        employTableList += '</ul>';
+        employTable += '</ul>';
 
-        $("#employmentTableContent").append(employTableList);
+        $("#employment-table-content").append(employTable);
     });
 
 
@@ -268,12 +271,12 @@ $(document).ready(function(){
      */
     xhr('get', {path:"/people/"}, "#people").done(function(results){
         // Our people title
-        $('div#people p.sectionHeading').append(results.title);
+        $('div#people p.section-heading').append(results.title);
 
         // Cycle through staff
         $.each(results.staff, function(){
             var staff = '<a href="#'+this.username+'" rel="modal:open">' +
-                    '<div class="staffBoxes" data-uname="'+this.username+'">' +
+                    '<div class="staff-boxes" data-uname="'+this.username+'">' +
                         '<h2>' + this.name + '</h2>' +
                         '<h4>' + this.title + '</h4>' +
                     '</div>';
@@ -284,7 +287,7 @@ $(document).ready(function(){
         // Cycle through Faculty
         $.each(results.faculty, function(){
             var faculty = '<a href="#'+this.username+'" rel="modal:open">'+
-                            '<div class="facultyBoxes" data-uname="'+this.username+'">' +
+                            '<div class="faculty-boxes" data-uname="'+ this.username +'">' +
                                 '<h2>'+this.name+'</h2>' +
                                 '<h4>' + this.title + '</h4>' +
                             '</div>'
@@ -295,13 +298,13 @@ $(document).ready(function(){
 
 
         // Now get the information for this object
-        $('.staffBoxes').on('click', function(){
+        $('.staff-boxes').on('click', function(){
             // Pass in the query 'results.undergraduate' and the data attribute value
             buildPeopleBackModal(results.staff, $(this).attr('data-uname'));
         });
 
         // Now get the information for this object
-        $('.facultyBoxes').on('click', function(){
+        $('.faculty-boxes').on('click', function(){
             // Pass in the query 'results.undergraduate' and the data attribute value
             buildPeopleBackModal(results.faculty, $(this).attr('data-uname'));
         });
@@ -328,7 +331,7 @@ $(document).ready(function(){
 
                 // Front Modal
                 var frontModal = '<a href="#'+ combined +'" rel="modal:open">'+
-                                '<div class="interestAreaBox" data-area-name="'+ this.areaName +'">' + 
+                                '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
                                     '<p>' + this.areaName + '</p>' +
                                 '</div>' +
                             '</a>';
@@ -338,7 +341,7 @@ $(document).ready(function(){
             else{
                 // Front Modal
                 var frontModal = '<a href="#'+ this.areaName +'" rel="modal:open">'+
-                                '<div class="interestAreaBox" data-area-name="'+ this.areaName +'">' + 
+                                '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
                                     '<p>' + this.areaName + '</p>' +
                                 '</div>' +
                             '</a>';
@@ -353,7 +356,7 @@ $(document).ready(function(){
 //
         $.each(results.byFaculty, function(){
             var frontModal = '<a href="#' + this.username + '" rel="modal:open">' + 
-                                '<div class="interestFacultyBox" data-faculty-name="' + this.username + '">' + 
+                                '<div class="interest-faculty-box" data-faculty-name="' + this.username + '">' + 
                                     '<p>' + this.facultyName + '</p>' +
                                 '</div>' +
                             '</a>';
@@ -363,11 +366,11 @@ $(document).ready(function(){
 
 
         // On click event to then make the back modal
-        $('.interestAreaBox').on('click', function(){
+        $('.interest-area-box').on('click', function(){
             buildInterestBackModal(results.byInterestArea, 'areaName', $(this).attr('data-area-name'));
         });
         // On click event to then make the back modal
-        $('.interestFacultyBox').on('click', function(){
+        $('.interest-faculty-box').on('click', function(){
             buildInterestBackModal(results.byFaculty, 'username', $(this).attr('data-faculty-name'));
         });
     });
@@ -394,8 +397,8 @@ function buildDegreeBackModal(resultField, dataField){
 
     var backModal = '<div id="'+ data.degreeName +'" class="modal">' +
         '<h2>' + data.title + '</h2>' +
-        '<p class="conSubHeading">Concentrations:</p>' +
-        '<ul class="conList">';
+        '<p class="concentration-subheading">Concentrations:</p>' +
+        '<ul class="concentration-list">';
 
         $.each(data.concentrations, function(index , elem){
             backModal += '<li>' + elem + '</li>'; 
@@ -418,9 +421,9 @@ function buildMinorsBackModal(resultField, dataField){
 
     var backModal = '<div id="'+ data.name +'" class="modal">' +
             '<h2>' + data.title + '</h2>' +
-            '<p class="minorDesc">' + data.description + "</p>" +
+            '<p class="minor-description">' + data.description + "</p>" +
             '<h3> Courses: </h3>' + 
-            '<ul class="minorClasses">';
+            '<ul class="minor-courses">';
 
 
     // Cycle through the courses array
@@ -431,7 +434,7 @@ function buildMinorsBackModal(resultField, dataField){
 
     // Only attach note at the bottom if it exists
     if(data.note){
-     backModal += '</ul><p class="minorNote">*'+ data.note +'</p></div>';
+     backModal += '</ul><p class="minor-note">*'+ data.note +'</p></div>';
     }
     else{
         backModal += '</ul></d>';
@@ -453,7 +456,7 @@ function buildMinorsBackModal(resultField, dataField){
 function buildPeopleBackModal(resultField, dataField){
     var data = getAttributesByName(resultField, "username", dataField);
 
-    var backModal = '<div id="'+ data.username +'" class="modal peopleBackModal">' +
+    var backModal = '<div id="'+ data.username +'" class="modal people-back-modal">' +
                         '<h1>'+ data.name;
     
     // CHECK: for tagline
@@ -464,7 +467,7 @@ function buildPeopleBackModal(resultField, dataField){
     }
 
     // Add rest of information
-    backModal +=  '<div class="peopleNameImage">' +
+    backModal +=  '<div class="people-brief-info">' +
                         '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
                         '<h2>' + data.title +'</h2>';
 
@@ -472,7 +475,7 @@ function buildPeopleBackModal(resultField, dataField){
     if(data.interestArea != null && data.interestArea != ""){
         backModal += '<p><strong>Interest Areas:</strong>  '  + data.interestArea + '</p></div>';
     }
-    backModal += '<div class="peopleContactInfo">';
+    backModal += '<div class="people-contact-info">';
 
 
     // CHECK: phone number
