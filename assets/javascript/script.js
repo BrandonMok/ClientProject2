@@ -13,6 +13,42 @@ $(document).ready(function(){
             break;
     }
 
+    // modal
+    // $('a.close-modal').on('click', function(){
+    //     $('.modal').remove();
+    //     $(this).children().remove();
+    //     $(this).remove();
+    // });
+    // $('div.jquery-modal.blocker.current').on('click', function(){
+    //     console.log($(this).children());
+    //     // $(this).children().remove();
+    //     // $(this).remove();
+    //     // $('div.jquery-modal.blocker.current').empty();
+    //     // alert('clicked');
+    // });s
+    // $('.modal a.close-modal').on('click', function(){
+    //     alert('2nd');
+    //     console.log("2nd");
+    // });
+    // $('.blocker').on('click', function(){
+    //     alert('33');
+    //     console.log("2nd33");
+    // });
+    // $('.modal a.close-modal[rel="modal:close"]').on('click', function(){
+    //     alert("Success");
+    // });
+    // $('div.jquery-modal').on('click', function(){
+    //     alert("Success");
+    // }); // mouseover
+
+    
+    // $('div.jquery-modal').on('mouseover', function(){
+    //     alert("Success");
+    // }); // mouseover
+
+
+
+
     // Tabs 
     $( "#tabs" ).tabs();
     $("#peopleTabs").tabs();
@@ -276,19 +312,44 @@ $(document).ready(function(){
     /**
      * Research Interest Areas
      */
-    xhr('get', {path:"/research/"}, '#researchBoxCont').done(function(results){
+    xhr('get', {path:"/research/"}, '#research-container').done(function(results){
         // byInterest area
         $.each(results.byInterestArea, function(){
             var frontModal = '<a href="#'+this.areaName+'" rel="modal:open">'+
-                                '<div class="interestBox" data-area-name="'+ this.areaName +'">' + 
+                                '<div class="interestAreaBox" data-area-name="'+ this.areaName +'">' + 
                                     '<p>' + this.areaName + '</p>' +
                                 '</div>' +
                             '</a>';
-            $('.researchBoxCont').append(frontModal);
+            $('.research-container').append(frontModal);
         });
+
+
+        // byFaculty
+        $('.research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
+        $.each(results.byFaculty, function(){
+            var frontModal = '<a href="#' + this.username + '" rel="modal:open">' + 
+                                '<div class="interestFacultyBox" data-faculty-name="' + this.username + '">' + 
+                                    '<p>' + this.facultyName + '</p>' +
+                                '</div>' +
+                            '</a>';
         
-        $('.interestBox').on('click', function(){
-            buildInterestBackModal(results.byInterestArea, $(this).attr('data-area-name'));
+            $('.research-container').append(frontModal);
+        });
+
+        /**
+         * Make function to accept both
+         * Have a check if for resultField for if it's results.byInterestArea or results.byFaculty
+         */
+
+
+
+        // On click event to then make the back modal
+        $('.interestAreaBox').on('click', function(){
+            buildInterestBackModal(results.byInterestArea, 'areaName', $(this).attr('data-area-name'));
+        });
+        // On click event to then make the back modal
+        $('.interestFacultyBox').on('click', function(){
+            buildInterestBackModal(results.byFaculty, 'username', $(this).attr('data-faculty-name'));
         });
 
     });
@@ -322,6 +383,8 @@ function buildDegreeBackModal(resultField, dataField){
             backModal += '<li>' + elem + '</li>'; 
         });
     backModal += '</ul></div>';
+
+
 
     
     $('body').append(backModal); // stuff after - back
@@ -361,6 +424,8 @@ function buildMinorsBackModal(resultField, dataField){
 
     $('body').append(backModal); // append back modal to the dom
 }
+
+
 
 
 
@@ -430,20 +495,39 @@ function buildPeopleBackModal(resultField, dataField){
  * buildResearch
  * Builds the back modal for minors
  * @param resultField - E.g. "results.byInterestArea"
+ * @param jsonField - Field in api json to test dataField on
  * @param dataField - Value of the data- attribute
  */
-function buildInterestBackModal(resultField, dataField){
-    var data = getAttributesByName(resultField, 'areaName', dataField);
+function buildInterestBackModal(resultField, jsonField, dataField){
+    // Check by jsonField (either 'username' or 'areaName')
+    if(jsonField === "areaName"){
+        // get the specific data object for the on clicked
+        var data = getAttributesByName(resultField, jsonField, dataField);
 
-    var backModal = '<div id="'+ data.areaName +'" class="modal">' +
-                        '<h1>'+ data.areaName + '</h1>' +
-                        '<ul id="citationsList">';
+        var backModal = '<div id="'+ data.areaName +'" class="modal">' +
+                            '<h1>'+ data.areaName + '</h1>' +
+                            '<ul id="citationsList">';
 
-    $.each(data.citations, function(index, elem){
-        backModal += '<li>' + elem + '</li>';
-    });
+        $.each(data.citations, function(index, elem){
+            backModal += '<li>' + elem + '</li>';
+        });
 
-    backModal += '</ul>';
-    $('body').append(backModal);
+        backModal += '</ul></div>';
+        $('body').append(backModal);
+    }
+    else if(jsonField === "username"){
+        // get the specific data object for the on clicked
+        var data = getAttributesByName(resultField, jsonField, dataField);
 
+        var backModal = '<div id="'+ data.username +'" class="modal">' +
+                            '<h1>'+ data.facultyName + '</h1>' +
+                            '<ul id="citationsList">';
+
+        $.each(data.citations, function(index, elem){
+            backModal += '<li>' + elem + '</li>';
+        });
+
+        backModal += '</ul></div>';
+        $('body').append(backModal);
+    }
 }

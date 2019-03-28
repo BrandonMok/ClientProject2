@@ -305,12 +305,12 @@ ul.minorClasses li{
 #research{
     margin: 3em;
 }
-.researchBoxCont{
+.research-container{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 1em;
 }
-.interestBox{
+.interestAreaBox, .interestFacultyBox{
     margin: 0 1em;
     width: 8em;
     height: 5em;
@@ -390,7 +390,7 @@ a.ui-button:active,
 }
 @media screen and (max-width: 600px){
     /* Degree boxes */
-    .uDegBoxes{
+    .uDegBoxes, .gDegBoxes{
         width: 15em;
     }
 
