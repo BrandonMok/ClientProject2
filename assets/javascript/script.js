@@ -24,6 +24,15 @@ $(document).ready(function(){
     });
 
 
+    // $('.jcarousel').jcarousel();
+    // $('.jcarousel-prev').click(function() {
+    //     $('.jcarousel').jcarousel('scroll', '-=1');
+    // });
+    
+    // $('.jcarousel-next').click(function() {
+    //     $('.jcarousel').jcarousel('scroll', '+=1');
+    // });
+
     /**
      * About
      */
@@ -277,7 +286,10 @@ $(document).ready(function(){
                             '</a>';
             $('.researchBoxCont').append(frontModal);
         });
-
+        
+        $('.interestBox').on('click', function(){
+            buildInterestBackModal(results.byInterestArea, $(this).attr('data-area-name'));
+        });
 
     });
 
@@ -299,15 +311,14 @@ $(document).ready(function(){
  */
 function buildDegreeBackModal(resultField, dataField){
     // get the requested object
-    var temp = getAttributesByName(resultField, "degreeName", dataField);
+    var data = getAttributesByName(resultField, "degreeName", dataField);
 
-    // console.log(temp);
-    var backModal = '<div id="'+ temp.degreeName +'" class="modal">' +
-        '<h2>' + temp.title + '</h2>' +
+    var backModal = '<div id="'+ data.degreeName +'" class="modal">' +
+        '<h2>' + data.title + '</h2>' +
         '<p class="conSubHeading">Concentrations:</p>' +
         '<ul class="conList">';
 
-        $.each(temp.concentrations, function(index , elem){
+        $.each(data.concentrations, function(index , elem){
             backModal += '<li>' + elem + '</li>'; 
         });
     backModal += '</ul></div>';
@@ -417,4 +428,22 @@ function buildPeopleBackModal(resultField, dataField){
 
 /**
  * buildResearch
+ * Builds the back modal for minors
+ * @param resultField - E.g. "results.byInterestArea"
+ * @param dataField - Value of the data- attribute
  */
+function buildInterestBackModal(resultField, dataField){
+    var data = getAttributesByName(resultField, 'areaName', dataField);
+
+    var backModal = '<div id="'+ data.areaName +'" class="modal">' +
+                        '<h1>'+ data.areaName + '</h1>' +
+                        '<ul id="citationsList">';
+
+    $.each(data.citations, function(index, elem){
+        backModal += '<li>' + elem + '</li>';
+    });
+
+    backModal += '</ul>';
+    $('body').append(backModal);
+
+}
