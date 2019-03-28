@@ -18,7 +18,7 @@ a, a:visited{
 }
 
 /* Section Headings */
-.sectionHeading{
+.section-heading{
     font-size: 3rem;
     padding-bottom: 1em;
     text-align: center;
@@ -179,7 +179,7 @@ ul.conList{
 #minors{
     margin: 3em;
 }
-/* #minors .sectionHeading{ 
+/* #minors .section-heading{ 
     text-align: center;
 }  */
 /* Container for all minor boxes */
@@ -236,7 +236,7 @@ ul.minorClasses li{
     text-align: center;
 }
 /* Word "employment" */
-#employment p.sectionHeading{
+#employment p.section-heading{
     font-size: 2.3rem;
 }
 /* Actual content */
@@ -270,7 +270,7 @@ ul.minorClasses li{
     flex-wrap: wrap;
     justify-content: center;
 }
-#people p.sectionHeading{
+#people p.section-heading{
     flex: 1 1 100%;
 }
 /* Tab */
@@ -305,7 +305,7 @@ ul.minorClasses li{
 #research{
     margin: 3em;
 }
-.research-container{
+#research-container{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 1em;
@@ -317,7 +317,10 @@ ul.minorClasses li{
     border: 2px solid black;
     text-align: center;
 }
-
+.citation-list{
+    font-size: .8rem;
+    padding-left: 1em;
+}
 
 
 

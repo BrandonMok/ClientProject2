@@ -315,17 +315,42 @@ $(document).ready(function(){
     xhr('get', {path:"/research/"}, '#research-container').done(function(results){
         // byInterest area
         $.each(results.byInterestArea, function(){
-            var frontModal = '<a href="#'+this.areaName+'" rel="modal:open">'+
+
+            // CHECK: for white space
+            if(this.areaName.indexOf(" ") > 0){
+
+                // Substringing - took each part and combined
+                var temp = this.areaName;
+                var space = temp.indexOf(" ");
+                var firstPart = temp.substring(0, space);
+                var lastPart = temp.substring(space + 1);
+                var combined = firstPart + lastPart;
+
+                // Front Modal
+                var frontModal = '<a href="#'+ combined +'" rel="modal:open">'+
                                 '<div class="interestAreaBox" data-area-name="'+ this.areaName +'">' + 
                                     '<p>' + this.areaName + '</p>' +
                                 '</div>' +
                             '</a>';
-            $('.research-container').append(frontModal);
+                // append
+                $('#research-container').append(frontModal);
+            }
+            else{
+                // Front Modal
+                var frontModal = '<a href="#'+ this.areaName +'" rel="modal:open">'+
+                                '<div class="interestAreaBox" data-area-name="'+ this.areaName +'">' + 
+                                    '<p>' + this.areaName + '</p>' +
+                                '</div>' +
+                            '</a>';
+                // append
+                $('#research-container').append(frontModal);
+            }
         });
 
 
         // byFaculty
-        $('.research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
+        $('#research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
+//
         $.each(results.byFaculty, function(){
             var frontModal = '<a href="#' + this.username + '" rel="modal:open">' + 
                                 '<div class="interestFacultyBox" data-faculty-name="' + this.username + '">' + 
@@ -333,14 +358,8 @@ $(document).ready(function(){
                                 '</div>' +
                             '</a>';
         
-            $('.research-container').append(frontModal);
+            $('#research-container').append(frontModal);
         });
-
-        /**
-         * Make function to accept both
-         * Have a check if for resultField for if it's results.byInterestArea or results.byFaculty
-         */
-
 
 
         // On click event to then make the back modal
@@ -351,7 +370,6 @@ $(document).ready(function(){
         $('.interestFacultyBox').on('click', function(){
             buildInterestBackModal(results.byFaculty, 'username', $(this).attr('data-faculty-name'));
         });
-
     });
 
 
@@ -383,9 +401,6 @@ function buildDegreeBackModal(resultField, dataField){
             backModal += '<li>' + elem + '</li>'; 
         });
     backModal += '</ul></div>';
-
-
-
     
     $('body').append(backModal); // stuff after - back
 }
@@ -504,30 +519,56 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         // get the specific data object for the on clicked
         var data = getAttributesByName(resultField, jsonField, dataField);
 
-        var backModal = '<div id="'+ data.areaName +'" class="modal">' +
-                            '<h1>'+ data.areaName + '</h1>' +
-                            '<ul id="citationsList">';
+        // BackModal
+        var backModal = '';
 
+        // SubStringing - take each part and get desired
+        var dataTemp = data.areaName;
+        var space = dataTemp.indexOf(" ");
+        var firstPart = dataTemp.substring(0, space);
+        var lastPart = dataTemp.substring(space + 1);
+        var combined = firstPart+lastPart;
+
+
+        // CHECK: for whitespace 
+        if(data.areaName.indexOf(" ") > 0){
+            backModal = '<div id="'+ combined + '" class="modal">' +
+                            '<h1>'+ data.areaName + '</h1>' +
+                            '<ul class="citation-list">';
+        }else{
+            backModal = '<div id="'+ data.areaName + '" class="modal">' +
+                            '<h1>'+ data.areaName + '</h1>' +
+                            '<ul class="citation-list">';
+        }
+
+        // Loop through all the citations
         $.each(data.citations, function(index, elem){
             backModal += '<li>' + elem + '</li>';
         });
+        backModal += '</ul></div>'; // close tags
 
-        backModal += '</ul></div>';
+
+        // append to the dom
         $('body').append(backModal);
     }
-    else if(jsonField === "username"){
+    else if(jsonField === "username"){ // case that it's for the faculty
+
         // get the specific data object for the on clicked
         var data = getAttributesByName(resultField, jsonField, dataField);
 
+        // backModal
         var backModal = '<div id="'+ data.username +'" class="modal">' +
                             '<h1>'+ data.facultyName + '</h1>' +
-                            '<ul id="citationsList">';
+                            '<ul class="citation-list">';
 
+        // Loop through all the citationa
         $.each(data.citations, function(index, elem){
             backModal += '<li>' + elem + '</li>';
         });
+        backModal += '</ul></div>'; // close tags
 
-        backModal += '</ul></div>';
-        $('body').append(backModal);
+        
+        // append to dom
+        $('body').append(backModal); 
     }
 }
