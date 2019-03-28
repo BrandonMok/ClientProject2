@@ -24,8 +24,6 @@ $(document).ready(function(){
     });
 
 
-
-
     /**
      * About
      */
@@ -163,7 +161,10 @@ $(document).ready(function(){
     });
 
 
-    // Co-op/Employment section
+
+    /**
+     * Co-op/Employment section
+     */
     xhr('get', {path:"/employment/"}, "#studentWorkLocations").done(function(results){
         // append titles to accordion plugin's tab
         $('#cTableTitle').append(results.coopTable.title);
@@ -248,7 +249,6 @@ $(document).ready(function(){
 
 
 
-
         // Now get the information for this object
         $('.staffBoxes').on('click', function(){
             // Pass in the query 'results.undergraduate' and the data attribute value
@@ -264,7 +264,25 @@ $(document).ready(function(){
 
 
 
+    /**
+     * Research Interest Areas
+     */
+    xhr('get', {path:"/research/"}, '#researchBoxCont').done(function(results){
+        // byInterest area
+        $.each(results.byInterestArea, function(){
+            var frontModal = '<a href="#'+this.areaName+'" rel="modal:open">'+
+                                '<div class="interestBox" data-area-name="'+ this.areaName +'">' + 
+                                    '<p>' + this.areaName + '</p>' +
+                                '</div>' +
+                            '</a>';
+            $('.researchBoxCont').append(frontModal);
+        });
 
+
+    });
+
+
+    
 });
 
 
@@ -397,3 +415,6 @@ function buildPeopleBackModal(resultField, dataField){
 
 
 
+/**
+ * buildResearch
+ */
