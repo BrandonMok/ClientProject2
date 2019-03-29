@@ -89,22 +89,22 @@ $(document).ready(function(){
     });
 
 
+
     /**
      * Degrees
-     * Get entire object so don't have to make an extra call
      */
     xhr('get', {path:"/degrees/"}, '#degrees').done(function(results){
 
         // Undergraduate
         $.each(results.undergraduate, function(){
             // Front Modal - Back will only be loaded if clicked on
-            var frontModal = '<a href="#'+this.degreeName+'" rel="modal:open">' +
-                                    '<div class="uDegBoxes" data-degree="'+this.degreeName+'">'+
-                                        '<p class="degree-name">' + this.title + '</p>' +
-                                        '<p class="degree-Desc">' + this.description + '</p>' +
-                                        '<i class="far fa-plus-square"></i>' +
-                                    '</div>' +
-                                '</a>';
+            var frontModal = '<a href="#mainModal" rel="modal:open">' +
+                                '<div class="uDegBoxes" data-degree="'+ this.degreeName +'">'+
+                                    '<p class="degree-name">' + this.title + '</p>' +
+                                    '<p class="degree-Desc">' + this.description + '</p>' +
+                                    '<i class="far fa-plus-square"></i>' +
+                                '</div>' +
+                            '</a>';
 
             //Append to dom
             $('#tabs-1').append(frontModal); // The modal itself - front
@@ -117,7 +117,7 @@ $(document).ready(function(){
             if(this.title){
 
                 // Only showing front modal until clickec on
-                var frontModal = '<a href="#'+ this.degreeName +'" rel="modal:open">' +
+                var frontModal = '<a href="#mainModal" rel="modal:open">' +
                                     '<div class="gDegBoxes" data-degree="'+ this.degreeName +'">'+
                                         '<p class="degree-name">' + this.title + '</p>' +
                                         '<p class="degree-Desc">' + this.description + '</p>' +
@@ -154,7 +154,7 @@ $(document).ready(function(){
         $.each(results.UgMinors , function(){
             
             // Front modal - the part visible
-            var frontModal = '<a href="#'+ this.name +'" rel="modal:open">' +
+            var frontModal = '<a href="#mainModal" rel="modal:open">' +
                                 '<div class="each-minor" data-minor-name="'+this.name+'">'+
                                     '<p class="degree-name">' + this.title + '</p>' +
                                 '</div>' +
@@ -360,7 +360,6 @@ $(document).ready(function(){
                                     '<p>' + this.facultyName + '</p>' +
                                 '</div>' +
                             '</a>';
-        
             $('#research-container').append(frontModal);
         });
 
@@ -395,17 +394,36 @@ function buildDegreeBackModal(resultField, dataField){
     // get the requested object
     var data = getAttributesByName(resultField, "degreeName", dataField);
 
-    var backModal = '<div id="'+ data.degreeName +'" class="modal">' +
-        '<h2>' + data.title + '</h2>' +
-        '<p class="concentration-subheading">Concentrations:</p>' +
-        '<ul class="concentration-list">';
+
+    // CHECK: inital check for #mainModal (one main modal used for all)
+    if( $('.modalflag').length > 0 ){
+
+        clearModal(); // clear modal since there's content already
+
+        // append new content
+        var backModal = '<h2>' + data.title + '</h2>' +
+                        '<p class="concentration-subheading">Concentrations:</p>' +
+                        '<ul class="concentration-list">';
 
         $.each(data.concentrations, function(index , elem){
             backModal += '<li>' + elem + '</li>'; 
         });
-    backModal += '</ul></div>';
-    
-    $('body').append(backModal); // stuff after - back
+        backModal += '</ul>';
+        $('#mainModal').append(backModal); 
+    }
+    else{
+        // CASE that the modal doesn't exist yet
+        // Create new backmodal
+        backModal = '<div id="mainModal" class="modal modalflag">' +
+                        '<h2>' + data.title + '</h2>' +
+                        '<p class="concentration-subheading">Concentrations:</p>' +
+                        '<ul class="concentration-list">';
+        $.each(data.concentrations, function(index , elem){
+            backModal += '<li>' + elem + '</li>'; 
+        });
+        backModal += '</ul></div>';
+        $('body').append(backModal); // stuff after - back
+    }   
 }
 
 
@@ -417,30 +435,58 @@ function buildDegreeBackModal(resultField, dataField){
  * @param dataField - Value of the data- attribute
  */
 function buildMinorsBackModal(resultField, dataField){
+    // Get object requested
     var data = getAttributesByName(resultField, "name", dataField);
 
-    var backModal = '<div id="'+ data.name +'" class="modal">' +
-            '<h2>' + data.title + '</h2>' +
-            '<p class="minor-description">' + data.description + "</p>" +
-            '<h3> Courses: </h3>' + 
-            '<ul class="minor-courses">';
+    // CHECK: initial if modal exists already
+    if( $('.modalflag').length > 0 ){
 
+        clearModal(); // clear modal since there's content already
 
-    // Cycle through the courses array
-    $.each(data.courses, function(index , elem){
-        backModal += '<li>' + elem + '</li>'; 
-    });
+        // Backmodal - only appending content
+        var backModal = '<h2>' + data.title + '</h2>' +
+                            '<p class="minor-description">' + data.description + "</p>" +
+                            '<h3> Courses: </h3>' + 
+                            '<ul class="minor-courses">';
 
+        // Cycle through the courses array
+        $.each(data.courses, function(index , elem){
+            backModal += '<li>' + elem + '</li>'; 
+        });
 
-    // Only attach note at the bottom if it exists
-    if(data.note){
-     backModal += '</ul><p class="minor-note">*'+ data.note +'</p></div>';
+        // Only attach note at the bottom if it exists
+        if(data.note){
+            backModal += '</ul><p class="minor-note">*'+ data.note +'</p>';
+        }
+        else{
+            backModal += '</ul>';
+        }
+
+        $('#mainModal').append(backModal); // append back modal to the MAIN modal
     }
     else{
-        backModal += '</ul></d>';
-    }
+        // CASE: that there the main modal isn't created yet
+        var backModal = '<div id="#mainModal" class="modal modalflag">' +
+                            '<h2>' + data.title + '</h2>' +
+                            '<p class="minor-description">' + data.description + "</p>" +
+                            '<h3> Courses: </h3>' + 
+                            '<ul class="minor-courses">';
 
-    $('body').append(backModal); // append back modal to the dom
+        // Cycle through the courses array
+        $.each(data.courses, function(index , elem){
+            backModal += '<li>' + elem + '</li>'; 
+        });
+
+        // Only attach note at the bottom if it exists
+        if(data.note){
+            backModal += '</ul><p class="minor-note">*'+ data.note +'</p></div>';
+        }
+        else{
+            backModal += '</ul></div>';
+        }
+
+        $('body').append(backModal); // append back modal to the dom
+    }
 }
 
 
@@ -574,4 +620,17 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         // append to dom
         $('body').append(backModal); 
     }
+}
+
+
+/** 
+ * clearModal
+ * Clears the modal - only called if modal exists
+ */
+function clearModal(){
+    
+    // Remove its contents
+    $.each($('#mainModal').children(), function(){
+        $(this).remove();
+    });
 }
