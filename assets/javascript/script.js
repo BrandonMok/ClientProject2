@@ -332,7 +332,7 @@ $(document).ready(function(){
             $('#research-container').append(frontModal);
         });
 
-        
+
 
         // On click event to then make the back modal
         $('.interest-area-box').on('click', function(){
@@ -351,7 +351,35 @@ $(document).ready(function(){
      * Resources
      */
     xhr('get', {path:"/resources/"}, '#resources').done(function(results){
-        $('div#resources p.section-heading').append(results.title);
+        $('div#resources p.section-heading').append(results.title); // append heading/title
+        $('div#resources p.sub-heading').append(results.subTitle); // subheading
+
+        // Study Abroad
+        var studyAbroadFM = resourcesFrontModal(results.studyAbroad.title);
+
+        // Student Services / Advising
+        var studentServicesFM = resourcesFrontModal(results.studentServices.title);
+
+        // Student Services / Advising
+        var tutorsLabFM = resourcesFrontModal(results.tutorsAndLabInformation.title);
+
+        // Coop - Enrollment
+        var coopEnrollmentFM = resourcesFrontModal(results.coopEnrollment.title);
+
+        // StudentAmbassadors 
+        var studentAmbassadorsFM = resourcesFrontModal(results.studentAmbassadors.title);
+
+        // Forms
+        var formsFM = resourcesFrontModal(results.forms.title);
+
+
+        // Append all divs to container
+        $('#resources-container').append(studyAbroadFM);
+        $('#resources-container').append(studentServicesFM);
+        $('#resources-container').append(tutorsLabFM);
+        $('#resources-container').append(coopEnrollmentFM);
+        $('#resources-container').append(studentAmbassadorsFM);
+        $('#resources-container').append(formsFM);
     });
     
 });
@@ -693,3 +721,18 @@ function clearModal(){
 //         });
 //     }
 // }
+
+
+
+/**
+ * resourcesFrontModal
+ * function to build the front modals of the resources section
+ * @param queryField - section of json wanted (i.e. results.forms.title)
+ */
+function resourcesFrontModal(queryField){
+    return '<a href="#mainModal" rel="modal:open">' +
+                '<div id="#' + queryField + '">' +
+                    '<p>' + queryField + '</p>' +
+                '</div>' +
+            '</a>';
+}

@@ -20,8 +20,15 @@ a, a:visited{
 /* Section Headings */
 .section-heading{
     font-size: 3rem;
-    padding-bottom: 1em;
+    padding-bottom: .5em;
     text-align: center;
+}
+
+/* Sub Heading */
+.sub-heading{
+    font-size: 1rem;
+    text-align: center;
+    padding-bottom: 1em;
 }
 
 
@@ -302,11 +309,13 @@ ul.minor-courses li{
 #research{
     margin: 3em;
 }
+/* Container to hold boxes */
 #research-container{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 1em;
 }
+/* Research area and faculty boxes */
 .interest-area-box, .interest-faculty-box{
     margin: 0 1em;
     width: 8em;
@@ -314,6 +323,7 @@ ul.minor-courses li{
     border: 2px solid black;
     text-align: center;
 }
+/* List of citations in back modal of each box */
 .citation-list{
     font-size: .8rem;
     padding-left: 1em;
@@ -363,9 +373,9 @@ a.ui-button:active,
     #minors-box-container{
         grid-template-columns: repeat(3, 1fr);
     }
-    /* #research-container{
+    #research-container{
         grid-template-columns: repeat(4, 1fr);
-    } */
+    }
 }
 @media screen and (max-width: 900px){
     /** Image scroll parallax effect stop */
@@ -379,7 +389,8 @@ a.ui-button:active,
     }
 
 
-    
+    /* MINORS boxes container */
+    /* Change styling to flex */
     #minors-box-container{
         display: flex;
         flex-wrap: wrap;
@@ -393,8 +404,16 @@ a.ui-button:active,
 
     /* Research container of research boxes */
     #research-container{
-        grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    } 
+    .interest-area-box, .interest-faculty-box{
+        flex: 1 1 50%;
+        margin: .5em;
     }
+
     
 }
 @media screen and (max-width: 850px){
@@ -433,7 +452,7 @@ a.ui-button:active,
     }
     #quote-Author{
         font-size: 1rem;
-    }
+    } 
 }
 @media screen and (max-width: 500px){
     /* Information Sciences & Technology text */
