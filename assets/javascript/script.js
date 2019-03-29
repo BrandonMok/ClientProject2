@@ -13,42 +13,7 @@ $(document).ready(function(){
             break;
     }
 
-    // modal
-    // $('a.close-modal').on('click', function(){
-    //     $('.modal').remove();
-    //     $(this).children().remove();
-    //     $(this).remove();
-    // });
-    // $('div.jquery-modal.blocker.current').on('click', function(){
-    //     console.log($(this).children());
-    //     // $(this).children().remove();
-    //     // $(this).remove();
-    //     // $('div.jquery-modal.blocker.current').empty();
-    //     // alert('clicked');
-    // });s
-    // $('.modal a.close-modal').on('click', function(){
-    //     alert('2nd');
-    //     console.log("2nd");
-    // });
-    // $('.blocker').on('click', function(){
-    //     alert('33');
-    //     console.log("2nd33");
-    // });
-    // $('.modal a.close-modal[rel="modal:close"]').on('click', function(){
-    //     alert("Success");
-    // });
-    // $('div.jquery-modal').on('click', function(){
-    //     alert("Success");
-    // }); // mouseover
-
     
-    // $('div.jquery-modal').on('mouseover', function(){
-    //     alert("Success");
-    // }); // mouseover
-
-
-
-
     // Tabs 
     $( "#tabs" ).tabs();
     $("#people-tabs").tabs();
@@ -68,6 +33,8 @@ $(document).ready(function(){
     // $('.jcarousel-next').click(function() {
     //     $('.jcarousel').jcarousel('scroll', '+=1');
     // });
+
+
 
     /**
      * About
@@ -275,24 +242,24 @@ $(document).ready(function(){
 
         // Cycle through staff
         $.each(results.staff, function(){
-            var staff = '<a href="#'+this.username+'" rel="modal:open">' +
-                    '<div class="staff-boxes" data-uname="'+this.username+'">' +
-                        '<h2>' + this.name + '</h2>' +
-                        '<h4>' + this.title + '</h4>' +
-                    '</div>';
-            $('#tabs-4').append(staff);
+            var frontModal = '<a href="#'+this.username+'" rel="modal:open">' +   // need to change ID!
+                        '<div class="staff-boxes" data-uname="'+this.username+'">' +
+                            '<h2>' + this.name + '</h2>' +
+                            '<h4>' + this.title + '</h4>' +
+                        '</div>';
+            $('#tabs-4').append(frontModal);
         });
 
 
         // Cycle through Faculty
         $.each(results.faculty, function(){
-            var faculty = '<a href="#'+this.username+'" rel="modal:open">'+
+            var frontModal = '<a href="#'+this.username+'" rel="modal:open">'+
                             '<div class="faculty-boxes" data-uname="'+ this.username +'">' +
                                 '<h2>'+this.name+'</h2>' +
                                 '<h4>' + this.title + '</h4>' +
                             '</div>'
                         '</a>';
-            $('#tabs-3').append(faculty); // append each faculty box to dom
+            $('#tabs-3').append(frontModal); // append each faculty box to dom
         });
 
 
@@ -309,6 +276,7 @@ $(document).ready(function(){
             buildPeopleBackModal(results.faculty, $(this).attr('data-uname'));
         });
     });
+
 
 
 
@@ -360,9 +328,11 @@ $(document).ready(function(){
                                     '<p>' + this.facultyName + '</p>' +
                                 '</div>' +
                             '</a>';
+
             $('#research-container').append(frontModal);
         });
 
+        
 
         // On click event to then make the back modal
         $('.interest-area-box').on('click', function(){
@@ -375,6 +345,14 @@ $(document).ready(function(){
     });
 
 
+
+
+    /**
+     * Resources
+     */
+    xhr('get', {path:"/resources/"}, '#resources').done(function(results){
+        $('div#resources p.section-heading').append(results.title);
+    });
     
 });
 
@@ -466,7 +444,7 @@ function buildMinorsBackModal(resultField, dataField){
     }
     else{
         // CASE: that there the main modal isn't created yet
-        var backModal = '<div id="#mainModal" class="modal modalflag">' +
+        var backModal = '<div id="mainModal" class="modal modalflag">' +
                             '<h2>' + data.title + '</h2>' +
                             '<p class="minor-description">' + data.description + "</p>" +
                             '<h3> Courses: </h3>' + 
@@ -551,6 +529,79 @@ function buildPeopleBackModal(resultField, dataField){
     }
     backModal += '</div></div>';    // close divs
     $('body').append(backModal);
+
+    // Get data object
+    // var data = getAttributesByName(resultField, "username", dataField);
+
+    // var backModal = "";
+
+    // // CHECK: if backmodal exists
+    // if( $('.modalflag').length > 0 ){
+    //     clearModal(); // clear modal contents 
+
+    //     backModal += '<h1>'+ data.name;
+    // }
+    // else{
+    //     // CASE: back modal doesn't exist
+    //     backModal = '<div id="mainModal" class="modal modalflag">' +   // people-back-modal 
+    //                     '<h1>'+ data.name;
+    // }
+
+    
+    // // CHECK: for tagline
+    // if(data.tagline != null && data.tagline != ""){
+    //     backModal += " - " + data.tagline + '</h1>';
+    // }else{
+    //     backModal += '</h1>';
+    // }
+
+    // // Add rest of information
+    // backModal +=  '<div class="people-brief-info">' +
+    //                     '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
+    //                     '<h2>' + data.title +'</h2>';
+
+    // // CHECK: interest areas isn't null
+    // if(data.interestArea != null && data.interestArea != ""){
+    //     backModal += '<p><strong>Interest Areas:</strong>  '  + data.interestArea + '</p></div>';
+    // }
+    // backModal += '<div class="people-contact-info">';
+
+
+    // // CHECK: phone number
+    // if(data.phone != null && data.phone != ""){
+    //     var originalPhone = data.phone; // orignal phone number from api
+
+    //     if(originalPhone.indexOf("(") >= 0 || originalPhone.indexOf(")") >= 0){
+    //         backModal += '<h4><i class="fas fa-mobile-alt"></i>' + originalPhone + '</h4>';
+    //     }
+    //     else if(originalPhone.indexOf("-") >= 0){
+    //         backModal += '<h4><i class="fas fa-mobile-alt"></i> ('+ originalPhone.substring(0,3) + ')' + originalPhone.substring(3, 12) + '</h4>';
+    //     }
+    //     else if(originalPhone.indexOf("-") < 0){ // check if phone number doesn't have the dash
+    //         backModal += '<h4><i class="fas fa-mobile-alt"></i>' +
+    //             "(" + originalPhone.substring(0,3) + ") " + originalPhone.substring(3,6) + " - " + originalPhone.substring(6,10) + '</h4>';
+    //     }
+    // }
+
+    // // CHECK: email 
+    // if(data.email != null && data.email != ""){
+    //     backModal += '<h4><i class="far fa-envelope"></i>' + data.email + '</h4>';
+    // }
+
+    // // CHECK: office
+    // if(data.office != null && data.office != ""){
+    //     backModal += '<h4><i class="far fa-building"></i>' + data.office + '</h4>';
+    // }
+
+    // // CHECK: need to know if exists or not again to know which ending tags
+    // if( $('.modalFlag').length > 0 ) {
+    //     backModal += '</div>';
+    //     $('#mainModal').append(backModal); // append back modal to the MAIN modal
+    // }
+    // else{
+    //     backModal += '</div></div>';    // close divs
+    //     $('body').append(backModal);
+    // }
 }
 
 
@@ -628,9 +679,17 @@ function buildInterestBackModal(resultField, jsonField, dataField){
  * Clears the modal - only called if modal exists
  */
 function clearModal(){
-    
     // Remove its contents
     $.each($('#mainModal').children(), function(){
         $(this).remove();
     });
 }
+
+// function checkModals(){
+//     console.log("E");
+//     if( $('#mainModal').length > 1){
+//         $.each($('#mainModal') , function(){
+//             $(this).remove();
+//         });
+//     }
+// }

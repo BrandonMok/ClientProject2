@@ -307,7 +307,7 @@ ul.minor-courses li{
     grid-template-columns: repeat(6, 1fr);
     grid-gap: 1em;
 }
-.interest-area-box, .interestFacultyBox{
+.interest-area-box, .interest-faculty-box{
     margin: 0 1em;
     width: 8em;
     height: 5em;
@@ -363,6 +363,9 @@ a.ui-button:active,
     #minors-box-container{
         grid-template-columns: repeat(3, 1fr);
     }
+    /* #research-container{
+        grid-template-columns: repeat(4, 1fr);
+    } */
 }
 @media screen and (max-width: 900px){
     /** Image scroll parallax effect stop */
@@ -376,6 +379,7 @@ a.ui-button:active,
     }
 
 
+    
     #minors-box-container{
         display: flex;
         flex-wrap: wrap;
@@ -385,6 +389,13 @@ a.ui-button:active,
     .each-minor{
         flex: 1 1 50%;
     }
+
+
+    /* Research container of research boxes */
+    #research-container{
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
 }
 @media screen and (max-width: 850px){
 }
