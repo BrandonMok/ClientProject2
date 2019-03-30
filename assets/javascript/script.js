@@ -24,16 +24,10 @@ $(document).ready(function(){
         collapsible: true
     });
 
-
-    // $('.jcarousel').jcarousel();
-    // $('.jcarousel-prev').click(function() {
-    //     $('.jcarousel').jcarousel('scroll', '-=1');
+    // // Carousel plugin - Slick
+    // $('#carousel').slick({
+    //     dots: true
     // });
-    
-    // $('.jcarousel-next').click(function() {
-    //     $('.jcarousel').jcarousel('scroll', '+=1');
-    // });
-
 
 
     /**
@@ -284,7 +278,14 @@ $(document).ready(function(){
     /**
      * Research Interest Areas
      */
-    xhr('get', {path:"/research/"}, '#research-container').done(function(results){
+    xhr('get', {path:"/research/"}, '#research').done(function(results){
+        var carousel = '<div id="carousel">' + 
+                            '<div id="byinterest-container"></div>' +
+                            '<div id="byFaculty-container"></div>' +
+                        '</div>'; 
+        $('#research').append(carousel);
+
+
         // byInterest area
         $.each(results.byInterestArea, function(){
 
@@ -300,28 +301,28 @@ $(document).ready(function(){
 
                 // Front Modal
                 var frontModal = '<a href="#'+ combined +'" rel="modal:open">'+
-                                '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
-                                    '<p>' + this.areaName + '</p>' +
-                                '</div>' +
-                            '</a>';
+                                    '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
+                                        '<p>' + this.areaName + '</p>' +
+                                    '</div>' +
+                                '</a>';
                 // append
-                $('#research-container').append(frontModal);
+                $('#byinterest-container').append(frontModal);
             }
             else{
                 // Front Modal
                 var frontModal = '<a href="#'+ this.areaName +'" rel="modal:open">'+
-                                '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
-                                    '<p>' + this.areaName + '</p>' +
-                                '</div>' +
-                            '</a>';
+                                    '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
+                                        '<p>' + this.areaName + '</p>' +
+                                    '</div>' +
+                                '</a>';
                 // append
-                $('#research-container').append(frontModal);
+                $('#byinterest-container').append(frontModal);
             }
         });
 
 
         // byFaculty
-        $('#research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
+        $('#byFaculty-container').append(document.createTextNode("By Faculty")); // TEMPORARY
 //
         $.each(results.byFaculty, function(){
             var frontModal = '<a href="#' + this.username + '" rel="modal:open">' + 
@@ -330,7 +331,13 @@ $(document).ready(function(){
                                 '</div>' +
                             '</a>';
 
-            $('#research-container').append(frontModal);
+
+            $('#byFaculty-container').append(frontModal);
+        });
+
+        // Carousel plugin - Slick
+        $('#carousel').slick({
+            dots: true
         });
 
 
