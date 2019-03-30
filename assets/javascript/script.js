@@ -242,22 +242,23 @@ $(document).ready(function(){
 
         // Cycle through staff
         $.each(results.staff, function(){
-            var frontModal = '<a href="#'+this.username+'" rel="modal:open">' +   // need to change ID!
-                        '<div class="staff-boxes" data-uname="'+this.username+'">' +
-                            '<h2>' + this.name + '</h2>' +
-                            '<h4>' + this.title + '</h4>' +
-                        '</div>';
+            var frontModal = '<a href="#mainModal" rel="modal:open">' + 
+                                '<div class="staff-boxes" data-uname="'+ this.username +'">' +
+                                    '<h2>' + this.name + '</h2>' +
+                                    '<h4>' + this.title + '</h4>' +
+                                '</div>' +
+                            '</a>';
             $('#tabs-4').append(frontModal);
         });
 
 
         // Cycle through Faculty
         $.each(results.faculty, function(){
-            var frontModal = '<a href="#'+this.username+'" rel="modal:open">'+
+            var frontModal = '<a href="#mainModal" rel="modal:open">'+
                             '<div class="faculty-boxes" data-uname="'+ this.username +'">' +
-                                '<h2>'+this.name+'</h2>' +
+                                '<h2>' + this.name +'</h2>' +
                                 '<h4>' + this.title + '</h4>' +
-                            '</div>'
+                            '</div>' +
                         '</a>';
             $('#tabs-3').append(frontModal); // append each faculty box to dom
         });
@@ -290,7 +291,7 @@ $(document).ready(function(){
             // CHECK: for white space
             if(this.areaName.indexOf(" ") > 0){
 
-                // Substringing - took each part and combined
+                // Phone number substringing
                 var temp = this.areaName;
                 var space = temp.indexOf(" ");
                 var firstPart = temp.substring(0, space);
@@ -324,7 +325,7 @@ $(document).ready(function(){
 //
         $.each(results.byFaculty, function(){
             var frontModal = '<a href="#' + this.username + '" rel="modal:open">' + 
-                                '<div class="interest-faculty-box" data-faculty-name="' + this.username + '">' + 
+                                '<div class="interest-faculty-box"  data-faculty-name="' + this.username + '">' + 
                                     '<p>' + this.facultyName + '</p>' +
                                 '</div>' +
                             '</a>';
@@ -380,6 +381,13 @@ $(document).ready(function(){
         $('#resources-container').append(coopEnrollmentFM);
         $('#resources-container').append(studentAmbassadorsFM);
         $('#resources-container').append(formsFM);
+
+
+        $('.resources-boxes').on('click', function(){
+
+        });
+
+
     });
     
 });
@@ -506,27 +514,50 @@ function buildMinorsBackModal(resultField, dataField){
  * @param dataField - Value of the data- attribute    
  */
 function buildPeopleBackModal(resultField, dataField){
+    // Get data object
     var data = getAttributesByName(resultField, "username", dataField);
 
-    var backModal = '<div id="'+ data.username +'" class="modal people-back-modal">' +
+    // BackModal - will add more elements
+    // Used as a general variable to avoid repeated code
+    var backModal = "";
+
+    // CHECK: if backmodal exists
+    if( $('.modalflag').length > 0 ){
+        clearModal(); // clear modal contents 
+
+        backModal = '<h1>' + data.name; // only adding content since mainmodal is there
+    }
+    else{
+        // CASE: back modal doesn't exist //people-back-modal
+        backModal = '<div id="mainModal" class="modal modalflag people-back-modal">' +  
                         '<h1>'+ data.name;
+    }
+
     
     // CHECK: for tagline
     if(data.tagline != null && data.tagline != ""){
-        backModal += " - " + data.tagline + '</h1>';
+        // if tagline is present, add it
+        backModal += " - " + data.tagline + '</h1>'; 
     }else{
+        // NOT present, just close the tag
         backModal += '</h1>';
     }
 
+
     // Add rest of information
     backModal +=  '<div class="people-brief-info">' +
-                        '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
+                        '<img src="'+ data.imagePath +'" style="max-width:150px;" >' +
                         '<h2>' + data.title +'</h2>';
 
-    // CHECK: interest areas
+    // CHECK: interest areas isn't null
     if(data.interestArea != null && data.interestArea != ""){
         backModal += '<p><strong>Interest Areas:</strong>  '  + data.interestArea + '</p></div>';
     }
+    else{
+       backModal += '</div>'; 
+    }
+
+    // next div
     backModal += '<div class="people-contact-info">';
 
 
@@ -555,81 +586,17 @@ function buildPeopleBackModal(resultField, dataField){
     if(data.office != null && data.office != ""){
         backModal += '<h4><i class="far fa-building"></i>' + data.office + '</h4>';
     }
-    backModal += '</div></div>';    // close divs
-    $('body').append(backModal);
-
-    // Get data object
-    // var data = getAttributesByName(resultField, "username", dataField);
-
-    // var backModal = "";
-
-    // // CHECK: if backmodal exists
-    // if( $('.modalflag').length > 0 ){
-    //     clearModal(); // clear modal contents 
-
-    //     backModal += '<h1>'+ data.name;
-    // }
-    // else{
-    //     // CASE: back modal doesn't exist
-    //     backModal = '<div id="mainModal" class="modal modalflag">' +   // people-back-modal 
-    //                     '<h1>'+ data.name;
-    // }
-
-    
-    // // CHECK: for tagline
-    // if(data.tagline != null && data.tagline != ""){
-    //     backModal += " - " + data.tagline + '</h1>';
-    // }else{
-    //     backModal += '</h1>';
-    // }
-
-    // // Add rest of information
-    // backModal +=  '<div class="people-brief-info">' +
-    //                     '<img src="'+ data.imagePath +'" style="max-width:150px;" />' +
-    //                     '<h2>' + data.title +'</h2>';
-
-    // // CHECK: interest areas isn't null
-    // if(data.interestArea != null && data.interestArea != ""){
-    //     backModal += '<p><strong>Interest Areas:</strong>  '  + data.interestArea + '</p></div>';
-    // }
-    // backModal += '<div class="people-contact-info">';
 
 
-    // // CHECK: phone number
-    // if(data.phone != null && data.phone != ""){
-    //     var originalPhone = data.phone; // orignal phone number from api
-
-    //     if(originalPhone.indexOf("(") >= 0 || originalPhone.indexOf(")") >= 0){
-    //         backModal += '<h4><i class="fas fa-mobile-alt"></i>' + originalPhone + '</h4>';
-    //     }
-    //     else if(originalPhone.indexOf("-") >= 0){
-    //         backModal += '<h4><i class="fas fa-mobile-alt"></i> ('+ originalPhone.substring(0,3) + ')' + originalPhone.substring(3, 12) + '</h4>';
-    //     }
-    //     else if(originalPhone.indexOf("-") < 0){ // check if phone number doesn't have the dash
-    //         backModal += '<h4><i class="fas fa-mobile-alt"></i>' +
-    //             "(" + originalPhone.substring(0,3) + ") " + originalPhone.substring(3,6) + " - " + originalPhone.substring(6,10) + '</h4>';
-    //     }
-    // }
-
-    // // CHECK: email 
-    // if(data.email != null && data.email != ""){
-    //     backModal += '<h4><i class="far fa-envelope"></i>' + data.email + '</h4>';
-    // }
-
-    // // CHECK: office
-    // if(data.office != null && data.office != ""){
-    //     backModal += '<h4><i class="far fa-building"></i>' + data.office + '</h4>';
-    // }
-
-    // // CHECK: need to know if exists or not again to know which ending tags
-    // if( $('.modalFlag').length > 0 ) {
-    //     backModal += '</div>';
-    //     $('#mainModal').append(backModal); // append back modal to the MAIN modal
-    // }
-    // else{
-    //     backModal += '</div></div>';    // close divs
-    //     $('body').append(backModal);
-    // }
+    // CHECK: need to know if exists or not again to know which ending tags
+    if( $('.modalflag').length > 0 ){
+        backModal += '</div>';
+        $('#mainModal').append(backModal); // append back modal to the MAIN modal
+    }
+    else{
+        backModal += '</div></div>';    // close divs
+        $('body').append(backModal);    // append to the dom
+    }
 }
 
 
@@ -713,16 +680,6 @@ function clearModal(){
     });
 }
 
-// function checkModals(){
-//     console.log("E");
-//     if( $('#mainModal').length > 1){
-//         $.each($('#mainModal') , function(){
-//             $(this).remove();
-//         });
-//     }
-// }
-
-
 
 /**
  * resourcesFrontModal
@@ -731,8 +688,13 @@ function clearModal(){
  */
 function resourcesFrontModal(queryField){
     return '<a href="#mainModal" rel="modal:open">' +
-                '<div id="#' + queryField + '">' +
+                '<div id="#' + queryField + '" class="resources-boxes" data-section="'+ queryField +'">' +
                     '<p>' + queryField + '</p>' +
                 '</div>' +
             '</a>';
 }
+
+
+// function buildResourcesBackModal(queryField){
+
+// }
