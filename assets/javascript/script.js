@@ -525,11 +525,12 @@ function buildPeopleBackModal(resultField, dataField){
     if( $('.modalflag').length > 0 ){
         clearModal(); // clear modal contents 
 
-        backModal = '<h1>' + data.name; // only adding content since mainmodal is there
+        backModal = '<div id="people-container"><h1>' + data.name; // only adding content since mainmodal is there
     }
     else{
         // CASE: back modal doesn't exist //people-back-modal
-        backModal = '<div id="mainModal" class="modal modalflag people-back-modal">' +  
+        backModal = '<div id="mainModal" class="modal modalflag">' +  
+                        '<div id="people-container">' +
                         '<h1>'+ data.name;
     }
 
@@ -590,11 +591,11 @@ function buildPeopleBackModal(resultField, dataField){
 
     // CHECK: need to know if exists or not again to know which ending tags
     if( $('.modalflag').length > 0 ){
-        backModal += '</div>';
+        backModal += '</div></div>';
         $('#mainModal').append(backModal); // append back modal to the MAIN modal
     }
     else{
-        backModal += '</div></div>';    // close divs
+        backModal += '</div></div></div>';    // close divs
         $('body').append(backModal);    // append to the dom
     }
 }

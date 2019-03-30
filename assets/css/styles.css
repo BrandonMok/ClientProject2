@@ -295,11 +295,12 @@ ul.minor-courses li{
     border: 4px solid #F76902;
     box-shadow: 0 4px 10px rgba(0,0,0,.16);
 }
-.people-back-modal{
-    text-align: center;
-}
 .people-brief-info, .peopleContactInfo{
     padding: 1em;
+}
+/* Container used for people information in back modal */
+#people-container{
+    text-align: center;
 }
 
 
