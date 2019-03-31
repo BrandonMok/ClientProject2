@@ -387,11 +387,62 @@ $(document).ready(function(){
         $('#resources-container').append(formsFM);
 
 
+
         // $('.resources-boxes').on('click', function(){
-
+        //     buildResourcesBackModal(results, )
         // });
+    });
 
 
+
+    /**
+     * Footer
+     */
+    xhr('get', {path:"/footer/"}, '#footer').done(function(results){
+        // Social section
+        var socialSect = '<div id="social">' +
+                            '<h2>' + results.social.title + '</h2>' +
+                            '<p>' + results.social.tweet + '</p>' +
+                            '<p>' + results.social.by + '</p>' +
+                            '<a href="'+results.social.twitter+'">' +
+                                '<p>' + results.social.twitter + '</p>' +
+                            '</a>' +
+                            '<a href="'+ results.social.facebook +'">' +
+                                '<p>' + results.social.facebook + '</p>' +
+                            '</a>'+
+                        '</div>';
+
+        // Link section
+        var links = '<div id="quickLinks">';
+        $.each(results.quickLinks, function(){
+            links += '<a href="'+ this.href +'" title="'+ this.title +'">' +
+                        '<div id="link-boxes">' +
+                            '<p>' + this.title + '</p>' +
+                        '</div>' +
+                    '</a>';
+        });
+        links += '</div>';
+
+
+        // copyright section
+        var copyright = '<div id="copyright">' +
+                            '<h3>' + results.copyright.title + '</h3>' +
+                            '<p>' + results.copyright.html + '</p>' +
+                        '</div>';         
+                        
+        // News section
+        var news = '<a href="'+results.news+'">' +
+                        '<div id="news">' +
+                            '<p>' + News + '</p>' +
+                        '</div>' +
+                    '</a>';
+
+
+        // Appending to dom
+        $('#footer-social-container').append(socialSect);
+        $('#footer-info-container').append(links);
+        $('#footer-info-container').append(copyright);
+        $('#footer-info-container').append(news);
     });
     
 });
@@ -712,7 +763,7 @@ function resourcesFrontModal(queryField){
     if(queryField == undefined){
         // Build frontmodal for the forms section
         frontModal += '<a href="#mainModal" rel="modal:open">' +
-                        '<div id="#' + queryField + '" class="resources-boxes" data-section="'+ queryField +'">' +
+                        '<div id="mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
                             '<p>Forms</p>' +
                         '</div>' +
                     '</a>';
@@ -720,7 +771,7 @@ function resourcesFrontModal(queryField){
     else{
         // Build frontmodal for all other sections
         frontModal += '<a href="#mainModal" rel="modal:open">' +
-                '<div id="#' + queryField + '" class="resources-boxes" data-section="'+ queryField +'">' +
+                '<div id="#mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
                     '<p>' + queryField + '</p>' +
                 '</div>' +
             '</a>';

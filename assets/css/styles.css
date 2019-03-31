@@ -382,6 +382,22 @@ ul.minor-courses li{
 }
 
 
+/** Footer */
+#footer{
+    position: relative;
+    bottom: 0;
+    text-align: center;
+}
+/* Info container */
+#footer-info-container{
+    margin-top: 3em;
+    border: 2px solid rgb(134, 134, 134);
+    background-color: rgb(192, 192, 192);
+}
+#quickLinks, #copyright{
+    margin: 2em;
+}
+
 
 
 
