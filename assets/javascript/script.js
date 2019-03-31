@@ -107,6 +107,8 @@ $(document).ready(function(){
 
 
 
+
+
     /**
      * Minors section
      */
@@ -118,6 +120,7 @@ $(document).ready(function(){
             var frontModal = '<a href="#mainModal" rel="modal:open">' +
                                 '<div class="each-minor" data-minor-name="'+this.name+'">'+
                                     '<p class="degree-name">' + this.title + '</p>' +
+                                    '<i class="fas fa-plus-circle"></i>' +
                                 '</div>' +
                             '</a>';
 
@@ -239,7 +242,7 @@ $(document).ready(function(){
             var frontModal = '<a href="#mainModal" rel="modal:open">' + 
                                 '<div class="staff-boxes" data-uname="'+ this.username +'">' +
                                     '<h2>' + this.name + '</h2>' +
-                                    '<h4>' + this.title + '</h4>' +
+                                    '<p>' + this.title + '</p>' +
                                 '</div>' +
                             '</a>';
             $('#tabs-4').append(frontModal);
@@ -652,6 +655,8 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         var data = getAttributesByName(resultField, jsonField, dataField);
 
         var backModal = "";
+
+        // CHECK: if modal exists
         if( $('.modalflag').length > 0 ){
             clearModal();
             backModal +=  '<h1>'+ data.facultyName + '</h1>' +
@@ -683,8 +688,6 @@ function buildInterestBackModal(resultField, jsonField, dataField){
 
 
 
-
-
 /** 
  * clearModal
  * Clears the modal - only called if modal exists
@@ -703,10 +706,27 @@ function clearModal(){
  * @param queryField - section of json wanted (i.e. results.forms.title)
  */
 function resourcesFrontModal(queryField){
-    return '<a href="#mainModal" rel="modal:open">' +
+    var frontModal = "";
+
+    // Check for the only field that doesn't have a title (Forms)
+    if(queryField == undefined){
+        // Build frontmodal for the forms section
+        frontModal += '<a href="#mainModal" rel="modal:open">' +
+                        '<div id="#' + queryField + '" class="resources-boxes" data-section="'+ queryField +'">' +
+                            '<p>Forms</p>' +
+                        '</div>' +
+                    '</a>';
+    }
+    else{
+        // Build frontmodal for all other sections
+        frontModal += '<a href="#mainModal" rel="modal:open">' +
                 '<div id="#' + queryField + '" class="resources-boxes" data-section="'+ queryField +'">' +
                     '<p>' + queryField + '</p>' +
                 '</div>' +
             '</a>';
+    }
+
+    // return the front Modal
+    return frontModal;
 }
 
