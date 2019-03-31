@@ -292,15 +292,8 @@ $(document).ready(function(){
             // CHECK: for white space
             if(this.areaName.indexOf(" ") > 0){
 
-                // Phone number substringing
-                var temp = this.areaName;
-                var space = temp.indexOf(" ");
-                var firstPart = temp.substring(0, space);
-                var lastPart = temp.substring(space + 1);
-                var combined = firstPart + lastPart;
-
                 // Front Modal
-                var frontModal = '<a href="#'+ combined +'" rel="modal:open">'+
+                var frontModal = '<a href="#mainModal" rel="modal:open">'+
                                     '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
                                         '<p>' + this.areaName + '</p>' +
                                     '</div>' +
@@ -310,7 +303,7 @@ $(document).ready(function(){
             }
             else{
                 // Front Modal
-                var frontModal = '<a href="#'+ this.areaName +'" rel="modal:open">'+
+                var frontModal = '<a href="#mainModal" rel="modal:open">'+
                                     '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
                                         '<p>' + this.areaName + '</p>' +
                                     '</div>' +
@@ -322,7 +315,7 @@ $(document).ready(function(){
 
 
         // byFaculty
-        $('#byFaculty-container').append(document.createTextNode("By Faculty")); // TEMPORARY
+        $('#research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
 
         $.each(results.byFaculty, function(){
             var frontModal = '<a href="#mainModal" rel="modal:open">' + 
@@ -625,21 +618,12 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         // BackModal
         var backModal = '';
 
-        // SubStringing - take each part and get desired
-        var dataTemp = data.areaName;
-        var space = dataTemp.indexOf(" ");
-        var firstPart = dataTemp.substring(0, space);
-        var lastPart = dataTemp.substring(space + 1);
-        var combined = firstPart+lastPart;
-
-
-        // CHECK: for whitespace 
-        if(data.areaName.indexOf(" ") > 0){
-            backModal = '<div id="'+ combined + '" class="modal">' +
-                            '<h1>'+ data.areaName + '</h1>' +
+        if( $('.modalFlag').length > 0){
+            clearModal();
+            backModal += '<h1>' + data.areaName + '</h1>' +
                             '<ul class="citation-list">';
         }else{
-            backModal = '<div id="'+ data.areaName + '" class="modal">' +
+            backModal = '<div id="mainModal" class="modal modalFlag">' +
                             '<h1>'+ data.areaName + '</h1>' +
                             '<ul class="citation-list">';
         }
@@ -648,22 +632,23 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         $.each(data.citations, function(index, elem){
             backModal += '<li>' + elem + '</li>';
         });
-        backModal += '</ul></div>'; // close tags
+        backModal += '</ul>';
 
-
-        // append to the dom
-        $('body').append(backModal);
+        if( $('.modalFlag').length > 0 ){
+            $('#mainModal').append(backModal);
+        }
+        else{
+            backModal += '</div>';
+            $('body').append(backModal);
+        }
     }
     else if(jsonField === "username"){ // case that it's for the faculty
-
-        //var flag = false;
 
         // get the specific data object for the on clicked
         var data = getAttributesByName(resultField, jsonField, dataField);
 
         var backModal = "";
         if( $('.modalflag').length > 0 ){
-           // flag = true;
             clearModal();
             backModal +=  '<h1>'+ data.facultyName + '</h1>' +
                             '<ul class="citation-list">';
