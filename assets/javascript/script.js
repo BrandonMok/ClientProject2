@@ -656,12 +656,14 @@ function buildInterestBackModal(resultField, jsonField, dataField){
     }
     else if(jsonField === "username"){ // case that it's for the faculty
 
+        //var flag = false;
+
         // get the specific data object for the on clicked
         var data = getAttributesByName(resultField, jsonField, dataField);
 
         var backModal = "";
         if( $('.modalflag').length > 0 ){
-
+           // flag = true;
             clearModal();
             backModal +=  '<h1>'+ data.facultyName + '</h1>' +
                             '<ul class="citation-list">';
@@ -672,38 +674,20 @@ function buildInterestBackModal(resultField, jsonField, dataField){
                             '<ul class="citation-list">';
         }
 
-        // // backModal
-        // var backModal = '<div id="mainModal" class="modal modalflag">' +
-        //                     '<h1>'+ data.facultyName + '</h1>' +
-        //                     '<ul class="citation-list">';
-
         // Loop through all the citation
         $.each(data.citations, function(index, elem){
             backModal += '<li>' + elem + '</li>';
         });
         backModal += '</ul>'; // close tags
-
-        console.log(backModal);
-
         
-        if( $('.modalFlag').length > 0 ){
-            // console.log("+-------------------------------------------------+");
-            // console.log("EXISTS: " + backModal);
-            // console.log("+-------------------------------------------------+");
-
+        if( $('.modalflag').length > 0 ){
+            console.log("TRUE");
             $('#mainModal').append(backModal);
         }
         else{
             backModal += '</div>';
-            // console.log("+-------------------------------------------------+");
-            // console.log("NOT: " + backModal);
-            // console.log("+-------------------------------------------------+");
-
             $('body').append(backModal); 
         }
-
-        // // append to dom
-        // $('body').append(backModal); 
     }
 }
 
