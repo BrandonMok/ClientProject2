@@ -348,6 +348,7 @@ $(document).ready(function(){
 
 
 
+
     /**
      * Resources
      */
@@ -383,9 +384,9 @@ $(document).ready(function(){
         $('#resources-container').append(formsFM);
 
 
-        $('.resources-boxes').on('click', function(){
+        // $('.resources-boxes').on('click', function(){
 
-        });
+        // });
 
 
     });
@@ -592,11 +593,11 @@ function buildPeopleBackModal(resultField, dataField){
     // CHECK: need to know if exists or not again to know which ending tags
     if( $('.modalflag').length > 0 ){
         backModal += '</div></div>';
-        $('#mainModal').append(backModal); // append back modal to the MAIN modal
+        $('#mainModal').append(backModal);      // append back modal to the MAIN modal
     }
     else{
-        backModal += '</div></div></div>';    // close divs
-        $('body').append(backModal);    // append to the dom
+        backModal += '</div></div></div>';      // close divs
+        $('body').append(backModal);            // append to the dom
     }
 }
 
@@ -618,7 +619,8 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         // BackModal
         var backModal = '';
 
-        if( $('.modalFlag').length > 0){
+        // CHECK: for existing modal
+        if( $('.modalflag').length > 0 ){
             clearModal();
             backModal += '<h1>' + data.areaName + '</h1>' +
                             '<ul class="citation-list">';
@@ -634,13 +636,15 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         });
         backModal += '</ul>';
 
-        if( $('.modalFlag').length > 0 ){
+
+        if( $('.modalflag').length > 0 ){
             $('#mainModal').append(backModal);
         }
         else{
             backModal += '</div>';
-            $('body').append(backModal);
+            $('body').append(backModal); 
         }
+
     }
     else if(jsonField === "username"){ // case that it's for the faculty
 
@@ -665,8 +669,8 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         });
         backModal += '</ul>'; // close tags
         
+
         if( $('.modalflag').length > 0 ){
-            console.log("TRUE");
             $('#mainModal').append(backModal);
         }
         else{
@@ -706,7 +710,3 @@ function resourcesFrontModal(queryField){
             '</a>';
 }
 
-
-// function buildResourcesBackModal(queryField){
-
-// }

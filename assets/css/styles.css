@@ -310,11 +310,11 @@ ul.minor-courses li{
 #research{
     margin: 3em;
 }
-#carousel{
+/* #carousel{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-}
+} */
 /* Container to hold boxes */
 #research-container{
     display: grid;
@@ -345,6 +345,21 @@ ul.minor-courses li{
     padding-left: 1em;
 }
 
+
+
+/** Resources */
+#resources-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.resources-boxes{
+    width: 50%;
+    border: 2px solid black;
+}
+.resources-boxes p{
+    text-align: center;
+    font-size: 1.5rem;
+}
 
 
 
@@ -418,7 +433,8 @@ a.ui-button:active,
     }
 
 
-    /* Research container of research boxes */
+    /* RESEARCH */
+    /* container of research boxes */
     #research-container{
         display: flex;
         flex-wrap: wrap;
@@ -435,14 +451,14 @@ a.ui-button:active,
 @media screen and (max-width: 850px){
 }
 @media screen and (max-width: 600px){
-    /* Degree boxes */
-    .uDegBoxes, .gDegBoxes{
-        width: 15em;
-    }
-
     /* Every other section */
     .altSection{
         margin: 0;
+    }
+
+    /* Degree boxes */
+    .uDegBoxes, .gDegBoxes{
+        width: 15em;
     }
 
 
