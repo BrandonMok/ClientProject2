@@ -12,7 +12,6 @@ $(document).ready(function(){
             window.location = "http://outdatedbrowser.com/en";
             break;
     }
-
     
     // Tabs 
     $( "#tabs" ).tabs();
@@ -117,7 +116,7 @@ $(document).ready(function(){
         $.each(results.UgMinors , function(){
             
             // Front modal - the part visible
-            var frontModal = '<a href="#mainModal" rel="modal:open">' +
+            var frontModal = '<a href="#mainModal" rel="modal:open" id="minors-anchor">' +
                                 '<div class="each-minor" data-minor-name="'+this.name+'">'+
                                     '<p class="degree-name">' + this.title + '</p>' +
                                     '<i class="fas fa-plus-circle"></i>' +
@@ -239,7 +238,7 @@ $(document).ready(function(){
 
         // Cycle through staff
         $.each(results.staff, function(){
-            var frontModal = '<a href="#mainModal" rel="modal:open">' + 
+            var frontModal = '<a href="#mainModal" rel="modal:open" id="people-anchor">' + 
                                 '<div class="staff-boxes" data-uname="'+ this.username +'">' +
                                     '<h2>' + this.name + '</h2>' +
                                     '<p>' + this.title + '</p>' +
@@ -251,7 +250,7 @@ $(document).ready(function(){
 
         // Cycle through Faculty
         $.each(results.faculty, function(){
-            var frontModal = '<a href="#mainModal" rel="modal:open">'+
+            var frontModal = '<a href="#mainModal" rel="modal:open" id="people-anchor">'+
                             '<div class="faculty-boxes" data-uname="'+ this.username +'">' +
                                 '<h2>' + this.name +'</h2>' +
                                 '<h4>' + this.title + '</h4>' +
@@ -296,7 +295,7 @@ $(document).ready(function(){
             if(this.areaName.indexOf(" ") > 0){
 
                 // Front Modal
-                var frontModal = '<a href="#mainModal" rel="modal:open">'+
+                var frontModal = '<a href="#mainModal" rel="modal:open" id="interest-anchor">'+
                                     '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
                                         '<p>' + this.areaName + '</p>' +
                                     '</div>' +
@@ -306,7 +305,7 @@ $(document).ready(function(){
             }
             else{
                 // Front Modal
-                var frontModal = '<a href="#mainModal" rel="modal:open">'+
+                var frontModal = '<a href="#mainModal" rel="modal:open" id="interest-anchor">'+
                                     '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
                                         '<p>' + this.areaName + '</p>' +
                                     '</div>' +
@@ -321,7 +320,7 @@ $(document).ready(function(){
         $('#research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
 
         $.each(results.byFaculty, function(){
-            var frontModal = '<a href="#mainModal" rel="modal:open">' + 
+            var frontModal = '<a href="#mainModal" rel="modal:open" id="interest-anchor">' + 
                                 '<div class="interest-faculty-box"  data-faculty-name="' + this.username + '">' + 
                                     '<p>' + this.facultyName + '</p>' +
                                 '</div>' +
@@ -387,10 +386,6 @@ $(document).ready(function(){
         $('#resources-container').append(formsFM);
 
 
-
-        // $('.resources-boxes').on('click', function(){
-        //     buildResourcesBackModal(results, )
-        // });
     });
 
 
@@ -403,12 +398,12 @@ $(document).ready(function(){
         var socialSect = '<div id="social">' +
                             '<h2>' + results.social.title + '</h2>' +
                             '<p>' + results.social.tweet + '</p>' +
-                            '<p>' + results.social.by + '</p>' +
-                            '<a href="'+results.social.twitter+'">' +
-                                '<p>' + results.social.twitter + '</p>' +
+                            '<p>' + results.social.by + '</p><br />' +
+                            '<a href="'+results.social.twitter+'" target="_blank">' +
+                                '<i class="fab fa-twitter social-links"></i>' +
                             '</a>' +
-                            '<a href="'+ results.social.facebook +'">' +
-                                '<p>' + results.social.facebook + '</p>' +
+                            '<a href="'+ results.social.facebook +'" target="_blank">' +
+                                '<i class="fab fa-facebook-f social-links" ></i>'+
                             '</a>'+
                         '</div>';
 
@@ -417,7 +412,7 @@ $(document).ready(function(){
         $.each(results.quickLinks, function(){
             links += '<a href="'+ this.href +'" title="'+ this.title +'">' +
                         '<div id="link-boxes">' +
-                            '<p>' + this.title + '</p>' +
+                            '<p class="each-link">' + this.title + '</p>' +
                         '</div>' +
                     '</a>';
         });
@@ -431,9 +426,9 @@ $(document).ready(function(){
                         '</div>';         
                         
         // News section
-        var news = '<a href="'+results.news+'">' +
+        var news = '<a href="'+ results.news +'" target="_blank">' +
                         '<div id="news">' +
-                            '<p>' + News + '</p>' +
+                            '<p>News</p>' +
                         '</div>' +
                     '</a>';
 
@@ -750,6 +745,13 @@ function clearModal(){
     });
 }
 
+function removeModal(){
+    if($('div #mainModal').length > 0){
+        $.each($('div #mainModal'), function(){
+            $(this).remove();
+        });
+    }
+}
 
 /**
  * resourcesFrontModal
@@ -760,22 +762,22 @@ function resourcesFrontModal(queryField){
     var frontModal = "";
 
     // Check for the only field that doesn't have a title (Forms)
-    if(queryField == undefined){
-        // Build frontmodal for the forms section
-        frontModal += '<a href="#mainModal" rel="modal:open">' +
-                        '<div id="mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
-                            '<p>Forms</p>' +
-                        '</div>' +
-                    '</a>';
-    }
-    else{
+    // if(queryField == undefined){
+    //     // Build frontmodal for the forms section
+    //     frontModal += '<a href="#mainModal" rel="modal:open">' +
+    //                     '<div id="mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
+    //                         '<p>Forms</p>' +
+    //                     '</div>' +
+    //                 '</a>';
+    // }
+    // else{
         // Build frontmodal for all other sections
         frontModal += '<a href="#mainModal" rel="modal:open">' +
                 '<div id="#mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
                     '<p>' + queryField + '</p>' +
                 '</div>' +
             '</a>';
-    }
+    // }
 
     // return the front Modal
     return frontModal;

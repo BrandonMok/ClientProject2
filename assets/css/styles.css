@@ -44,7 +44,7 @@ a, a:visited{
 
 /* Header - Top Bar */
 .header{
-    display: inline;
+    display: inline-block;
     position: fixed;
     width: 100%;
     background-color: #ffffff;
@@ -191,6 +191,11 @@ ul.concentration-list{
     display: grid; 
     grid-template-columns: repeat(4, 1fr);
 }
+/* Modal anchor tag */
+#minors-anchor{
+    padding: 0;
+    margin: 1em;
+}
 .each-minor{
     margin: 1em;
     border: 2px solid gray;
@@ -252,9 +257,11 @@ ul.minor-courses li{
 #statistics-boxes{
     flex: 1 1 25%;
     border: 3px solid #F76902;
-    margin:.5em;
-    min-height: 8em;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 }
+
 
 
 
@@ -281,9 +288,13 @@ ul.minor-courses li{
 #peopleTabs{
     width: 100%;
 }
+#people-anchor{
+    padding: 0;
+    margin: 1em;
+}
+/* Boxes that hold faculty & staff names */
 .faculty-boxes, .staff-boxes{
     flex: 1 1 25%;
-    margin: 1em;
     width: 14em;
     height: 7em;
     border: 2px solid #F76902;
@@ -292,10 +303,11 @@ ul.minor-courses li{
 }
 .faculty-boxes:hover, .staff-boxes:hover{
     font-size: 1.1rem;
-    z-index: 3;
     border: 4px solid #F76902;
-    box-shadow: 0 4px 10px rgba(0,0,0,.16);
+    z-index: 3;
+    box-shadow: 0 2px 2px rgba(0,0,0,.16);
 }
+
 /* Faculty/staff box name and subheading */
 .faculty-boxes h2, .faculty-boxes p, .staff-boxes h2, .staff-boxes p{
     margin: auto;
@@ -328,14 +340,16 @@ ul.minor-courses li{
     grid-template-columns: repeat(6, 1fr);
 }
 /* Research area and faculty boxes */
-.interest-area-box, .interest-faculty-box{
-    margin: 1em;
+ a .interest-area-box, a .interest-faculty-box{
     width: 9em;
     height: 4em;
     border: 2px solid black;
-    border-radius: 40%;
     text-align: center;
     overflow: hidden;
+}
+#interest-anchor{
+    padding: 0;
+    margin: 1em;
 }
 .interest-area-box p, .interest-faculty-box p{
     margin: auto;
@@ -343,9 +357,8 @@ ul.minor-courses li{
     padding: 10px;
 }
 .interest-area-box:hover, .interest-faculty-box:hover{
-    border-radius: 50%;
     border: 4px solid #F76902;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 /* List of citations in back modal of each box */
 .citation-list{
@@ -382,20 +395,56 @@ ul.minor-courses li{
 }
 
 
+
+
+
 /** Footer */
 #footer{
     position: relative;
     bottom: 0;
     text-align: center;
 }
+/** Socail Presence */
+#footer-social-container{
+    margin: 3em;
+}
 /* Info container */
 #footer-info-container{
-    margin-top: 3em;
+    /* margin-top: 3em; */
     border: 2px solid rgb(134, 134, 134);
     background-color: rgb(192, 192, 192);
 }
+/* Dynamically created */
 #quickLinks, #copyright{
     margin: 2em;
+}
+/* Links to facebook and twitter */
+.social-links{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1.25em;
+}
+.social-links:hover{
+    font-size: 2.25rem;
+    color: #F76902;
+}
+
+
+#quickLinks{
+    display: flex; 
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+/* Each link in grey footer  */
+.each-link{
+    margin: 0 2em;
+    flex: 1 1 25%;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 1em;
+}
+.each-link:hover{
+    color: #F76902;
 }
 
 
@@ -521,6 +570,14 @@ a.ui-button:active,
     #quote-Author{
         font-size: 1rem;
     } 
+
+
+    /* Section in footer for links */
+    #quickLinks{
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
 }
 @media screen and (max-width: 500px){
     /* Information Sciences & Technology text */
@@ -532,7 +589,4 @@ a.ui-button:active,
     #statistics-boxes{
         font-size: .7rem;
     }
-
-
-
 }
