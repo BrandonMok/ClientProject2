@@ -279,11 +279,11 @@ $(document).ready(function(){
      * Research Interest Areas
      */
     xhr('get', {path:"/research/"}, '#research').done(function(results){
-        var carousel = '<div id="carousel">' + 
-                            '<div id="byinterest-container"></div>' +
-                            '<div id="byFaculty-container"></div>' +
-                        '</div>'; 
-        $('#research').append(carousel);
+        // var carousel = '<div id="carousel">' + 
+        //                     '<div id="byinterest-container"></div>' +
+        //                     '<div id="byFaculty-container"></div>' +
+        //                 '</div>'; 
+        // $('#research').append(carousel);
 
 
         // byInterest area
@@ -306,7 +306,7 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</a>';
                 // append
-                $('#byinterest-container').append(frontModal);
+                $('#research-container').append(frontModal);
             }
             else{
                 // Front Modal
@@ -316,29 +316,29 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</a>';
                 // append
-                $('#byinterest-container').append(frontModal);
+                $('#research-container').append(frontModal);
             }
         });
 
 
         // byFaculty
         $('#byFaculty-container').append(document.createTextNode("By Faculty")); // TEMPORARY
-//
+
         $.each(results.byFaculty, function(){
-            var frontModal = '<a href="#' + this.username + '" rel="modal:open">' + 
+            var frontModal = '<a href="#mainModal" rel="modal:open">' + 
                                 '<div class="interest-faculty-box"  data-faculty-name="' + this.username + '">' + 
                                     '<p>' + this.facultyName + '</p>' +
                                 '</div>' +
                             '</a>';
 
 
-            $('#byFaculty-container').append(frontModal);
+            $('#research-container').append(frontModal);
         });
 
         // Carousel plugin - Slick
-        $('#carousel').slick({
-            dots: true
-        });
+        // $('#carousel').slick({
+        //     dots: true
+        // });
 
 
 
@@ -659,22 +659,57 @@ function buildInterestBackModal(resultField, jsonField, dataField){
         // get the specific data object for the on clicked
         var data = getAttributesByName(resultField, jsonField, dataField);
 
-        // backModal
-        var backModal = '<div id="'+ data.username +'" class="modal">' +
+        var backModal = "";
+        if( $('.modalflag').length > 0 ){
+
+            clearModal();
+            backModal +=  '<h1>'+ data.facultyName + '</h1>' +
+                            '<ul class="citation-list">';
+        }
+        else{
+            backModal = '<div id="mainModal" class="modal modalflag">' +
                             '<h1>'+ data.facultyName + '</h1>' +
                             '<ul class="citation-list">';
+        }
 
-        // Loop through all the citationa
+        // // backModal
+        // var backModal = '<div id="mainModal" class="modal modalflag">' +
+        //                     '<h1>'+ data.facultyName + '</h1>' +
+        //                     '<ul class="citation-list">';
+
+        // Loop through all the citation
         $.each(data.citations, function(index, elem){
             backModal += '<li>' + elem + '</li>';
         });
-        backModal += '</ul></div>'; // close tags
+        backModal += '</ul>'; // close tags
+
+        console.log(backModal);
 
         
-        // append to dom
-        $('body').append(backModal); 
+        if( $('.modalFlag').length > 0 ){
+            // console.log("+-------------------------------------------------+");
+            // console.log("EXISTS: " + backModal);
+            // console.log("+-------------------------------------------------+");
+
+            $('#mainModal').append(backModal);
+        }
+        else{
+            backModal += '</div>';
+            // console.log("+-------------------------------------------------+");
+            // console.log("NOT: " + backModal);
+            // console.log("+-------------------------------------------------+");
+
+            $('body').append(backModal); 
+        }
+
+        // // append to dom
+        // $('body').append(backModal); 
     }
 }
+
+
+
+
 
 
 /** 

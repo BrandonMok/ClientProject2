@@ -310,11 +310,15 @@ ul.minor-courses li{
 #research{
     margin: 3em;
 }
+#carousel{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
 /* Container to hold boxes */
-#research-container, #byFaculty-container, #byinterest-container{
+#research-container{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-gap: 1em;
 }
 /* Research area and faculty boxes */
 .interest-area-box, .interest-faculty-box{
