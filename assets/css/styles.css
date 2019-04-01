@@ -268,10 +268,20 @@ ul.minor-courses li{
 /** Student work locations "Where our students work" */
 #student-work-locations{
     margin: 3em;
+    text-align: center;
 }
-/* ul#coopList li{
-    padding: .5em 0;
-} */
+#coop-table{
+    display: block;
+    position: relative;
+    width: 100%;
+}
+table#coop-table tr td, table#coop-table tr th{
+    text-align: left;
+    width: 15em;
+}
+
+
+
 
 
 
@@ -467,7 +477,7 @@ a.ui-button:active,
 	border: 1px solid #e86202;
 	background: #F76902;
 	font-weight: normal;
-	color: #ffffff;
+    color: #ffffff;
 }
 
 /* Overwrite modal styles */
@@ -480,9 +490,8 @@ a.ui-button:active,
 
 /* Accordian content size */
 .ui-accordion .ui-accordion-content{
-    padding: 1em 2.2em 5em 2.2em;
+    height: 15em;
 }
-
 
 
 
@@ -571,9 +580,9 @@ a.ui-button:active,
         font-size: 1rem;
     }
 
-
+    /* Faculty and staff people headers*/
     .faculty-boxes h2, .staff-boxes h2{
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
 

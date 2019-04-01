@@ -184,16 +184,14 @@ $(document).ready(function(){
         $('#coop-table-title').append(results.coopTable.title);
         $('#employment-table-title').append(results.employmentTable.title);
 
-        // var coopTableList = '<ul id="coopList">';
         var cTable = '<table id="coop-table">'+
                         '<tr>'+
                             '<th>Degree</th>'+
                             '<th>Employer</th>' +
-                            '<th>Title</th>'+
-                            '<th>City</th>' +
-                            '<th>Start Date</th>'+
+                            '<th>Location</th>'+
+                            '<th>Term</th>' +
                         '</tr>'; 
-
+        
         // Cycle through CO-OP table information
         $.each(results.coopTable.coopInformation, function(){
             cTable += '<tr>' +
@@ -202,30 +200,40 @@ $(document).ready(function(){
                         '<td>' + this.city +'</td>' +
                         '<td>' + this.term + '</td>' +
                        '</tr>';
-
-            // coopTableList += '<hr/><li>' + this.employer + 
-            //             // + this.degree + '</span>' + 
-            //             // ' + this.city + '</span>' + 
-            //             // '+ this.term + '</span>' + 
-            //             '</li>';
         });
-        // coopTableList += '</ul>';
         cTable += '</table>';
 
-
+        // append table
         $('#coop-table-content').append(cTable);
 
 
-        // Cycle through employment table list
-        var employTable = '<ul id="employment-table">';
-        $.each(results.employmentTable.professionalEmploymentInformation, function(){
-            employTable += '<li>' + this.employer +'</li>';
-        });
-        employTable += '</ul>';
 
+        
+
+        // Cycle through employment table list
+        var employTable = '<table id="employment-table">'+
+                            '<tr>'+
+                                '<th>Degree</th>'+
+                                '<th>Employer</th>' +
+                                '<th>Location</th>'+
+                                '<th>Title</th>' +
+                                '<th>Term</th>' +
+                            '</tr>'; 
+
+        $.each(results.employmentTable.professionalEmploymentInformation, function(){
+            employTable += '<tr>' + 
+                                '<td>' + this.degree + '</td>' +
+                                '<td>' + this.employer + '</td>' +
+                                '<td>' + this.city + '</td>' +
+                                '<td>' + this.title + '</td>' +
+                                '<td>' + this.startDate + '</td>' +
+                            '</tr>';
+        });
+        employTable += '</table>'; // close tags
+
+        // append employment table to accordian
         $("#employment-table-content").append(employTable);
     });
-
 
 
 
@@ -443,6 +451,8 @@ $(document).ready(function(){
     });
     
 });
+
+
 
 
 
