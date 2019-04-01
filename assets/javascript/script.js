@@ -144,6 +144,9 @@ $(document).ready(function(){
      * Employment Section - Brief Co-op & employment w/statistics
      */
     xhr('get', {path:"/employment/"}, "#employment").done(function(results){
+
+        // var map = getMap();
+
         // Building of the employment section
         var employmentSect = '<div id="employment-content">' +
                                 '<p class="section-heading">' + results.introduction.title + '</p>' +
@@ -169,6 +172,7 @@ $(document).ready(function(){
                       
                         
         // append to dom
+        // $('#map').append(map);
         $('#employment').append(employmentSect);
         $('#employment').append(coopSect);
     });
@@ -207,8 +211,6 @@ $(document).ready(function(){
         $('#coop-table-content').append(cTable);
 
 
-
-        
 
         // Cycle through employment table list
         var employTable = '<table id="employment-table">'+
@@ -359,8 +361,6 @@ $(document).ready(function(){
 
 
 
-
-
     /**
      * Resources
      */
@@ -370,7 +370,7 @@ $(document).ready(function(){
 
         // Study Abroad
         var studyAbroadFM = resourcesFrontModal(results.studyAbroad.title);
-
+        
         // Student Services / Advising
         var studentServicesFM = resourcesFrontModal(results.studentServices.title);
 
@@ -381,11 +381,15 @@ $(document).ready(function(){
         var coopEnrollmentFM = resourcesFrontModal(results.coopEnrollment.title);
 
         // StudentAmbassadors 
-        var studentAmbassadorsFM = resourcesFrontModal(results.studentAmbassadors.title);
+        // var studentAmbassadorsFM = resourcesFrontModal(results.studentAmbassadors.title);
 
         // Forms
-        // var formsFM = resourcesFrontModal(results.forms.title);
-
+        // var formsFM = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
+        //                 '<div id="#mainModal" id="formBM" class="resources-boxes" data-section="'+ results.forms +'">' +
+        //                     '<p>Forms</p>' +
+        //                 '</div>' +
+        //             '</a>';
+        
 
         // Append all divs to container
         $('#resources-container').append(studyAbroadFM);
@@ -395,7 +399,23 @@ $(document).ready(function(){
         $('#resources-container').append(studentAmbassadorsFM);
         // $('#resources-container').append(formsFM);
 
-
+        // $('.resources-boxes').on('click', function(){
+        //     console.log("HERE");
+        //     var data = getAttributesByName(graduateForms, "forms", $(this).attr('data-section'));
+        //     console.log(data);
+        //     var backModal = "";
+        //     if( $('.modalflag').length > 0 ){
+        //         clearModal();
+        //         $.each(data.graduateForms, function(){
+        //             console.log("E");
+        //             backModal += '<a href="'+ this.href +'">' +
+        //                             '<p>' + this.formName + '</p>' +
+        //                         '</a>'
+        //         });
+        //         $('#mainModal').append(backModal);
+        //     }
+        //     console.log("NO");
+        // });
     });
 
 
@@ -420,7 +440,7 @@ $(document).ready(function(){
         // Link section
         var links = '<div id="quickLinks">';
         $.each(results.quickLinks, function(){
-            links += '<a href="'+ this.href +'" title="'+ this.title +'">' +
+            links += '<a href="'+ this.href +'" title="'+ this.title +'" target="_blank" id="footer-link-anchor">' +
                         '<div id="link-boxes">' +
                             '<p class="each-link">' + this.title + '</p>' +
                         '</div>' +
@@ -765,17 +785,34 @@ function clearModal(){
  * @param queryField - section of json wanted (i.e. results.forms.title)
  */
 function resourcesFrontModal(queryField){
-    // var frontModal = "";
+    var frontModal = '<a href="#mainModal" rel="modal:open" id="resources-anchor">';
 
-    // // Build frontmodal for all other sections
-    // frontModal += '<a href="#mainModal" rel="modal:open" id="resources-anchor">'+
-    //         '<div id="#mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
-    //             '<p>' + queryField + '</p>' +
-    //         '</div>' +
-    //     '</a>';
+    if(queryField == undefined){
+        frontModal += '<div id="#mainModal" class="resources-boxes" data-section="forms">' +
+                        '<p>Forms</p>';
+    }
+    else{
+        frontModal +=  '<div id="#mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
+                        '<p>' + queryField + '</p>';
+    }
+    frontModal += '</div></a>';
 
-
-    // // return the front Modal
-    // return frontModal;
+    // return the front Modal
+    return frontModal;
 }
 
+
+
+
+
+// function getMap(){
+//     return  $.ajax({
+//                 type: 'get',
+//                 cache: false,
+//                 async: true,
+//                 data: {path:"/map/"},
+//                 url: 'proxy.php',
+//             }).done(function(results){
+//                 console.log(results);
+//             });
+// }

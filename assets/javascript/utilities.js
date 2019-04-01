@@ -7,7 +7,7 @@
 //		ajax object
 // 	use:
 //		xhr('get', {path:'/degrees/'}, #parent).done(function(json){})
-function xhr(getPost,d,idForSpinner){
+function xhr(getPost, d, idForSpinner){
     // Since each data will be different, pass in the entire call obj
     return $.ajax({
                 type: getPost,
@@ -31,6 +31,7 @@ function xhr(getPost,d,idForSpinner){
                     console.log(err);
             });
 }
+
 
 
 

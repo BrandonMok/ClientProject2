@@ -424,8 +424,11 @@ table#coop-table tr td, table#coop-table tr th{
     background-color: rgb(192, 192, 192);
 }
 /* Dynamically created */
-#quickLinks, #copyright{
-    margin: 2em;
+/* #quickLinks, #copyright{
+     margin: 2em; 
+} */
+#footer-link-anchor{
+    margin: 1em;
 }
 /* Icon Links to facebook and twitter */
 .social-links{
@@ -584,7 +587,9 @@ a.ui-button:active,
     .faculty-boxes h2, .staff-boxes h2{
         font-size: 1.1rem;
     }
-
+    .faculty-boxes, .staff-boxes{
+        height: 8em;
+    }
 
     /* Section in footer for links */
     #quickLinks{
