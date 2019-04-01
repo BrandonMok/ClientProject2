@@ -28,6 +28,8 @@ $(document).ready(function(){
     //     dots: true
     // });
 
+    // $('#nav').slicknav();
+
 
     /**
      * About
@@ -374,7 +376,7 @@ $(document).ready(function(){
         var studentAmbassadorsFM = resourcesFrontModal(results.studentAmbassadors.title);
 
         // Forms
-        var formsFM = resourcesFrontModal(results.forms.title);
+        // var formsFM = resourcesFrontModal(results.forms.title);
 
 
         // Append all divs to container
@@ -383,7 +385,7 @@ $(document).ready(function(){
         $('#resources-container').append(tutorsLabFM);
         $('#resources-container').append(coopEnrollmentFM);
         $('#resources-container').append(studentAmbassadorsFM);
-        $('#resources-container').append(formsFM);
+        // $('#resources-container').append(formsFM);
 
 
     });
@@ -445,6 +447,7 @@ $(document).ready(function(){
 
 
 
+/** Back modal building  */
 
 
 
@@ -674,7 +677,7 @@ function buildInterestBackModal(resultField, jsonField, dataField){
             backModal += '<h1>' + data.areaName + '</h1>' +
                             '<ul class="citation-list">';
         }else{
-            backModal = '<div id="mainModal" class="modal modalFlag">' +
+            backModal = '<div id="mainModal" class="modal modalflag">' +
                             '<h1>'+ data.areaName + '</h1>' +
                             '<ul class="citation-list">';
         }
@@ -745,13 +748,6 @@ function clearModal(){
     });
 }
 
-function removeModal(){
-    if($('div #mainModal').length > 0){
-        $.each($('div #mainModal'), function(){
-            $(this).remove();
-        });
-    }
-}
 
 /**
  * resourcesFrontModal
@@ -759,27 +755,17 @@ function removeModal(){
  * @param queryField - section of json wanted (i.e. results.forms.title)
  */
 function resourcesFrontModal(queryField){
-    var frontModal = "";
+    // var frontModal = "";
 
-    // Check for the only field that doesn't have a title (Forms)
-    // if(queryField == undefined){
-    //     // Build frontmodal for the forms section
-    //     frontModal += '<a href="#mainModal" rel="modal:open">' +
-    //                     '<div id="mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
-    //                         '<p>Forms</p>' +
-    //                     '</div>' +
-    //                 '</a>';
-    // }
-    // else{
-        // Build frontmodal for all other sections
-        frontModal += '<a href="#mainModal" rel="modal:open">' +
-                '<div id="#mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
-                    '<p>' + queryField + '</p>' +
-                '</div>' +
-            '</a>';
-    // }
+    // // Build frontmodal for all other sections
+    // frontModal += '<a href="#mainModal" rel="modal:open" id="resources-anchor">'+
+    //         '<div id="#mainModal" class="resources-boxes" data-section="'+ queryField +'">' +
+    //             '<p>' + queryField + '</p>' +
+    //         '</div>' +
+    //     '</a>';
 
-    // return the front Modal
-    return frontModal;
+
+    // // return the front Modal
+    // return frontModal;
 }
 
