@@ -507,46 +507,71 @@ function buildDegreeBackModal(resultField, dataField){
     // get the requested object
     var data = getAttributesByName(resultField, "degreeName", dataField);
 
-    // Check for the outlyer degree w/fewer fields
-    // if(dataField == "graduate advanced certificates"){
+    /**
+     * CHECK - for the outlyer with different fields
+     * If not that clickec one, use normal template in else
+     */
+    if(dataField == "graduate advanced certificates"){
+        var backModal = "";
+        if( $('.modalflag').length > 0 ){
+            clearModal();
+            backModal += '<h2>' + dataField + '</h2>' +
+                            '<ul class="concentration-list">';
+            $.each(data.availableCertificates, function(index, elem){
+                backModal += '<li>' + elem + '</li>'; 
+            });
+            backModal += '</ul>';
+            $('#mainModal').append(backModal);
+        }else{
+            var backModal = '<div id="mainModal" class="modal modalflag">' +
+                            '<h2>' + dataField + '</h2>' +
+                            '<p class="concentration-subheading">Certificates:</p>' +
+                            '<ul class="concentration-list">';
+            $.each(data.availableCertificates, function(index, elem){
+                backModal += '<li>' + elem + '</li>'; 
+            });
+            backModal += '</ul></div>';
+            $('body').append(backModal);
+        }
+    }
+    else{
+
+        var backModal = "";
+
+        // CHECK: inital check for #mainModal (one main modal used for all)
+        if( $('.modalflag').length > 0 ){
+            clearModal(); // clear modal since there's content already
+
+            // append new content
+            backModal = '<h2>' + data.title + '</h2>' +
+                            '<p class="concentration-subheading">Concentrations:</p>' +
+                            '<ul class="concentration-list">';
+        }
+        else{
+            // CASE that the modal doesn't exist yet
+            // Create new backmodal
+            backModal = '<div id="mainModal" class="modal modalflag">' +
+                            '<h2>' + data.title + '</h2>' +
+                            '<p class="concentration-subheading">Concentrations:</p>' +
+                            '<ul class="concentration-list">';
+        }
         
-    // }
+        
+        $.each(data.concentrations, function(index , elem){
+            backModal += '<li>' + elem + '</li>'; 
+        });
 
-    var backModal = "";
 
-    // CHECK: inital check for #mainModal (one main modal used for all)
-    if( $('.modalflag').length > 0 ){
-        clearModal(); // clear modal since there's content already
-
-        // append new content
-        backModal = '<h2>' + data.title + '</h2>' +
-                        '<p class="concentration-subheading">Concentrations:</p>' +
-                        '<ul class="concentration-list">';
+        // Check again to know which closing tags and where to append
+        if( $('.modalflag').length > 0 ){
+            backModal += '</div>';
+            $('#mainModal').append(backModal);
+        }
+        else{
+            backModal += '</ul></div>';
+            $('body').append(backModal); // stuff after - back
+        }  
     }
-    else{
-        // CASE that the modal doesn't exist yet
-        // Create new backmodal
-        backModal = '<div id="mainModal" class="modal modalflag">' +
-                        '<h2>' + data.title + '</h2>' +
-                        '<p class="concentration-subheading">Concentrations:</p>' +
-                        '<ul class="concentration-list">';
-    }
-    
-    
-    $.each(data.concentrations, function(index , elem){
-        backModal += '<li>' + elem + '</li>'; 
-    });
-
-    
-    // Check again to know which closing tags and where to append
-    if( $('.modalflag').length > 0 ){
-        backModal += '</div>';
-        $('#mainModal').append(backModal);
-    }
-    else{
-        backModal += '</ul></div>';
-        $('body').append(backModal); // stuff after - back
-    }  
 }
 
 
@@ -605,7 +630,7 @@ function buildMinorsBackModal(resultField, dataField){
             backModal += '</ul><p class="minor-note">*'+ data.note +'</p></div>';
         }
         else{
-            backModal += '</ul></div>';
+            backModal += '</li></div>';
         }
 
         $('body').append(backModal); // append back modal to the dom
