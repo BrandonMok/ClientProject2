@@ -170,20 +170,42 @@ $(document).ready(function(){
                                 '<p>' + this.description + '</p>'+
                             '</div>';
         });
-        
 
 
-        // Coop Section
+        // Co-op Section
         var coopSect = '<div id="coop-content">' +
                             '<h3 style="padding-top: 1em;">' + results.introduction.content[1].title + '</h3>' +
                             '<p>' + results.introduction.content[1].description + '</p>' +
                         '</div>';
+
+        
+
+        // Employers - random employers shown
+        var employers = '<div id="employers-div">' +
+                            '<h3>' + results.employers.title + '</h3>';
+
+        $.each(results.employers.employerNames, function(index, elem){
+            employers += '<span class="employer-names-span">' + elem + '</span>';
+        });
+        employers += '</div>';
+
+
+        // var careers 
+        var careers = '<div id="careers-div">' +
+                        '<h3>' + results.careers.title + '</h3>';
+        $.each(results.careers.careerNames, function(index, elem){
+            careers += '<span class="careers-names-span">' + elem + '</span>';
+        });
+        careers += '</div>';
+        
+
                       
                         
         // append to dom
-        // $('#map').append(map);
         $('#employment').append(employmentSect);
         $('#employment').append(coopSect);
+        $('#employment').append(employers);
+        $('#employment').append(careers);
     });
 
 

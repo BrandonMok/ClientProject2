@@ -195,6 +195,7 @@ ul.concentration-list{
 
 
 
+
 /** Minors Section **/
 /* Main minors container */
 #minors{
@@ -263,7 +264,7 @@ ul.minor-courses li{
     font-size: 2.3rem;
 }
 /* Actual content */
-#employment-content, #coop-content{
+#employment-content, #coop-content, #employers-div, #careers-div{
     flex: 1 1 100%;
     padding-bottom: 2em;
 }
@@ -275,7 +276,10 @@ ul.minor-courses li{
     width: 50%;
     padding: 10px;
 }
-
+.employer-names-span, .careers-names-span{
+    color: #F76902;
+    margin: 1em;
+}
 
 
 
