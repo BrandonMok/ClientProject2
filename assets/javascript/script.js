@@ -60,7 +60,7 @@ $(document).ready(function(){
         // Undergraduate
         $.each(results.undergraduate, function(){
             // Front Modal - Back will only be loaded if clicked on
-            var frontModal = '<a href="#mainModal" rel="modal:open">' +
+            var frontModal = '<a href="#mainModal" rel="modal:open" class="degree-anchor">' +
                                 '<div class="uDegBoxes" data-degree="'+ this.degreeName +'">'+
                                     '<p class="degree-name">' + this.title + '</p>' +
                                     '<p class="degree-Desc">' + this.description + '</p>' +
@@ -77,9 +77,8 @@ $(document).ready(function(){
        $.each(results.graduate, function(){
             // Only make ones that have a title
             if(this.title){
-
                 // Only showing front modal until clickec on
-                var frontModal = '<a href="#mainModal" rel="modal:open">' +
+                var frontModal = '<a href="#mainModal" rel="modal:open" class="degree-anchor">' +
                                     '<div class="gDegBoxes" data-degree="'+ this.degreeName +'">'+
                                         '<p class="degree-name">' + this.title + '</p>' +
                                         '<p class="degree-Desc">' + this.description + '</p>' +
@@ -105,7 +104,6 @@ $(document).ready(function(){
             buildDegreeBackModal(results.graduate, $(this).attr('data-degree'));
         });
     });
-
 
 
 
@@ -145,7 +143,7 @@ $(document).ready(function(){
      */
     xhr('get', {path:"/employment/"}, "#employment").done(function(results){
 
-        // var map = getMap();
+        getMap();
 
         // Building of the employment section
         var employmentSect = '<div id="employment-content">' +
@@ -222,6 +220,7 @@ $(document).ready(function(){
                                 '<th>Term</th>' +
                             '</tr>'; 
 
+        // cycle through employment table
         $.each(results.employmentTable.professionalEmploymentInformation, function(){
             employTable += '<tr>' + 
                                 '<td>' + this.degree + '</td>' +
@@ -232,9 +231,32 @@ $(document).ready(function(){
                             '</tr>';
         });
         employTable += '</table>'; // close tags
+        
 
         // append employment table to accordian
         $("#employment-table-content").append(employTable);
+
+
+        /** Data Optimization - only show when clicked, remove content when closed */
+        // $('h3#coop-table-title').on('click', function(){
+        //     if($('.ui-accordion-header-active').length > 0){
+        //         $("#employment-table-content").append(employTable);
+        //     }
+        //     // else if($('.ui-accordion-header-collapsed').length > 0){
+        //     //     $("#employment-table-content").empty();
+        //     // }
+        // });
+
+
+        // $('h3#employment-table-title').on('click', function(){
+        //     if($('.ui-accordion-header-active').length > 0){
+        //         $("#employment-table-content").append(employTable);
+        //     }
+        //     // else if($('.ui-accordion-header-collapsed').length > 0){
+        //     //     $("#employment-table-content").empty();
+        //     // }
+        // });
+        
     });
 
 
@@ -805,14 +827,14 @@ function resourcesFrontModal(queryField){
 
 
 
-// function getMap(){
-//     return  $.ajax({
-//                 type: 'get',
-//                 cache: false,
-//                 async: true,
-//                 data: {path:"/map/"},
-//                 url: 'proxy.php',
-//             }).done(function(results){
-//                 console.log(results);
-//             });
-// }
+function getMap(){
+    $.ajax({
+        type: 'get',
+        async: true,
+        data: {path:"/map/"},
+        dataType: 'php',
+        url: 'proxy.php',
+    }).done(function(results){
+        $('#map').append(results);
+    });
+}
