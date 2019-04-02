@@ -142,9 +142,6 @@ $(document).ready(function(){
      * Employment Section - Brief Co-op & employment w/statistics
      */
     xhr('get', {path:"/employment/"}, "#employment").done(function(results){
-
-        getMap();
-
         // Building of the employment section
         var employmentSect = '<div id="employment-content">' +
                                 '<p class="section-heading">' + results.introduction.title + '</p>' +
@@ -324,10 +321,6 @@ $(document).ready(function(){
 
         // byInterest area
         $.each(results.byInterestArea, function(){
-
-            // CHECK: for white space
-            if(this.areaName.indexOf(" ") > 0){
-
                 // Front Modal
                 var frontModal = '<a href="#mainModal" rel="modal:open" id="interest-anchor">'+
                                     '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
@@ -335,18 +328,9 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</a>';
                 // append
-                $('#research-container').append(frontModal);
-            }
-            else{
-                // Front Modal
-                var frontModal = '<a href="#mainModal" rel="modal:open" id="interest-anchor">'+
-                                    '<div class="interest-area-box" data-area-name="'+ this.areaName +'">' + 
-                                        '<p>' + this.areaName + '</p>' +
-                                    '</div>' +
-                                '</a>';
-                // append
-                $('#research-container').append(frontModal);
-            }
+                // $('#research-container').append(frontModal);
+//                $('#by-interest-slide').append(frontModal);
+            $('#research-container').append(frontModal);
         });
 
 
@@ -362,6 +346,7 @@ $(document).ready(function(){
 
 
             $('#research-container').append(frontModal);
+//            $('#by-faculty-slide').append(frontModal);
         });
 
         // Carousel plugin - Slick
@@ -824,17 +809,3 @@ function resourcesFrontModal(queryField){
 }
 
 
-
-
-
-function getMap(){
-    $.ajax({
-        type: 'get',
-        async: true,
-        data: {path:"/map/"},
-        dataType: 'php',
-        url: 'proxy.php',
-    }).done(function(results){
-        $('#map').append(results);
-    });
-}
