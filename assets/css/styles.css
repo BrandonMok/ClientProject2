@@ -274,6 +274,10 @@ ul.minor-courses li{
 
 
 /** Student work locations "Where our students work" */
+#map-container{
+    width: 85%; 
+    height: 35em;
+}
 #student-work-locations{
     margin: 3em;
     text-align: center;
