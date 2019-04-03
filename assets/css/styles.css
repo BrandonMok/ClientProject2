@@ -284,7 +284,7 @@ ul.minor-courses li{
 
 
 /** Student work locations "Where our students work" */
-#map-container{
+#imap{
     width: 85%; 
     height: 35em;
 }
@@ -478,7 +478,26 @@ ul.minor-courses li{
 .each-link:hover{
     color: #F76902;
 }
-
+/* Styles for news elements */
+.news-titles{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 2em;
+}
+.news-timestamp{
+    font-size: 1rem;
+    font-style: italic;
+    margin-bottom: .5em;
+}
+#news-word{
+    margin: 2em;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+#news-word:hover{
+    font-size: 1.6rem;
+    color: #F76902; 
+}
 
 
 

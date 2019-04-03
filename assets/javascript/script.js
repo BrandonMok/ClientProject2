@@ -268,28 +268,6 @@ $(document).ready(function(){
 
         // append employment table to accordian
         $("#employment-table-content").append(employTable);
-
-
-        /** Data Optimization - only show when clicked, remove content when closed */
-        // $('h3#coop-table-title').on('click', function(){
-        //     if($('.ui-accordion-header-active').length > 0){
-        //         $("#employment-table-content").append(employTable);
-        //     }
-        //     // else if($('.ui-accordion-header-collapsed').length > 0){
-        //     //     $("#employment-table-content").empty();
-        //     // }
-        // });
-
-
-        // $('h3#employment-table-title').on('click', function(){
-        //     if($('.ui-accordion-header-active').length > 0){
-        //         $("#employment-table-content").append(employTable);
-        //     }
-        //     // else if($('.ui-accordion-header-collapsed').length > 0){
-        //     //     $("#employment-table-content").empty();
-        //     // }
-        // });
-        
     });
 
 
@@ -363,9 +341,7 @@ $(document).ready(function(){
                                         '<p>' + this.areaName + '</p>' +
                                     '</div>' +
                                 '</a>';
-                // append
-                // $('#research-container').append(frontModal);
-//                $('#by-interest-slide').append(frontModal);
+
             $('#research-container').append(frontModal);
         });
 
@@ -382,14 +358,12 @@ $(document).ready(function(){
 
 
             $('#research-container').append(frontModal);
-//            $('#by-faculty-slide').append(frontModal);
         });
 
         // Carousel plugin - Slick
         // $('#carousel').slick({
         //     dots: true
         // });
-
 
 
         // On click event to then make the back modal
@@ -423,16 +397,7 @@ $(document).ready(function(){
         // Coop - Enrollment
         var coopEnrollmentFM = resourcesFrontModal(results.coopEnrollment.title);
 
-        // StudentAmbassadors 
-        // var studentAmbassadorsFM = resourcesFrontModal(results.studentAmbassadors.title);
 
-        // Forms
-        // var formsFM = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
-        //                 '<div id="#mainModal" id="formBM" class="resources-boxes" data-section="'+ results.forms +'">' +
-        //                     '<p>Forms</p>' +
-        //                 '</div>' +
-        //             '</a>';
-        
 
         // Append all divs to container
         $('#resources-container').append(studyAbroadFM);
@@ -441,24 +406,6 @@ $(document).ready(function(){
         $('#resources-container').append(coopEnrollmentFM);
         $('#resources-container').append(studentAmbassadorsFM);
         // $('#resources-container').append(formsFM);
-
-        // $('.resources-boxes').on('click', function(){
-        //     console.log("HERE");
-        //     var data = getAttributesByName(graduateForms, "forms", $(this).attr('data-section'));
-        //     console.log(data);
-        //     var backModal = "";
-        //     if( $('.modalflag').length > 0 ){
-        //         clearModal();
-        //         $.each(data.graduateForms, function(){
-        //             console.log("E");
-        //             backModal += '<a href="'+ this.href +'">' +
-        //                             '<p>' + this.formName + '</p>' +
-        //                         '</a>'
-        //         });
-        //         $('#mainModal').append(backModal);
-        //     }
-        //     console.log("NO");
-        // });
     });
 
 
@@ -498,19 +445,27 @@ $(document).ready(function(){
                             '<p>' + results.copyright.html + '</p>' +
                         '</div>';         
                         
-        // News section
-        var news = '<a href="'+ results.news +'" target="_blank">' +
-                        '<div id="news">' +
-                            '<p>News</p>' +
-                        '</div>' +
-                    '</a>';
-
 
         // Appending to dom
         $('#footer-social-container').append(socialSect);
         $('#footer-info-container').append(links);
         $('#footer-info-container').append(copyright);
-        $('#footer-info-container').append(news);
+    });
+
+
+
+    // NEWS section - apart of footer
+    xhr('get', {path:"/news/"}, '#footer').done(function(results){
+        var frontModal = '<a href="#mainModal" rel="modal:open">' +
+                            '<div id="news" data-news="news">'+
+                                '<p id="news-word">News</p>' +
+                            '</div>' +
+                        '</a>';
+        $('#footer-info-container').append(frontModal); // append to footer
+
+        $('#news').on('click', function(){
+            buildNewsBackModal(results);
+        });
     });
     
 });
@@ -850,4 +805,37 @@ function resourcesFrontModal(queryField){
     return frontModal;
 }
 
+
+
+
+function buildNewsBackModal(queryField){
+    var backModal = "";
+    var modalCheck = false;
+    
+    if( $('.modalflag').length > 0 ){
+        clearModal();
+        modalCheck = true;
+    }
+    else{
+        backModal = '<div id="mainModal" class="modal modalflag">';
+    }
+
+
+    // Cycle through news
+    $.each(queryField.older, function(){
+        backModal += '<p class="news-titles">' + this.title + '</p>' +
+                        '<p class="news-timestamp">' + this.date.substring(0,10) + '</p>' +
+                        '<p>' + this.description + '</p>';
+    });
+
+     
+
+    if( modalCheck == true ){
+        $('#mainModal').append(backModal);
+    }
+    else{
+        backModal += '</div>';
+        $('body').append(backModal);
+    }
+}
 
