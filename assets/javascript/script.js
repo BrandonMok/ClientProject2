@@ -808,28 +808,41 @@ function resourcesFrontModal(queryField){
 
 
 
+/**
+ * buildNewsBackModal
+ * Builds the back modal for the news section in the footer
+ * @param queryField - ( i.e. results.news )
+ */
 function buildNewsBackModal(queryField){
     var backModal = "";
     var modalCheck = false;
     
+    // CHECK: if modal exists already
     if( $('.modalflag').length > 0 ){
         clearModal();
         modalCheck = true;
     }
     else{
+        // Case that modal DOESN'T EXIST
         backModal = '<div id="mainModal" class="modal modalflag">';
     }
 
 
     // Cycle through news
     $.each(queryField.older, function(){
+        // append news information 
         backModal += '<p class="news-titles">' + this.title + '</p>' +
-                        '<p class="news-timestamp">' + this.date.substring(0,10) + '</p>' +
-                        '<p>' + this.description + '</p>';
+                        '<p class="news-timestamp">' + this.date.substring(0,10) + '</p>';
+
+        // CHECK: if description is null.
+        // If null, don't include description
+        if(this.description != null){
+            backModal += '<p>' + this.description + '</p>';
+        }
     });
 
      
-
+    // Check again to know which closing tags to add
     if( modalCheck == true ){
         $('#mainModal').append(backModal);
     }
