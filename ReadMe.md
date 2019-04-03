@@ -5,3 +5,4 @@ Plugins used:
 UI
 jquerymodal
 Browser detection
+Smooth Scroll 
