@@ -75,8 +75,7 @@ html[xmlns] .flexslider .slides {
  * ====================================================================================================================*/
 .flexslider {
   margin: 0 3em;
-  background: orange;     /***************************************************/
-  border: 4px solid black;
+  border: 2px solid black;
   position: relative;
   zoom: 1;
   -webkit-border-radius: 4px;
@@ -91,7 +90,7 @@ html[xmlns] .flexslider .slides {
   zoom: 1;
 }
 .flex-viewport {
-  max-height: 800px; /*******************************/
+  max-height: 800px; 
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
   -ms-transition: all 1s ease;
@@ -262,5 +261,8 @@ html[xmlns] .flexslider .slides {
   .flex-direction-nav .flex-next {
     opacity: 1;
     right: 10px;
+  }
+  .flexslider {
+    margin: 0;
   }
 }

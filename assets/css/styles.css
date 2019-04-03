@@ -358,17 +358,14 @@ ul.minor-courses li{
 
 /** Research */
 #research{
-    margin: 3em;
+    margin: 3em 3em 10em 3em;
 }
-/* Container to hold boxes */
-#research-container{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
+#research-for-mobile{
+    display: none;
 }
+
 /* Research area and faculty boxes */
  a .interest-area-box, a .interest-faculty-box{
-    /* width: 9em;
-    height: 4em; */
     border: 2px solid black;
     text-align: center;
     overflow: hidden;
@@ -420,6 +417,7 @@ ul.minor-courses li{
     font-size: 1.5rem;
     padding-top: 2em;
 }
+
 
 
 
@@ -527,23 +525,26 @@ a.ui-button:active,
 }
 
 
+
 .slides{
     margin: 0 4em;
-    background-color: lightblue;
 }
 #flex-slide1, #flex-slide2{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    background-color: pink;
+    text-align: center;
+    
 }
-#flex-slide1 div, #flex-slide2 div{
+#flex-slide1 a div, #flex-slide2 a div{
     display: inline-block;
     width: 10em;
     height: 5em;
+    margin: .2em;
 }
 .by-interest-title{
-    display: inline-block;
-    width: 100%;
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1em 0;
 }
 
 
@@ -653,7 +654,27 @@ a.ui-button:active,
         margin: 0;
         padding: 0;
     }
+
+    /* MAP - don't show on mobile! */
+    #map{
+        display: none;
+    }
+    /* Hide the desktop version of research */
+    .flexslider{
+        display: none;
+    }
+    /* display the same research content, but for mobile */
+    #research-for-mobile{
+        display: block;
+    }
+    #research-for-mobile-areas, #research-for-mobile-faculty{
+        display: absolute;
+    }
+    #research-for-mobile a div{
+        height: 5em;
+    }
 }
+
 @media screen and (max-width: 500px){
     /* Information Sciences & Technology text */
     #image-text{
@@ -665,21 +686,3 @@ a.ui-button:active,
         font-size: .7rem;
     }
 }
-
-
-
-
-/* .slicknav_menu {
-	display:none;
-}
-
-@media screen and (max-width: 40em) {
-	#nav {
-		display:none;
-	}
-	
-	.slicknav_menu {
-        display: block;
-        position: fixed;
-	}
-} */

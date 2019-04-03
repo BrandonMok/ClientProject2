@@ -339,13 +339,12 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</a>';
 
-            //$('#research-container').append(frontModal);
+            $('#research-for-mobile-areas').append(frontModal);
             $('#flex-slide1').append(frontModal);
         });
 
 
         // byFaculty
-        $('#research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
         $.each(results.byFaculty, function(){
             var frontModal = '<a href="#mainModal" rel="modal:open" id="interest-anchor">' + 
                                 '<div class="interest-faculty-box"  data-faculty-name="' + this.username + '">' + 
@@ -354,7 +353,7 @@ $(document).ready(function(){
                             '</a>';
 
 
-//            $('#research-container').append(frontModal);
+            $('#research-for-mobile-faculty').append(frontModal);
             $('#flex-slide2').append(frontModal);
         });
 
