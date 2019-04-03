@@ -23,6 +23,9 @@ $(document).ready(function(){
         collapsible: true
     });
 
+    // Scroll plugin - makes scrolling smooth for nav options
+    $('a').smoothScroll();
+    
     // // Carousel plugin - Slick
     // $('#carousel').slick({
     //     dots: true
