@@ -25,8 +25,9 @@ $(document).ready(function(){
 
     // Scroll plugin - makes scrolling smooth for nav options
     $('a').smoothScroll();
-    
-    // // Carousel plugin - Slick
+
+
+     // Carousel plugin - Slick
     // $('#carousel').slick({
     //     dots: true
     // });
@@ -329,13 +330,6 @@ $(document).ready(function(){
      * Research Interest Areas
      */
     xhr('get', {path:"/research/"}, '#research').done(function(results){
-        // var carousel = '<div id="carousel">' + 
-        //                     '<div id="byinterest-container"></div>' +
-        //                     '<div id="byFaculty-container"></div>' +
-        //                 '</div>'; 
-        // $('#research').append(carousel);
-
-
         // byInterest area
         $.each(results.byInterestArea, function(){
                 // Front Modal
@@ -345,13 +339,13 @@ $(document).ready(function(){
                                     '</div>' +
                                 '</a>';
 
-            $('#research-container').append(frontModal);
+            //$('#research-container').append(frontModal);
+            $('#flex-slide1').append(frontModal);
         });
 
 
         // byFaculty
         $('#research-container').append(document.createTextNode("By Faculty")); // TEMPORARY
-
         $.each(results.byFaculty, function(){
             var frontModal = '<a href="#mainModal" rel="modal:open" id="interest-anchor">' + 
                                 '<div class="interest-faculty-box"  data-faculty-name="' + this.username + '">' + 
@@ -360,14 +354,9 @@ $(document).ready(function(){
                             '</a>';
 
 
-            $('#research-container').append(frontModal);
+//            $('#research-container').append(frontModal);
+            $('#flex-slide2').append(frontModal);
         });
-
-        // Carousel plugin - Slick
-        // $('#carousel').slick({
-        //     dots: true
-        // });
-
 
         // On click event to then make the back modal
         $('.interest-area-box').on('click', function(){
@@ -377,7 +366,11 @@ $(document).ready(function(){
         $('.interest-faculty-box').on('click', function(){
             buildInterestBackModal(results.byFaculty, 'username', $(this).attr('data-faculty-name'));
         });
+
     });
+
+    $('.flexslider').flexslider();
+
 
 
 

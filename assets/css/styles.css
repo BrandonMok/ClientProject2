@@ -360,11 +360,6 @@ ul.minor-courses li{
 #research{
     margin: 3em;
 }
-/* #carousel{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-} */
 /* Container to hold boxes */
 #research-container{
     display: grid;
@@ -372,8 +367,8 @@ ul.minor-courses li{
 }
 /* Research area and faculty boxes */
  a .interest-area-box, a .interest-faculty-box{
-    width: 9em;
-    height: 4em;
+    /* width: 9em;
+    height: 4em; */
     border: 2px solid black;
     text-align: center;
     overflow: hidden;
@@ -529,6 +524,26 @@ a.ui-button:active,
 /* Accordian content size */
 .ui-accordion .ui-accordion-content{
     height: 15em;
+}
+
+
+.slides{
+    margin: 0 4em;
+    background-color: lightblue;
+}
+#flex-slide1, #flex-slide2{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: pink;
+}
+#flex-slide1 div, #flex-slide2 div{
+    display: inline-block;
+    width: 10em;
+    height: 5em;
+}
+.by-interest-title{
+    display: inline-block;
+    width: 100%;
 }
 
 
