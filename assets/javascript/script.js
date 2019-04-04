@@ -402,30 +402,9 @@ $(document).ready(function(){
             buildAdvisingBackModal(results, $(this).attr("data-rname"));
         });
 
-        // var studentServicesBM = '';
-        // if( $('.modalflag').length > 0){
-        //     clearModal();
-        //     studentServicesBM += '<h2>' + results.studentServices.title + '</h2>';
-        // }else{
-        //     studentServicesBM += '<div id="mainModal" class="modal modalflag">'; 
-                                    
-        // }
 
-        // studentServicesBM += '<div id="academic-advisors">' +
-        //                         '<h2>' + results.studentServices.academicAdvisors.title + '</h2>' +
-        //                         '<p>' + results.studentServices.academicAdvisors.description + '</p>' +
-        //                         '<h3>' + results.studentServices.academicAdvisors.faq.title +'</h3>' +
-        //                         '<p>' + results.studentServices.academicAdvisors.faq.contentHref + '</p>';
-        //                     '</div>';
 
-        // if( $('.modalflag').length > 0){
-        //     $('#mainModal').append(studentServicesBM);
-        // }
-        // else{
-        //     studentServicesBM += '</div>';
-        //     $('#body').append(studentServicesBM);
-        // }
-
+        
 
     });
 
@@ -493,12 +472,13 @@ $(document).ready(function(){
 
 
 
+
+
 /**
  * buildStudyAbroadModals
  * @param resultField - (i.e. results.studyAbroad)
  */
 function buildStudyAbroadModals(resultField, dataField){
-    console.log(dataField);
     var data = getAttributesByName(resultField, "title", dataField);
 
     var studyAbroadBM = '';
@@ -530,30 +510,50 @@ function buildStudyAbroadModals(resultField, dataField){
 
 function buildAdvisingBackModal(resultField, dataField){
     var data = getAttributesByName(resultField, "title", dataField);
-    console.log(data);
 
     var studentServicesBM = '';
+    var check = false;
+
     if( $('.modalflag').length > 0){
         clearModal();
+        check = true;
         studentServicesBM += '<h2>' + data.title + '</h2>';
     }else{
-        studentServicesBM += '<div id="mainModal" class="modal modalflag">'; 
-                                
+        studentServicesBM += '<div id="mainModal" class="modal modalflag">';
     }
-
 
     studentServicesBM += '<div id="academic-advisors">' +
                             '<h2>' + data.academicAdvisors.title + '</h2>' +
-                            // '<p>' + data.academicAdvisors.description + '</p>' +
-                            '<h3>' + data.academicAdvisors.faq.title +'</h3>' +
-                            '<p>' + data.academicAdvisors.faq.contentHref + '</p>';
+                            '<p>' + data.academicAdvisors.description + '</p>' +
+                            '<a href="'+data.academicAdvisors.faq.contentHref+'" target="_blank" id="advising-faq-link">' +
+                                '<h3>' + data.academicAdvisors.faq.title +'</h3>' +
+                            '</a>' +
                         '</div>';
 
-    if( $('.modalflag').length > 0){
+
+    studentServicesBM += '<div id="professonal-advisors">' +
+                            '<h2>' + data.professonalAdvisors.title + '</h2>';
+
+    $.each(data.professonalAdvisors.advisorInformation, function(){
+        // studentServicesBM += '<div class="prof-advisor-info">'+
+        studentServicesBM +=    '<h3>' + this.name + '</h3>' +
+                                '<p>' + this.department + '</p>' +
+                                '<p>' + this.email + '</p>';
+                            // '</div>'; 
+    });
+    studentServicesBM += '</div>';
+
+    studentServicesBM += '<div id="faculty-advisors">'+
+                            '<h2>' + data.facultyAdvisors.title + '</h2>' +
+                            '<p>' + data.facultyAdvisors.description + '</p>' +
+                        '</div>';
+    
+
+    if(check == true){
         $('#mainModal').append(studentServicesBM);
     }
     else{
         studentServicesBM += '</div>';
-        $('#body').append(studentServicesBM);
+        $('body').append(studentServicesBM);
     }
 }
