@@ -378,80 +378,49 @@ $(document).ready(function(){
         $('div#resources p.sub-heading').append(results.subTitle); // subheading
 
         // STUDY ABROAD
-        var studyAbroadFM = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
-                                '<div class="resources-boxes" id="studyAbroad" data-rname="'+ results.studyAbroad.title +'">' +
-                                    '<p class="resources-box-titles">' + results.studyAbroad.title + '</p>' +
-                                '</div>'+
-                            '</a>';
-
+        var studyAbroadFM = buildResourcesFrontModal(results.studyAbroad.title, 'studyAbroad');
         $('#resources-container').append(studyAbroadFM);
-
         $('#studyAbroad').on('click', function(){
             buildStudyAbroadBackModals(results, $(this).attr('data-rname'));
         });
 
-
         // STUDENT SERVICES / ADVISING
-        var advising = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
-                            '<div class="resources-boxes" id="advising" data-rname="'+ results.studentServices.title +'">' +
-                                '<p class="resources-box-titles">' + results.studentServices.title + '</p>' +
-                            '</div>'+
-                        '</a>';
+        var advising = buildResourcesFrontModal(results.studentServices.title, 'advising');
         $('#resources-container').append(advising);      
         $('#advising').on('click', function(){
             buildAdvisingBackModal(results, $(this).attr("data-rname"));
-        });
-
+        }); 
 
         // TUTORS AND LAB INFORMATION
-        var tutorsLabInfo = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
-                                '<div class="resources-boxes" id="tutorsLab" data-rname="'+ results.tutorsAndLabInformation.title +'">' +
-                                    '<p class="resources-box-titles">' + results.tutorsAndLabInformation.title + '</p>' +
-                                '</div>'+
-                            '</a>';
+        var tutorsLabInfo = buildResourcesFrontModal(results.tutorsAndLabInformation.title, 'tutorsLab');
         $('#resources-container').append(tutorsLabInfo);      
         $('#tutorsLab').on('click', function(){
             buildTutorsBackModal(results, $(this).attr("data-rname"));
         });
-
+      
 
         // STUDENT AMBASSADORS
-        var studentAmb = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
-                            '<div class="resources-boxes" id="student-ambassadors" data-rname="'+ results.studentAmbassadors.title +'">' +
-                                '<p class="resources-box-titles">' + results.studentAmbassadors.title + '</p>' +
-                            '</div>'+
-                        '</a>';
+        var studentAmb = buildResourcesFrontModal(results.studentAmbassadors.title, 'student-ambassadors');
         $('#resources-container').append(studentAmb);      
         $('#student-ambassadors').on('click', function(){
             buildStudentAmbassadorsBackModal(results, $(this).attr("data-rname"));
         });
 
-
         
         // FORMS
-        var forms = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
-                            '<div class="resources-boxes" id="forms">' +
-                                '<p class="resources-box-titles">Forms</p>' +
-                            '</div>'+
-                        '</a>';
+        var forms = buildResourcesFrontModal(results.forms.title, 'forms');
         $('#resources-container').append(forms);      
         $('#forms').on('click', function(){
-            // buildFormsBackModal(results, $(this).attr("data-rname"));
             buildFormsBackModal(results.forms);
         });
+        
 
-
-        // COOPENROLLMENT
-        var coopEnrollment = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
-                                '<div class="resources-boxes" id="coop-enrollment" data-rname="'+ results.coopEnrollment.title +'">' +
-                                    '<p class="resources-box-titles">' + results.coopEnrollment.title + '</p>' +
-                                '</div>'+
-                            '</a>';
+        // COOP ENROLLMENT
+        var coopEnrollment = buildResourcesFrontModal(results.coopEnrollment.title, 'coop-enrollment');
         $('#resources-container').append(coopEnrollment);      
         $('#coop-enrollment').on('click', function(){
              buildEnrollmentBackModal(results.coopEnrollment);
         });
-            
     });
 
 
@@ -517,3 +486,31 @@ $(document).ready(function(){
 });
 
 
+
+
+/**
+ * buildResourcesFrontModal
+ * @param dataTitle - title of the results object
+ * @param resID     - ID given for onclick to work
+ */
+function buildResourcesFrontModal(dataTitle, resID){
+    var frontModal = '';
+
+    // Only undefined for the 'FORMS' seciton
+    if(dataTitle == undefined){
+        frontModal += '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
+                        '<div class="resources-boxes" id="'+ resID +'">' +
+                            '<p class="resources-box-titles">Forms</p>' +
+                        '</div>'+
+                    '</a>';
+    }
+    else{
+        frontModal += '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
+                        '<div class="resources-boxes" id="'+ resID +'" data-rname="'+ dataTitle +'">' +
+                            '<p class="resources-box-titles">' + dataTitle + '</p>' +
+                        '</div>'+
+                    '</a>';
+    }
+
+    return frontModal;
+}
