@@ -417,14 +417,18 @@ ul.minor-courses li{
     font-size: 1.5rem;
     padding-top: 2em;
 }
-.study-abroad-description{
-    margin-bottom: 1.5em;
-}
+/* All resources boxes title */
 .resources-box-titles{
     margin: auto;
     width: 50%;
     padding: 10px;
 }
+
+/* Study abroad */
+.study-abroad-description{
+    margin-bottom: 1.5em;
+}
+
 
 
 /* Advising - back modal  */
@@ -525,11 +529,33 @@ ul.minor-courses li{
     border: 4px solid #F76902;
 }
 
+/* Forms - form titles */
+.form-title{
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1em;
+}
+.form-names{
+    padding: .5em;
+}
+.form-names:hover{
+    color: #F76902;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
 
-
-
-
-
+/* Enrollment info back modal */
+.enrollment-info{
+    margin: 1.2em;
+}
+#enrollment-job-zone-link{
+    margin: 0 1.2em;
+    font-weight: bold;
+}
+#enrollment-job-zone-link:hover{
+    font-size: 1.2rem;
+    color: #F76902;
+}
 
 
 /** Footer */

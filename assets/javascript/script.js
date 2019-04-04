@@ -425,6 +425,32 @@ $(document).ready(function(){
         $('#student-ambassadors').on('click', function(){
             buildStudentAmbassadorsBackModal(results, $(this).attr("data-rname"));
         });
+
+
+        
+        // FORMS
+        var forms = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
+                            '<div class="resources-boxes" id="forms">' +
+                                '<p class="resources-box-titles">Forms</p>' +
+                            '</div>'+
+                        '</a>';
+        $('#resources-container').append(forms);      
+        $('#forms').on('click', function(){
+            // buildFormsBackModal(results, $(this).attr("data-rname"));
+            buildFormsBackModal(results.forms);
+        });
+
+
+        // COOPENROLLMENT
+        var coopEnrollment = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
+                                '<div class="resources-boxes" id="coop-enrollment" data-rname="'+ results.coopEnrollment.title +'">' +
+                                    '<p class="resources-box-titles">' + results.coopEnrollment.title + '</p>' +
+                                '</div>'+
+                            '</a>';
+        $('#resources-container').append(coopEnrollment);      
+        $('#coop-enrollment').on('click', function(){
+             buildEnrollmentBackModal(results.coopEnrollment);
+        });
             
     });
 

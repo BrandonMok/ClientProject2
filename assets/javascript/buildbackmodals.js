@@ -542,3 +542,84 @@ function buildStudentAmbassadorsBackModal(resultField, dataField){
     }
 
 }
+
+
+
+function buildFormsBackModal(dataObject){
+    
+    var backModal = '';
+    var modalCheck = false;
+    if( $('.modalflag').length > 0 ){
+        clearModal();
+        modalCheck = true;
+        backModal +=  '<h2>Forms</h2>';
+    }
+    else{
+        backModal += '<div id="mainModal" class="modal modalflag">' +
+                        '<h2>Forms</h2>';
+    }
+
+    // Graduate forms
+    backModal += '<p class="form-title">Graduate Forms</p>';
+    $.each(dataObject.graduateForms, function(){
+        backModal += '<span class="graduateForms">' +
+                        '<a href="'+ this.href +'" target="_blank">' +
+                          '<p class="form-names">' + this.formName + '</p>' +
+                        '</a>' +
+                    '</span>';
+    });
+
+    // Undergraduate forms
+    backModal += '<p class="form-title">Undergraduate Forms</p>' +
+                    '<a href="'+ dataObject.undergraduateForms[0].href +'" target="_blank">' +
+                        '<p class="form-names">' + dataObject.undergraduateForms[0].formName + '</p>' +
+                    '</a>';
+
+
+    if(modalCheck == true){
+        $('#mainModal').append(backModal);
+    }
+    else{
+        backModal += '</div>';
+        $('body').append(backModal);
+    }
+}
+
+
+
+
+function buildEnrollmentBackModal(dataObject){
+    var backModal = '';
+    var modalCheck = false;
+    if( $('.modalflag').length > 0){
+        clearModal();
+        modalCheck = true;
+        backModal += '<h2>' + dataObject.title +'</h2>';
+    }
+    else{
+        backModal += '<div id="mainModal" class="modal modalflag">' +
+                        '<h2>' + dataObject.title +'</h2>';
+    }
+
+    // Enrollment content
+    $.each(dataObject.enrollmentInformationContent, function(){
+        backModal += '<div class="enrollment-info">' +
+                        '<h3>' + this.title + '</h3>' +
+                        '<p>' + this.description + '</p>' +
+                    '</div>';
+    });
+
+    // LINK
+    backModal += '<a href="'+dataObject.RITJobZoneGuidelink+'" target="_blank">' +
+                    '<p id="enrollment-job-zone-link">RIT Job Zone Guide</p>' +
+                '</a>';
+
+
+    if(modalCheck == true){
+        $('#mainModal').append(backModal);
+    }
+    else{
+        backModal += '</div>';
+        $('body').append(backModal);
+    }
+}
