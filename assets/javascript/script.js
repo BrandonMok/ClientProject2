@@ -413,6 +413,19 @@ $(document).ready(function(){
         $('#tutorsLab').on('click', function(){
             buildTutorsBackModal(results, $(this).attr("data-rname"));
         });
+
+
+        // STUDENT AMBASSADORS
+        var studentAmb = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
+                            '<div class="resources-boxes" id="student-ambassadors" data-rname="'+ results.studentAmbassadors.title +'">' +
+                                '<p class="resources-box-titles">' + results.studentAmbassadors.title + '</p>' +
+                            '</div>'+
+                        '</a>';
+        $('#resources-container').append(studentAmb);      
+        $('#student-ambassadors').on('click', function(){
+            buildStudentAmbassadorsBackModal(results, $(this).attr("data-rname"));
+        });
+            
     });
 
 
@@ -476,6 +489,5 @@ $(document).ready(function(){
     });
     
 });
-
 
 

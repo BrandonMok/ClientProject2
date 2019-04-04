@@ -489,7 +489,7 @@ ul.minor-courses li{
 }
 
 
-
+/* Tutors & lab styling */
 #lab-hours-link{
     margin: 1em 0;
     font-weight: bold;
@@ -497,6 +497,32 @@ ul.minor-courses li{
 #lab-hours-link:hover{
     font-size: 1.2rem;
     color: #F76902;
+}
+
+
+/* Student Ambassador back Modal */
+.sa-subcontent{
+    margin: 1em;
+}
+/* NOTE at the bottom */
+#sa-note{
+    font-style: italic;
+    font-size: .8rem;
+    margin: 1em;
+}
+/* Apply word / div */
+#sa-apply{
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 2px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 1em;
+}
+#sa-apply:hover{
+    font-size: 1.4rem;
+    color: #F76902;
+    border: 4px solid #F76902;
 }
 
 

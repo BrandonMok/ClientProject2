@@ -466,7 +466,7 @@ function buildAdvisingBackModal(resultField, dataField){
 
 /**
  * buildTutorsBackModal
- * @param resultField  - (i.e. results.tutorsAndLabInformation)
+ * @param resultField  - (i.e. results.tutorsAndLabInformation.title)
  * @param dataField  - data attribute resource name
  */
 function buildTutorsBackModal(resultField, dataField){
@@ -493,4 +493,52 @@ function buildTutorsBackModal(resultField, dataField){
                     '</div>';
         $('body').append(backModal);
     }
+}
+
+
+/**
+ * buildStudentAmbassadorsBackModal
+ * @param resultField  - (i.e. results.studentAmbassadors.title)
+ * @param dataField  - data attribute resource name
+ */
+function buildStudentAmbassadorsBackModal(resultField, dataField){
+    var data = getAttributesByName(resultField, 'title', dataField);
+
+    var backModal = '';
+    var modalCheck = false;
+
+    if( $('.modalflag').length > 0 ){
+        clearModal();
+        modalCheck = true;
+        backModal += '<h2>' + data.title + '</h2>' +
+                        '<img src="'+data.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
+    }
+    else{
+        backModal += '<div id="mainModal" class="modal modalflag">' +
+                        '<h2>' + data.title + '</h2>' +
+                        '<img src="'+data.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
+    }
+
+    // Iterate through the subcontent
+    $.each(data.subSectionContent, function(){
+        backModal += '<div class="sa-subcontent">' +
+                        '<h2>' + this.title + '</h2>' +
+                        '<p>' + this.description + '</p>' +
+                    '</div>';
+    });
+
+    // Application form link
+    backModal += '<a href="'+ data.applicationFormLink +'" target="_blank">' +
+                    '<div id="sa-apply">Apply</div>' +
+                '</a>' +
+                '<p id="sa-note">*' + data.note + '</p>';
+                    
+    if( modalCheck == true){
+        $('#mainModal').append(backModal);
+    }   
+    else{
+        backModal += '</div>';
+        $('body').append(backModal);
+    }
+
 }
