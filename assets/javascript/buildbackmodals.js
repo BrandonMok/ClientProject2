@@ -373,8 +373,8 @@ function buildStudyAbroadBackModals(resultField, dataField){
                             '<p>' + data.description + '</p>';
     }else{
         studyAbroadBM += '<div id="mainModal" class="modal modalflag">' +
-            '<h2>' + data.title + '</h2>' +
-            '<p class="study-abroad-description">' + data.description + '</p>';
+                            '<h2>' + data.title + '</h2>' +
+                            '<p class="study-abroad-description">' + data.description + '</p>';
     }
 
     $.each(data.places, function(){
@@ -460,5 +460,37 @@ function buildAdvisingBackModal(resultField, dataField){
     else{
         studentServicesBM += '</div>';
         $('body').append(studentServicesBM);
+    }
+}
+
+
+/**
+ * buildTutorsBackModal
+ * @param resultField  - (i.e. results.tutorsAndLabInformation)
+ * @param dataField  - data attribute resource name
+ */
+function buildTutorsBackModal(resultField, dataField){
+    // Get the data object
+    var data = getAttributesByName(resultField, 'title', dataField);
+
+    var backModal = '';
+    if( $('.modalflag').length > 0 ){
+        clearModal();
+        backModal += '<h2>' + data.title + '</h2>' +
+                        '<p>' + data.description + '</p>' +
+                        '<a href="'+data.tutoringLabHoursLink+'" target="_blank">' +
+                            '<p id="lab-hours-link">Lab Hours</p>' +
+                        '</a>';
+
+        $('#mainModal').append(backModal);
+    }else{
+        backModal += '<div id="mainModal" class="modal modalflag">' +
+                        '<h2>' + data.title + '</h2>' +
+                        '<p>' + data.description + '</p>' +
+                        '<a href="'+data.tutoringLabHoursLink+'" target="_blank">' +
+                            '<p id="lab-hours-link">Lab Hours</p>' +
+                        '</a>' +
+                    '</div>';
+        $('body').append(backModal);
     }
 }

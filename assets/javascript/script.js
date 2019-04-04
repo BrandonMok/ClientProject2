@@ -377,7 +377,7 @@ $(document).ready(function(){
         $('div#resources p.section-heading').append(results.title); // append heading/title
         $('div#resources p.sub-heading').append(results.subTitle); // subheading
 
-
+        // STUDY ABROAD
         var studyAbroadFM = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
                                 '<div class="resources-boxes" id="studyAbroad" data-rname="'+ results.studyAbroad.title +'">' +
                                     '<p class="resources-box-titles">' + results.studyAbroad.title + '</p>' +
@@ -391,7 +391,7 @@ $(document).ready(function(){
         });
 
 
-        // Student Services / Advising
+        // STUDENT SERVICES / ADVISING
         var advising = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
                             '<div class="resources-boxes" id="advising" data-rname="'+ results.studentServices.title +'">' +
                                 '<p class="resources-box-titles">' + results.studentServices.title + '</p>' +
@@ -403,9 +403,16 @@ $(document).ready(function(){
         });
 
 
-
-        
-
+        // TUTORS AND LAB INFORMATION
+        var tutorsLabInfo = '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
+                                '<div class="resources-boxes" id="tutorsLab" data-rname="'+ results.tutorsAndLabInformation.title +'">' +
+                                    '<p class="resources-box-titles">' + results.tutorsAndLabInformation.title + '</p>' +
+                                '</div>'+
+                            '</a>';
+        $('#resources-container').append(tutorsLabInfo);      
+        $('#tutorsLab').on('click', function(){
+            buildTutorsBackModal(results, $(this).attr("data-rname"));
+        });
     });
 
 
@@ -472,109 +479,3 @@ $(document).ready(function(){
 
 
 
-
-
-// /**
-//  * buildStudyAbroadModals
-//  * @param resultField - (i.e. results.studyAbroad)
-//  */
-// function buildStudyAbroadBackModals(resultField, dataField){
-//     var data = getAttributesByName(resultField, "title", dataField);
-
-//     var studyAbroadBM = '';
-
-//     if( $('.modalflag').length > 0 ){
-//         clearModal();
-//         studyAbroadBM += '<h2>' + data.title + '</h2>' +
-//                             '<p>' + data.description + '</p>';
-//     }else{
-//         studyAbroadBM += '<div id="mainModal" class="modal modalflag">' +
-//             '<h2>' + data.title + '</h2>' +
-//             '<p class="study-abroad-description">' + data.description + '</p>';
-//     }
-
-//     $.each(data.places, function(){
-//         studyAbroadBM += '<h3>' + this.nameOfPlace + '</h3>' +
-//             '<p class="study-abroad-description">' + this.description + '</p>';
-//     });
-
-//     if( $('.modalflag').length > 0 ){
-//         $('#mainModal').append(studyAbroadBM);
-//     }
-//     else{   
-//         studyAbroadBM += '</div>';
-//         $('body').append(studyAbroadBM);
-//     }
-// }
-
-
-// /**
-//  * buildAdvisingBackModal
-//  * @param resultField - (i.e. results.studentServices)
-//  * @param dataField - data attribute value
-//  */
-// function buildAdvisingBackModal(resultField, dataField){
-//     var data = getAttributesByName(resultField, "title", dataField);
-
-//     var studentServicesBM = '';
-//     var check = false;
-
-//     if( $('.modalflag').length > 0){
-//         clearModal();
-//         check = true;
-//         studentServicesBM += '<h2>' + data.title + '</h2>';
-//     }else{
-//         studentServicesBM += '<div id="mainModal" class="modal modalflag">';
-//     }
-
-//     // Academic Advisors
-//     studentServicesBM += '<div id="academic-advisors">' +
-//                             '<h2>' + data.academicAdvisors.title + '</h2>' +
-//                             '<p>' + data.academicAdvisors.description + '</p>' +
-//                             '<a href="'+data.academicAdvisors.faq.contentHref+'" target="_blank" id="advising-faq-link">' +
-//                                 '<h3>' + data.academicAdvisors.faq.title +'</h3>' +
-//                             '</a>' +
-//                         '</div>';
-
-//     // Professional Advisors
-//     studentServicesBM += '<div id="professonal-advisors">' +
-//                             '<h2>' + data.professonalAdvisors.title + '</h2>';
-
-//     $.each(data.professonalAdvisors.advisorInformation, function(){
-//         studentServicesBM +=  '<div id="prof-advisor-info">' +
-//                                 '<h3>' + this.name + '</h3>' +
-//                                 '<p id="advisor-department">' + this.department + '</p>' +
-//                                 '<p><strong>' + this.email + '</strong></p>' +
-//                             '</div>';
-//     });
-//     studentServicesBM += '</div>';
-
-
-
-//     // Faculty Advisors
-//     studentServicesBM += '<div id="faculty-advisors">'+
-//                             '<h2>' + data.facultyAdvisors.title + '</h2>' +
-//                             '<p>' + data.facultyAdvisors.description + '</p>' +
-//                         '</div>';
-    
-//     studentServicesBM += '<div id="ist-minor-advising">' +
-//                             '<h2>' + data.istMinorAdvising.title + '</h2>';
-
-//     $.each(data.istMinorAdvising.minorAdvisorInformation, function(){
-//         studentServicesBM += '<div class="minor-advisor-info">' +
-//                                 '<h4>' + this.title + '</h4>' +
-//                                 '<p>' + this.advisor + '</p>' +
-//                                 '<p>' + this.email + '</p>' +
-//                             '</div>';
-//     });
-//     studentServicesBM += '</div>';
-
-
-//     if(check == true){
-//         $('#mainModal').append(studentServicesBM);
-//     }
-//     else{
-//         studentServicesBM += '</div>';
-//         $('body').append(studentServicesBM);
-//     }
-// }
