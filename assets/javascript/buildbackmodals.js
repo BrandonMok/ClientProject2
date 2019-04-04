@@ -360,24 +360,22 @@ function buildNewsBackModal(queryField){
 
 /**
  * buildStudyAbroadModals
- * @param resultField - (i.e. results.studyAbroad)
+ * @param dataObject - results object (i.e. results.studyAbroad)
  */
-function buildStudyAbroadBackModals(resultField, dataField){
-    var data = getAttributesByName(resultField, "title", dataField);
-
+function buildStudyAbroadBackModals(dataObject){
     var studyAbroadBM = '';
 
     if( $('.modalflag').length > 0 ){
         clearModal();
-        studyAbroadBM += '<h2>' + data.title + '</h2>' +
-                            '<p>' + data.description + '</p>';
+        studyAbroadBM += '<h2>' + dataObject.title + '</h2>' +
+                            '<p>' + dataObject.description + '</p>';
     }else{
         studyAbroadBM += '<div id="mainModal" class="modal modalflag">' +
-                            '<h2>' + data.title + '</h2>' +
-                            '<p class="study-abroad-description">' + data.description + '</p>';
+                            '<h2>' + dataObject.title + '</h2>' +
+                            '<p class="study-abroad-description">' + dataObject.description + '</p>';
     }
 
-    $.each(data.places, function(){
+    $.each(dataObject.places, function(){
         studyAbroadBM += '<h3>' + this.nameOfPlace + '</h3>' +
             '<p class="study-abroad-description">' + this.description + '</p>';
     });
@@ -394,37 +392,34 @@ function buildStudyAbroadBackModals(resultField, dataField){
 
 /**
  * buildAdvisingBackModal
- * @param resultField - (i.e. results.studentServices)
- * @param dataField - data attribute value
+ * @param dataObject - (results.studentServices)
  */
-function buildAdvisingBackModal(resultField, dataField){
-    var data = getAttributesByName(resultField, "title", dataField);
-
+function buildAdvisingBackModal(dataObject){
     var studentServicesBM = '';
     var check = false;
 
     if( $('.modalflag').length > 0){
         clearModal();
         check = true;
-        studentServicesBM += '<h2>' + data.title + '</h2>';
+        studentServicesBM += '<h2>' + dataObject.title + '</h2>';
     }else{
         studentServicesBM += '<div id="mainModal" class="modal modalflag">';
     }
 
     // Academic Advisors
     studentServicesBM += '<div id="academic-advisors">' +
-                            '<h2>' + data.academicAdvisors.title + '</h2>' +
-                            '<p>' + data.academicAdvisors.description + '</p>' +
-                            '<a href="'+data.academicAdvisors.faq.contentHref+'" target="_blank" id="advising-faq-link">' +
-                                '<h3>' + data.academicAdvisors.faq.title +'</h3>' +
+                            '<h2>' + dataObject.academicAdvisors.title + '</h2>' +
+                            '<p>' + dataObject.academicAdvisors.description + '</p>' +
+                            '<a href="'+dataObject.academicAdvisors.faq.contentHref+'" target="_blank" id="advising-faq-link">' +
+                                '<h3>' + dataObject.academicAdvisors.faq.title +'</h3>' +
                             '</a>' +
                         '</div>';
 
     // Professional Advisors
     studentServicesBM += '<div id="professonal-advisors">' +
-                            '<h2>' + data.professonalAdvisors.title + '</h2>';
+                            '<h2>' + dataObject.professonalAdvisors.title + '</h2>';
 
-    $.each(data.professonalAdvisors.advisorInformation, function(){
+    $.each(dataObject.professonalAdvisors.advisorInformation, function(){
         studentServicesBM +=  '<div id="prof-advisor-info">' +
                                 '<h3>' + this.name + '</h3>' +
                                 '<p id="advisor-department">' + this.department + '</p>' +
@@ -437,14 +432,14 @@ function buildAdvisingBackModal(resultField, dataField){
 
     // Faculty Advisors
     studentServicesBM += '<div id="faculty-advisors">'+
-                            '<h2>' + data.facultyAdvisors.title + '</h2>' +
-                            '<p>' + data.facultyAdvisors.description + '</p>' +
+                            '<h2>' + dataObject.facultyAdvisors.title + '</h2>' +
+                            '<p>' + dataObject.facultyAdvisors.description + '</p>' +
                         '</div>';
     
     studentServicesBM += '<div id="ist-minor-advising">' +
-                            '<h2>' + data.istMinorAdvising.title + '</h2>';
+                            '<h2>' + dataObject.istMinorAdvising.title + '</h2>';
 
-    $.each(data.istMinorAdvising.minorAdvisorInformation, function(){
+    $.each(dataObject.istMinorAdvising.minorAdvisorInformation, function(){
         studentServicesBM += '<div class="minor-advisor-info">' +
                                 '<h4>' + this.title + '</h4>' +
                                 '<p>' + this.advisor + '</p>' +
@@ -464,30 +459,27 @@ function buildAdvisingBackModal(resultField, dataField){
 }
 
 
+
 /**
  * buildTutorsBackModal
- * @param resultField  - (i.e. results.tutorsAndLabInformation.title)
- * @param dataField  - data attribute resource name
+ * @param dataObject  - (i.e. results.tutorsAndLabInformation )
  */
-function buildTutorsBackModal(resultField, dataField){
-    // Get the data object
-    var data = getAttributesByName(resultField, 'title', dataField);
-
+function buildTutorsBackModal(dataObject){
     var backModal = '';
     if( $('.modalflag').length > 0 ){
         clearModal();
-        backModal += '<h2>' + data.title + '</h2>' +
-                        '<p>' + data.description + '</p>' +
-                        '<a href="'+data.tutoringLabHoursLink+'" target="_blank">' +
+        backModal += '<h2>' + dataObject.title + '</h2>' +
+                        '<p>' + dataObject.description + '</p>' +
+                        '<a href="'+dataObject.tutoringLabHoursLink+'" target="_blank">' +
                             '<p id="lab-hours-link">Lab Hours</p>' +
                         '</a>';
 
         $('#mainModal').append(backModal);
     }else{
         backModal += '<div id="mainModal" class="modal modalflag">' +
-                        '<h2>' + data.title + '</h2>' +
-                        '<p>' + data.description + '</p>' +
-                        '<a href="'+data.tutoringLabHoursLink+'" target="_blank">' +
+                        '<h2>' + dataObject.title + '</h2>' +
+                        '<p>' + dataObject.description + '</p>' +
+                        '<a href="'+dataObject.tutoringLabHoursLink+'" target="_blank">' +
                             '<p id="lab-hours-link">Lab Hours</p>' +
                         '</a>' +
                     '</div>';
@@ -498,29 +490,26 @@ function buildTutorsBackModal(resultField, dataField){
 
 /**
  * buildStudentAmbassadorsBackModal
- * @param resultField  - (i.e. results.studentAmbassadors.title)
- * @param dataField  - data attribute resource name
+ * @param dataObject  - (i.e. results.studentAmbassadors)
  */
-function buildStudentAmbassadorsBackModal(resultField, dataField){
-    var data = getAttributesByName(resultField, 'title', dataField);
-
+function buildStudentAmbassadorsBackModal(dataObject){
     var backModal = '';
     var modalCheck = false;
 
     if( $('.modalflag').length > 0 ){
         clearModal();
         modalCheck = true;
-        backModal += '<h2>' + data.title + '</h2>' +
-                        '<img src="'+data.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
+        backModal += '<h2>' + dataObject.title + '</h2>' +
+                        '<img src="'+ dataObject.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
     }
     else{
         backModal += '<div id="mainModal" class="modal modalflag">' +
-                        '<h2>' + data.title + '</h2>' +
-                        '<img src="'+data.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
+                        '<h2>' + dataObject.title + '</h2>' +
+                        '<img src="'+ dataObject.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
     }
 
     // Iterate through the subcontent
-    $.each(data.subSectionContent, function(){
+    $.each(dataObject.subSectionContent, function(){
         backModal += '<div class="sa-subcontent">' +
                         '<h2>' + this.title + '</h2>' +
                         '<p>' + this.description + '</p>' +
@@ -528,10 +517,10 @@ function buildStudentAmbassadorsBackModal(resultField, dataField){
     });
 
     // Application form link
-    backModal += '<a href="'+ data.applicationFormLink +'" target="_blank">' +
+    backModal += '<a href="'+ dataObject.applicationFormLink +'" target="_blank">' +
                     '<div id="sa-apply">Apply</div>' +
                 '</a>' +
-                '<p id="sa-note">*' + data.note + '</p>';
+                '<p id="sa-note">*' + dataObject.note + '</p>';
                     
     if( modalCheck == true){
         $('#mainModal').append(backModal);
@@ -544,11 +533,15 @@ function buildStudentAmbassadorsBackModal(resultField, dataField){
 }
 
 
-
+/**
+ * buildFormsBackModal
+ * @param dataObject - (results.form)
+ */
 function buildFormsBackModal(dataObject){
-    
     var backModal = '';
     var modalCheck = false;
+
+
     if( $('.modalflag').length > 0 ){
         clearModal();
         modalCheck = true;
@@ -587,7 +580,10 @@ function buildFormsBackModal(dataObject){
 
 
 
-
+/**
+ * buildEnrollmentBackModal
+ * @param dataObject - (results.coopEnrollment)
+ */
 function buildEnrollmentBackModal(dataObject){
     var backModal = '';
     var modalCheck = false;

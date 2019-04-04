@@ -381,21 +381,21 @@ $(document).ready(function(){
         var studyAbroadFM = buildResourcesFrontModal(results.studyAbroad.title, 'studyAbroad');
         $('#resources-container').append(studyAbroadFM);
         $('#studyAbroad').on('click', function(){
-            buildStudyAbroadBackModals(results, $(this).attr('data-rname'));
+            buildStudyAbroadBackModals(results.studyAbroad);
         });
 
         // STUDENT SERVICES / ADVISING
         var advising = buildResourcesFrontModal(results.studentServices.title, 'advising');
         $('#resources-container').append(advising);      
         $('#advising').on('click', function(){
-            buildAdvisingBackModal(results, $(this).attr("data-rname"));
+            buildAdvisingBackModal(results.studentServices);
         }); 
 
         // TUTORS AND LAB INFORMATION
         var tutorsLabInfo = buildResourcesFrontModal(results.tutorsAndLabInformation.title, 'tutorsLab');
         $('#resources-container').append(tutorsLabInfo);      
         $('#tutorsLab').on('click', function(){
-            buildTutorsBackModal(results, $(this).attr("data-rname"));
+            buildTutorsBackModal(results.tutorsAndLabInformation);
         });
       
 
@@ -403,7 +403,7 @@ $(document).ready(function(){
         var studentAmb = buildResourcesFrontModal(results.studentAmbassadors.title, 'student-ambassadors');
         $('#resources-container').append(studentAmb);      
         $('#student-ambassadors').on('click', function(){
-            buildStudentAmbassadorsBackModal(results, $(this).attr("data-rname"));
+            buildStudentAmbassadorsBackModal(results.studentAmbassadors);
         });
 
         
@@ -484,6 +484,9 @@ $(document).ready(function(){
     });
     
 });
+
+
+
 
 
 
