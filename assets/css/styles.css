@@ -425,6 +425,8 @@ ul.minor-courses li{
     width: 50%;
     padding: 10px;
 }
+
+
 /* Advising - back modal  */
 #advising-faq-link{
     margin: .5em;
@@ -434,6 +436,7 @@ ul.minor-courses li{
     font-size: 1.1rem;
     color: #F76902;;
 }
+
 
 /* Container for prof advisors */
 #professonal-advisors{
@@ -484,6 +487,20 @@ ul.minor-courses li{
     padding: 15px;
     text-align: center;
 }
+
+
+
+#lab-hours-link{
+    margin: 1em 0;
+    font-weight: bold;
+}
+#lab-hours-link:hover{
+    font-size: 1.2rem;
+    color: #F76902;
+}
+
+
+
 
 
 
