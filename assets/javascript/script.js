@@ -522,6 +522,7 @@ function buildAdvisingBackModal(resultField, dataField){
         studentServicesBM += '<div id="mainModal" class="modal modalflag">';
     }
 
+    // Academic Advisors
     studentServicesBM += '<div id="academic-advisors">' +
                             '<h2>' + data.academicAdvisors.title + '</h2>' +
                             '<p>' + data.academicAdvisors.description + '</p>' +
@@ -530,24 +531,39 @@ function buildAdvisingBackModal(resultField, dataField){
                             '</a>' +
                         '</div>';
 
-
+    // Professional Advisors
     studentServicesBM += '<div id="professonal-advisors">' +
                             '<h2>' + data.professonalAdvisors.title + '</h2>';
 
     $.each(data.professonalAdvisors.advisorInformation, function(){
-        // studentServicesBM += '<div class="prof-advisor-info">'+
-        studentServicesBM +=    '<h3>' + this.name + '</h3>' +
-                                '<p>' + this.department + '</p>' +
-                                '<p>' + this.email + '</p>';
-                            // '</div>'; 
+        studentServicesBM +=  '<div id="prof-advisor-info">' +
+                                '<h3>' + this.name + '</h3>' +
+                                '<p id="advisor-department">' + this.department + '</p>' +
+                                '<p><strong>' + this.email + '</strong></p>' +
+                            '</div>';
     });
     studentServicesBM += '</div>';
 
+
+
+    // Faculty Advisors
     studentServicesBM += '<div id="faculty-advisors">'+
                             '<h2>' + data.facultyAdvisors.title + '</h2>' +
                             '<p>' + data.facultyAdvisors.description + '</p>' +
                         '</div>';
     
+    studentServicesBM += '<div id="ist-minor-advising">' +
+                            '<h2>' + data.istMinorAdvising.title + '</h2>';
+
+    $.each(data.istMinorAdvising.minorAdvisorInformation, function(){
+        studentServicesBM += '<div class="minor-advisor-info">' +
+                                '<h4>' + this.title + '</h4>' +
+                                '<p>' + this.advisor + '</p>' +
+                                '<p>' + this.email + '</p>' +
+                            '</div>';
+    });
+    studentServicesBM += '</div>';
+
 
     if(check == true){
         $('#mainModal').append(studentServicesBM);
