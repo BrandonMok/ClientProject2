@@ -417,6 +417,14 @@ ul.minor-courses li{
     font-size: 1.5rem;
     padding-top: 2em;
 }
+.study-abroad-description{
+    margin-bottom: 1.5em;
+}
+.resources-box-titles{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
 
 
 
