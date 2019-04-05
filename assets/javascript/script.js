@@ -27,6 +27,13 @@ $(document).ready(function(){
     // Scroll plugin - makes scrolling smooth for nav options
     $('#nav a').smoothScroll();
 
+    
+    // Slick-nav plugin
+    $('#nav').slicknav({
+		prependTo:'body'
+    });
+
+
 
     /**
      * About
@@ -331,9 +338,9 @@ $(document).ready(function(){
                                 '</div>' +
                             '</a>';
 
-            $('#research-for-mobile-areas').append(frontModal); // append to mobile div (Not shown originally)
-            $('#flex-slide1').append(frontModal);// append to main display slider
-            // $('#research-box-container').append(frontModal);
+            // $('#research-for-mobile-areas').append(frontModal); // append to mobile div (Not shown originally)
+            // $('#flex-slide1').append(frontModal);// append to main display slider
+            $('#research-box-container').append(frontModal);
         });
 
 
@@ -346,10 +353,11 @@ $(document).ready(function(){
                             '</a>';
 
 
-            $('#research-for-mobile-faculty').append(frontModal);   // append to mobile div (Not shown originally)
-            $('#flex-slide2').append(frontModal);   // append to main display slider
-            // $('#research-box-container').append(frontModal);
+            // $('#research-for-mobile-faculty').append(frontModal);   // append to mobile div (Not shown originally)
+            // $('#flex-slide2').append(frontModal);   // append to main display slider
+            $('#research-box-container').append(frontModal);
         });
+
 
         // On click event to then make the back modal
         $('.interest-area-box').on('click', function(){
@@ -366,6 +374,8 @@ $(document).ready(function(){
     $('.flexslider').flexslider({
         slideshow: false
     });
+
+    
 
 
 

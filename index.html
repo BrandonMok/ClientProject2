@@ -33,8 +33,6 @@
     <!-- Browser Detection Plugin - https://github.com/danieledesantis/jquery-browser-detection -->
     <script src="assets/javascript/jquery.browser.detection.js"></script>
 
-    <!-- <script src="assets/javascript/jquery.slicknav.min.js"></script>
-    <link rel="stylesheet" href="assets/css/slicknav.css"> -->
 
     <!-- Smooth Scroll (https://plugins.jquery.com/smooth-scroll/) -->
     <script src="assets/javascript/jquery.smooth-scroll.min.js"></script>
@@ -45,23 +43,34 @@
     <link rel="stylesheet" href="assets/css/flexslider.css">
 
 
+    <link  href="assets/css/flexslider.css" rel="stylesheet"> 
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
+
+    <!-- SlickNav plugin  http://slicknav.io/  -->
+    <link href="assets/css/slicknav.css" rel="stylesheet"> 
+    <script src="assets/javascript/jquery.slicknav.js"></script>
+
+
+
     <!-- My StyleSheet -->
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-
     <!-- Header (Top Bar) -->
     <div class="header">
         <a href="#landing-image"><p id="RIT">RIT</p></a>
 
-        <!-- Navigation -->
         <ul id="nav">
-            <a href="#about"><li>About</li></a>
-            <a href="#degrees"><li>Degrees</li></a>
-            <a href="#minors"><li>Minors</li></a>
+            <a href="#about" class="scroll"><li>About</li></a>
+            <a href="#degrees" class="scroll"><li>Degrees</li></a>
+            <a href="#minors" class="scroll"><li>Minors</li></a>
+            <a href="#research" class="scroll"><li>Research</li></a>
+            <a href="#resources" class="scroll"><li>Resources</li></a>
         </ul>
-
     </div>
+
+
+
 
 
 
@@ -69,7 +78,6 @@
     <div id="landing-image">
         <p id="image-text">Information Sciences & Technologies</p>
     </div>
-
 
 
     <!-- About section-->
@@ -138,7 +146,6 @@
             <div id="tabs-3"></div>
             <div id="tabs-4"></div>
         </div>
- 
     </div>
 
 
@@ -151,15 +158,17 @@
             <div id="research-for-mobile-faculty"><span class="by-interest-title">By Faculty</span></div>
         </div>
 
+<!-- 
         <div class="flexslider">
             <ul class="slides">
               <li id="flex-slide1"><span class="by-interest-title">By Interest Areas</span></li>
               <li id="flex-slide2"><span class="by-interest-title">By Faculty</span></li>
             </ul>
-        </div>
+        </div> -->
 
-        <!-- <div id="research-box-container"></div> -->
+        <div id="research-box-container"></div>
     </div>
+
 
 
 

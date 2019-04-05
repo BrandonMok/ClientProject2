@@ -41,6 +41,7 @@ a, a:visited{
 }
 
 
+
 /* Header - Top Bar */
 .header{
     display: inline-block;
@@ -364,16 +365,24 @@ ul.minor-courses li{
     display: none;
 }
 
+
 /* Research area and faculty boxes */
- a .interest-area-box, a .interest-faculty-box{
+#research-box-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+a .interest-area-box, a .interest-faculty-box{
     border: 2px solid black;
     text-align: center;
     overflow: hidden;
+    width: 10em;
+    height: 5em;
 }
 #interest-anchor{
     padding: 0;
     margin: 1em;
 }
+/* Name/Area words */
 .interest-area-box p, .interest-faculty-box p{
     margin: auto;
     width: 50%;
@@ -419,7 +428,7 @@ ul.minor-courses li{
 }
 /* All resources boxes title */
 .resources-box-titles{
-    margin: auto;
+    /* margin: auto; */
     width: 50%;
     padding: 10px;
 }
@@ -819,5 +828,32 @@ a.ui-button:active,
     /* Employee boxes statistics */
     #statistics-boxes{
         font-size: .7rem;
+    }
+}
+
+
+
+
+
+/*****************************/
+
+/** SLICK ANV PLUGIN  */
+.slicknav_menu {
+    display:none;
+}
+
+@media screen and (max-width: 40em) {
+    /* #menu is the original menu */
+    #nav {
+        display:none;
+    }
+
+    .header{
+        display: relative;
+        position: static;
+    }
+
+    .slicknav_menu {
+        display: block;
     }
 }
