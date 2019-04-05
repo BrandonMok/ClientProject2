@@ -26,6 +26,7 @@ $(document).ready(function(){
 
     // Scroll plugin - makes scrolling smooth for nav options
     $('#nav a').smoothScroll();
+    $('.slicknav_menu a').smoothScroll();
 
     
     // Slick-nav plugin

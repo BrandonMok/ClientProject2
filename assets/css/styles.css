@@ -537,6 +537,11 @@ a .interest-area-box, a .interest-faculty-box{
     color: #F76902;
     border: 4px solid #F76902;
 }
+#sa-image{
+    max-width: 20em;
+}
+
+
 
 /* Forms - form titles */
 .form-title{
@@ -855,5 +860,9 @@ a.ui-button:active,
 
     .slicknav_menu {
         display: block;
+    }
+
+    #sa-image{
+        display: none;
     }
 }

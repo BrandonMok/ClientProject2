@@ -500,12 +500,12 @@ function buildStudentAmbassadorsBackModal(dataObject){
         clearModal();
         modalCheck = true;
         backModal += '<h2>' + dataObject.title + '</h2>' +
-                        '<img src="'+ dataObject.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
+                        '<img src="'+ dataObject.ambassadorsImageSource+'" id="sa-image"  alt="student ambassadors" title="student ambassadors" >';          
     }
     else{
         backModal += '<div id="mainModal" class="modal modalflag">' +
                         '<h2>' + dataObject.title + '</h2>' +
-                        '<img src="'+ dataObject.ambassadorsImageSource+'" alt="student ambassadors" title="student ambassadors">';          
+                        '<img src="'+ dataObject.ambassadorsImageSource+'" id="sa-image" alt="student ambassadors" title="student ambassadors">';          
     }
 
     // Iterate through the subcontent
