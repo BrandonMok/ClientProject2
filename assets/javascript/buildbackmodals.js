@@ -368,7 +368,7 @@ function buildStudyAbroadBackModals(dataObject){
     if( $('.modalflag').length > 0 ){
         clearModal();
         studyAbroadBM += '<h2>' + dataObject.title + '</h2>' +
-                            '<p>' + dataObject.description + '</p>';
+                            '<p class="study-abroad-description">' + dataObject.description + '</p>';
     }else{
         studyAbroadBM += '<div id="mainModal" class="modal modalflag">' +
                             '<h2>' + dataObject.title + '</h2>' +
@@ -435,7 +435,8 @@ function buildAdvisingBackModal(dataObject){
                             '<h2>' + dataObject.facultyAdvisors.title + '</h2>' +
                             '<p>' + dataObject.facultyAdvisors.description + '</p>' +
                         '</div>';
-    
+                        
+    // IST Minor advisors
     studentServicesBM += '<div id="ist-minor-advising">' +
                             '<h2>' + dataObject.istMinorAdvising.title + '</h2>';
 

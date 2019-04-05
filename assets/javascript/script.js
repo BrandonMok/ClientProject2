@@ -330,6 +330,12 @@ $(document).ready(function(){
      * Research Interest Areas
      */
     xhr('get', {path:"/research/"}, '#research').done(function(results){
+        var interestAreaDiv =  '<div id="interest-area-container">' +
+                                    '<h2>By Interest Area</h2>';
+
+        var facultyInterestDiv = '<div id="faculty-interest-container">' +
+                                    '<h2>By Faculty</h2>';
+
         // byInterest area
         $.each(results.byInterestArea, function(){
             // Front Modal
@@ -338,11 +344,9 @@ $(document).ready(function(){
                                     '<p>' + this.areaName + '</p>' +
                                 '</div>' +
                             '</a>';
-
-            // $('#research-for-mobile-areas').append(frontModal); // append to mobile div (Not shown originally)
-            // $('#flex-slide1').append(frontModal);// append to main display slider
-            $('#research-box-container').append(frontModal);
+            interestAreaDiv += frontModal;
         });
+
 
 
         // byFaculty
@@ -352,12 +356,13 @@ $(document).ready(function(){
                                     '<p>' + this.facultyName + '</p>' +
                                 '</div>' +
                             '</a>';
-
-
-            // $('#research-for-mobile-faculty').append(frontModal);   // append to mobile div (Not shown originally)
-            // $('#flex-slide2').append(frontModal);   // append to main display slider
-            $('#research-box-container').append(frontModal);
+            facultyInterestDiv += frontModal;
         });
+
+        $('#research').append(interestAreaDiv);
+        $('#research').append(facultyInterestDiv);
+
+
 
 
         // On click event to then make the back modal
@@ -371,10 +376,6 @@ $(document).ready(function(){
 
     });
 
-    /** Research area's slider  */
-    $('.flexslider').flexslider({
-        slideshow: false
-    });
 
     
 

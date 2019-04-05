@@ -361,17 +361,23 @@ ul.minor-courses li{
 #research{
     margin: 3em 3em 10em 3em;
 }
-#research-for-mobile{
-    display: none;
-}
-
 
 /* Research area and faculty boxes */
-#research-box-container{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+#interest-area-container, #faculty-interest-container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 5em;
 }
-a .interest-area-box, a .interest-faculty-box{
+
+#interest-area-container h2, #faculty-interest-container h2{
+    text-align: center;
+    width: 100%;
+}
+
+.interest-area-box, .interest-faculty-box{
     border: 2px solid black;
     text-align: center;
     overflow: hidden;
@@ -433,11 +439,12 @@ a .interest-area-box, a .interest-faculty-box{
     padding: 10px;
 }
 
+
+
 /* Study abroad */
 .study-abroad-description{
     margin-bottom: 1.5em;
 }
-
 
 
 /* Advising - back modal  */
@@ -675,37 +682,12 @@ a.ui-button:active,
 
 
 
-.slides{
-    margin: 0 4em;
-}
-#flex-slide1, #flex-slide2{
-    text-align: center;
-    
-}
-#flex-slide1 a div, #flex-slide2 a div{
-    display: inline-block;
-    width: 10em;
-    height: 5em;
-    margin: .2em;
-}
-.by-interest-title{
-    display: block;
-    text-align: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 1em 0;
-}
-
-
 
 
 /** Media Queries */
 @media screen and (max-width: 1000px){
     #minors-box-container{
         grid-template-columns: repeat(3, 1fr);
-    }
-    #research-container{
-        grid-template-columns: repeat(4, 1fr);
     }
 }
 @media screen and (max-width: 900px){
@@ -736,12 +718,6 @@ a.ui-button:active,
 
     /* RESEARCH */
     /* container of research boxes */
-    #research-container{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-content: center;
-    } 
     .interest-area-box, .interest-faculty-box{
         flex: 1 1 50%;
         margin: .5em;
@@ -807,20 +783,6 @@ a.ui-button:active,
     /* MAP - don't show on mobile! */
     #map{
         display: none;
-    }
-    /* Hide the desktop version of research */
-    .flexslider{
-        display: none;
-    }
-    /* display the same research content, but for mobile */
-    #research-for-mobile{
-        display: block;
-    }
-    #research-for-mobile-areas, #research-for-mobile-faculty{
-        display: absolute;
-    }
-    #research-for-mobile a div{
-        height: 5em;
     }
 }
 
