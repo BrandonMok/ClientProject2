@@ -26,6 +26,7 @@ $(document).ready(function(){
 
     // Scroll plugin - makes scrolling smooth for nav options
     $('#nav a').smoothScroll();
+    $('.header a').smoothScroll();
     $('.slicknav_menu a').smoothScroll();
 
     
@@ -289,8 +290,8 @@ $(document).ready(function(){
         $.each(results.staff, function(){
             var frontModal = '<a href="#mainModal" rel="modal:open" id="people-anchor">' + 
                                 '<div class="staff-boxes" data-uname="'+ this.username +'">' +
-                                    '<h2>' + this.name + '</h2>' +
-                                    '<p>' + this.title + '</p>' +
+                                    '<p class="people-names">' + this.name + '</p>' +
+                                    '<p class="people-title">' + this.title + '</p>' +
                                 '</div>' +
                             '</a>';
             $('#tabs-4').append(frontModal);
@@ -301,8 +302,8 @@ $(document).ready(function(){
         $.each(results.faculty, function(){
             var frontModal = '<a href="#mainModal" rel="modal:open" id="people-anchor">'+
                             '<div class="faculty-boxes" data-uname="'+ this.username +'">' +
-                                '<h2>' + this.name +'</h2>' +
-                                '<h4>' + this.title + '</h4>' +
+                                '<p class="people-names">' + this.name +'</p>' +
+                                '<p class="people-title">' + this.title + '</p>' +
                             '</div>' +
                         '</a>';
             $('#tabs-3').append(frontModal); // append each faculty box to dom

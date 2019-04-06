@@ -270,7 +270,6 @@ ul.minor-courses li{
 }
 /* Boxes for employment stats */
 #statistics-boxes{
-    /* flex: 1 1 25%; */
     width: 10em;
     border: 3px solid #F76902;
     margin: auto;
@@ -324,6 +323,14 @@ ul.minor-courses li{
     padding: 0;
     margin: 1em;
 }
+/* Front modal w/names of people */
+.people-names{
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.people-title{
+    font-style: italic;
+}
 /* Boxes that hold faculty & staff names */
 .faculty-boxes, .staff-boxes{
     flex: 1 1 25%;
@@ -334,24 +341,27 @@ ul.minor-courses li{
     overflow: hidden;
 }
 .faculty-boxes:hover, .staff-boxes:hover{
-    font-size: 1.1rem;
     border: 4px solid #F76902;
     z-index: 3;
     box-shadow: 0 2px 2px rgba(0,0,0,.16);
 }
-
 /* Faculty/staff box name and subheading */
 .faculty-boxes h2, .faculty-boxes p, .staff-boxes h2, .staff-boxes p{
     margin: auto;
     width: 50%;
 }
+/* Container used for people information in back modal */
+#people-container{
+    text-align: center;
+}
 /* information in backmodal for people */
 .people-brief-info, .peopleContactInfo{
     padding: 1em;
 }
-/* Container used for people information in back modal */
-#people-container{
-    text-align: center;
+/* For the people w/websites */
+#people-website:hover{
+    color: #F76902;
+    font-size: 1.05rem;
 }
 
 

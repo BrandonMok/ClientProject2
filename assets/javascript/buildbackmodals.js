@@ -202,6 +202,7 @@ function buildPeopleBackModal(resultField, dataField){
         }
     }
 
+
     // CHECK: email 
     if(data.email != null && data.email != ""){
         backModal += '<h4><i class="far fa-envelope"></i>' + data.email + '</h4>';
@@ -210,6 +211,13 @@ function buildPeopleBackModal(resultField, dataField){
     // CHECK: office
     if(data.office != null && data.office != ""){
         backModal += '<h4><i class="far fa-building"></i>' + data.office + '</h4>';
+    }
+
+    // CHECK: website
+    if(data.website != null && data.website != ""){
+        backModal += '<a href="'+data.website+'" target="_blank">'+
+                        '<h4 id="people-website"><i class="far fa-window-maximize"></i>' + data.website + '</h4>' +
+                    '</a>';
     }
 
 
