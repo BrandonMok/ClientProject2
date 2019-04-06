@@ -424,6 +424,9 @@ ul.minor-courses li{
     border: 2px solid black;
     margin: .5em;
 }
+.resources-boxes:hover{
+    border: 4px solid #F76902;;
+}
 /* resource box paragraph tag */
 .resources-boxes p{
     margin: auto;
@@ -576,6 +579,18 @@ ul.minor-courses li{
 }
 
 
+/* Contact Form */
+#contact{
+    margin: 3em;
+    height: 30em;
+    text-align: center;
+}
+#contact-form{
+    width: 100%;
+    height: 100%;
+}
+
+
 
 
 /** Footer */
@@ -636,8 +651,13 @@ ul.minor-courses li{
     font-style: italic;
     margin-bottom: .5em;
 }
+/* News div to hold news word */
+#news{
+    text-align: center;
+    overflow: hidden;
+    margin: 1em 5em;
+}
 #news-word{
-    margin: 2em;
     font-size: 1.5rem;
     font-weight: bold;
 }
