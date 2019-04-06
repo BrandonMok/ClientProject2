@@ -510,12 +510,36 @@ $(document).ready(function(){
  */
 function buildResourcesFrontModal(dataTitle, resID){
     var frontModal = '';
+    var iconToUse;
+
+    // EXTRA: Adding icons
+    switch(resID){
+        case "studyAbroad":
+            iconToUse  = '<i class="fas fa-globe-americas resources-icons"></i>';
+            break;
+        case "advising":
+            iconToUse = '<i class="fas fa-user-friends resources-icons"></i>';
+            break;
+        case "tutorsLab":
+            iconToUse = '<i class="fas fa-chalkboard-teacher resources-icons"></i>';
+            break;
+        case "student-ambassadors":
+            iconToUse = '<i class="fas fa-bullhorn resources-icons"></i>';
+            break;
+        case "forms":
+            iconToUse = '<i class="far fa-copy resources-icons"></i>';
+            break;
+        case "coop-enrollment":
+            iconToUse = '<i class="far fa-clipboard resources-icons"></i>';
+            break;
+    }
 
     // Only undefined for the 'FORMS' seciton
     if(dataTitle == undefined){
         frontModal += '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
                         '<div class="resources-boxes" id="'+ resID +'">' +
                             '<p class="resources-box-titles">Forms</p>' +
+                            iconToUse +
                         '</div>'+
                     '</a>';
     }
@@ -523,6 +547,7 @@ function buildResourcesFrontModal(dataTitle, resID){
         frontModal += '<a href="#mainModal" rel="modal:open" id="resources-anchor">' +
                         '<div class="resources-boxes" id="'+ resID +'" data-rname="'+ dataTitle +'">' +
                             '<p class="resources-box-titles">' + dataTitle + '</p>' +
+                            iconToUse +
                         '</div>'+
                     '</a>';
     }
