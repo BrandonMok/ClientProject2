@@ -285,6 +285,7 @@ $(document).ready(function(){
     xhr('get', {path:"/people/"}, "#people").done(function(results){
         // Our people title
         $('div#people p.section-heading').append(results.title);
+        $('div#people p.sub-heading').append(results.subTitle);
 
         // Cycle through staff
         $.each(results.staff, function(){
