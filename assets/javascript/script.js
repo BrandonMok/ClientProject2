@@ -35,7 +35,11 @@ $(document).ready(function(){
 		prependTo:'body'
     });
 
-
+    // Typist plugin 
+    $('#image-text').typist({
+        speed: 16,
+        text: 'Information Sciences & Technologies'
+    }).typistStop();
 
     /**
      * About
