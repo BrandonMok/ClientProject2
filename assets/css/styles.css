@@ -9,6 +9,10 @@
     font-family: 'PT Sans', sans-serif;
 }
 
+html{
+    overflow-x: hidden;
+}
+
 
 /* Anchor tags - keep the same */
 a, a:visited{
@@ -44,7 +48,7 @@ a, a:visited{
 
 /* Header - Top Bar */
 .header{
-    display: inline-block;
+    display: inline;
     position: fixed;
     width: 100%;
     background-color: #ffffff;
@@ -55,9 +59,10 @@ a, a:visited{
 
 /* RIT in header */
 #RIT{
-    display: inline-block;
+    display: inline;
     font-size: 3rem;
     margin-left: 1em;
+    overflow: hidden;
 }
 
 
@@ -79,11 +84,13 @@ div ul#nav a:hover{
 /* Landing image DIV */
 #landing-image{
     background-image: url("../images/homepage.jpg"); /* creator: willian-justen @ unsplash.com */
-    background-attachment: fixed;
-    background-position: center;
+    /* background-attachment: fixed; */
+    /* background-position: center; */
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
+    overflow-x: hidden;
+    /* width: 100%; */
 }
 #image-text{
     position: absolute;
@@ -707,8 +714,6 @@ a.ui-button:active,
 
 
 /** Media Queries */
-@media screen and (max-width: 1000px){
-}
 @media screen and (max-width: 900px){
     /** Image scroll parallax effect stop */
     #landing-image{
@@ -720,15 +725,6 @@ a.ui-button:active,
         margin-right: 2em;      
     }
 
-
-    /* MINORS boxes container */
-    /* Change styling to flex */
-    /* #minors-box-container{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-content: center;
-    } */
     .each-minor{
         flex: 1 1 50%;
         margin: 0;
@@ -811,6 +807,13 @@ a.ui-button:active,
         font-size: 2.4rem;        
     }
 
+    /* RIT in header */
+    #RIT{
+        display: inline-block;
+    }
+
+
+
     /* Employee boxes statistics */
     #statistics-boxes{
         font-size: .7rem;
@@ -822,6 +825,26 @@ a.ui-button:active,
     }
 }
 
+@media screen and (max-width: 400px){
+    /* Degree boxes */
+    .uDegBoxes, .gDegBoxes{
+        width: 10em;
+    }
+
+    /* Boxes that hold faculty & staff names */
+    .faculty-boxes, .staff-boxes{
+        width: 10em;
+    }
+
+    /* Resource boxes */
+    .resources-boxes{
+        width: 12em
+    }
+
+    .resources-boxes p{
+        font-size: 1rem;
+    }
+}
 
 
 
