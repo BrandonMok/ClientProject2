@@ -16,7 +16,7 @@ Features and development practices that I felt makes my project above and beyond
 trying to keep the data load and data plan of users low when loading the site. I primarily
 used modals as each area and specific sections only had the minimal front modal information
 load and show. Once the user clicks on the specific modal, then I load and configure the data
-for the section as to save on data. Also, I configured the project so that there is either zero
+for the section as to save on the data load. I also configured the project so that there is either zero
 or one backmodal appended on the dom: if user clicks on a front modal, I either
 create the backmodal (if not existent) or grab the existing back modal, clear its contents, then replace
 the information.
