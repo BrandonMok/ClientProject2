@@ -203,11 +203,12 @@ ul.concentration-list{
 }
 /* Container for all minor boxes */
 #minors-box-container{
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
 }
 .each-minor{
-    margin: 1em;
     border: 3px solid gray;
     border-radius: .5em;
     width: 12em;
@@ -216,6 +217,10 @@ ul.concentration-list{
     font-size: 1.1rem;
     text-align: center;
     font-weight: bold;
+}
+#minors-anchor{
+    padding: 0;
+    margin: 1em;
 }
 /* Minor div hover effect */
 .each-minor:hover{
@@ -243,6 +248,7 @@ ul.minor-courses li{
     font-size: .8rem;
     font-style: italic;
 }
+
 
 
 
@@ -702,9 +708,6 @@ a.ui-button:active,
 
 /** Media Queries */
 @media screen and (max-width: 1000px){
-    #minors-box-container{
-        grid-template-columns: repeat(3, 1fr);
-    }
 }
 @media screen and (max-width: 900px){
     /** Image scroll parallax effect stop */
@@ -720,12 +723,12 @@ a.ui-button:active,
 
     /* MINORS boxes container */
     /* Change styling to flex */
-    #minors-box-container{
+    /* #minors-box-container{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         align-content: center;
-    }
+    } */
     .each-minor{
         flex: 1 1 50%;
         margin: 0;
