@@ -59,10 +59,9 @@ a, a:visited{
 
 /* RIT in header */
 #RIT{
-    display: inline;
+    display: inline-block;
     font-size: 3rem;
     margin-left: 1em;
-    overflow: hidden;
 }
 
 
@@ -747,12 +746,6 @@ a.ui-button:active,
     .degree-Desc{
         font-size: .8rem;
     }
-}
-@media screen and (max-width: 600px){
-    /* Every other section */
-    .altSection{
-        margin: 0;
-    }
 
     /* about */
     #about{
@@ -773,6 +766,12 @@ a.ui-button:active,
     }
     #quote, #quote-Author{
         font-size: 1rem;
+    }
+}
+@media screen and (max-width: 600px){
+    /* Every other section */
+    .altSection{
+        margin: 0;
     }
 
     /* Faculty and staff people headers*/
@@ -807,12 +806,10 @@ a.ui-button:active,
         font-size: 2.4rem;        
     }
 
-    /* RIT in header */
     #RIT{
-        display: inline-block;
+        display: inline;
+        overflow: hidden;
     }
-
-
 
     /* Employee boxes statistics */
     #statistics-boxes{
