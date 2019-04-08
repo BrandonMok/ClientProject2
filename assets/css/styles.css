@@ -152,14 +152,14 @@ div ul#nav a:hover{
     flex: 1 1 25%;
     width: 18em;
     height: 14em;
-    border: 2px solid gray;
+    border: 3px solid gray;
     border-radius: .5em;
     background-color: white;
     overflow: hidden;
 }
 .uDegBoxes:hover, .gDegBoxes:hover{
-    border: 4px solid #fc954a;
-    font-size: 1.05rem;
+    border: 3px solid #F76902;
+    background-color: #fc954a;
 }
 /* Anchor modal tag to seperate btw boxes */
 .degree-anchor{
@@ -206,14 +206,9 @@ ul.concentration-list{
     display: grid; 
     grid-template-columns: repeat(4, 1fr);
 }
-/* Modal anchor tag */
-#minors-anchor{
-    padding: 0;
-    margin: 1em;
-}
 .each-minor{
     margin: 1em;
-    border: 2px solid gray;
+    border: 3px solid gray;
     border-radius: .5em;
     width: 12em;
     height: 10em;
@@ -224,7 +219,7 @@ ul.concentration-list{
 }
 /* Minor div hover effect */
 .each-minor:hover{
-    border: 5px solid #F76902;
+    border: 3px solid #F76902;
     background-color: #fc954a;
     z-index: 3;
     box-shadow: 0 4px 10px rgba(0,0,0,.16);
@@ -336,14 +331,13 @@ ul.minor-courses li{
     flex: 1 1 25%;
     width: 14em;
     height: 7em;
-    border: 2px solid #F76902;
+    border: 3px solid gray;
     text-align: center;
     overflow: hidden;
 }
 .faculty-boxes:hover, .staff-boxes:hover{
-    border: 4px solid #F76902;
-    z-index: 3;
-    box-shadow: 0 2px 2px rgba(0,0,0,.16);
+    border: 3px solid #F76902;
+    background-color: #fc954a;
 }
 /* Faculty/staff box name and subheading */
 .faculty-boxes h2, .faculty-boxes p, .staff-boxes h2, .staff-boxes p{
@@ -360,8 +354,8 @@ ul.minor-courses li{
 }
 /* For the people w/websites */
 #people-website:hover{
-    color: #F76902;
-    font-size: 1.05rem;
+    border: 3px solid #F76902;
+    background-color: #fc954a;
 }
 
 
@@ -371,7 +365,6 @@ ul.minor-courses li{
 #research{
     margin: 3em 3em 10em 3em;
 }
-
 /* Research area and faculty boxes */
 #interest-area-container, #faculty-interest-container{
     display: flex;
@@ -387,7 +380,7 @@ ul.minor-courses li{
     width: 100%;
 }
 .interest-area-box, .interest-faculty-box{
-    border: 2px solid black;
+    border: 3px solid gray;
     text-align: center;
     overflow: hidden;
     width: 10em;
@@ -404,8 +397,8 @@ ul.minor-courses li{
     padding: 10px;
 }
 .interest-area-box:hover, .interest-faculty-box:hover{
-    border: 4px solid #F76902;
-    font-size: 1.1rem;
+    border: 3px solid #F76902;
+    background-color: #fc954a;
 }
 /* List of citations in back modal of each box */
 .citation-list{
@@ -431,11 +424,12 @@ ul.minor-courses li{
     flex: 1 1 50%;
     width: 20em;
     height: 12em;
-    border: 2px solid black;
+    border: 3px solid gray;
     margin: .5em;
 }
 .resources-boxes:hover{
-    border: 4px solid #F76902;;
+    border: 3px solid #F76902;
+    background-color: #fc954a;
 }
 /* resource box paragraph tag */
 .resources-boxes p{
@@ -462,8 +456,7 @@ ul.minor-courses li{
 }
 #advising-faq-link:hover{
     font-weight: bold;
-    font-size: 1.1rem;
-    color: #F76902;;
+    color: #F76902;
 }
 
 
@@ -525,7 +518,6 @@ ul.minor-courses li{
     font-weight: bold;
 }
 #lab-hours-link:hover{
-    font-size: 1.2rem;
     color: #F76902;
 }
 
@@ -543,16 +535,15 @@ ul.minor-courses li{
 /* Apply word / div */
 #sa-apply{
     text-align: center;
-    border: 2px solid black;
+    border: 3px solid black;
     border-radius: 2px;
     font-size: 1.4rem;
     font-weight: bold;
     margin: 1em;
 }
 #sa-apply:hover{
-    font-size: 1.4rem;
     color: #F76902;
-    border: 4px solid #F76902;
+    border: 3px solid #F76902;
 }
 #sa-image{
     max-width: 20em;
@@ -572,7 +563,6 @@ ul.minor-courses li{
 .form-names:hover{
     color: #F76902;
     font-weight: bold;
-    font-size: 1.1rem;
 }
 
 /* Enrollment info back modal */
@@ -584,7 +574,6 @@ ul.minor-courses li{
     font-weight: bold;
 }
 #enrollment-job-zone-link:hover{
-    font-size: 1.2rem;
     color: #F76902;
 }
 
@@ -628,7 +617,6 @@ ul.minor-courses li{
     margin: 1em;
 }
 .social-links:hover{
-    font-size: 2.25rem;
     color: #F76902;
 }
 #resources-anchor{
@@ -672,7 +660,6 @@ ul.minor-courses li{
     font-weight: bold;
 }
 #news-word:hover{
-    font-size: 1.6rem;
     color: #F76902; 
 }
 
@@ -726,7 +713,7 @@ a.ui-button:active,
     }
     /* Information Sciences & Technology text */
     #image-text{
-        font-size: 3rem; 
+        font-size: 2rem; 
         margin-right: 2em;      
     }
 
@@ -838,7 +825,7 @@ a.ui-button:active,
 
 /*****************************/
 
-/** SLICK ANV PLUGIN  */
+/** SLICK NAV PLUGIN  */
 .slicknav_menu {
     display:none;
 }

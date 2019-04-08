@@ -98,7 +98,7 @@ $(document).ready(function(){
                 // Case of only degree without a title
                 // It's the certificates section
                 var certificates = '<div id="certificates-container">' +
-                        '<h1>' + this.degreeName + '</h1>';
+                        '<h1>' + this.degreeName + '</h1><i class="fas fa-award"></i>';
 
                 $.each(this.availableCertificates, function(index, elem){
                     certificates += '<p>' + elem + '</p>';
