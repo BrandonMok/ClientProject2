@@ -8,7 +8,8 @@ UI,
 jquerymodal,
 Browser detection,
 Smooth Scroll,
-SlickNav
+SlickNav,
+Typist
 
 
 Above and Beyond:
